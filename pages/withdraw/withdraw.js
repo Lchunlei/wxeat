@@ -5,6 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    vipStr:'普通商家',
+    butText:'立即加入',
     balance: 0
   },
 
@@ -15,16 +17,35 @@ Page({
     var that = this;
     if (app.globalData.iphone == true) { that.setData({ iphone: 'iphone' }) }
     wx.request({
-      url: app.globalData.urls + '/user/amount',
+      url: app.globalData.urls + '/shop/info',
       data: {
-        token: app.globalData.token
+        eToken: app.globalData.token
       },
       success: function (res) {
-        if (res.data.code == 0) {
-          that.setData({
-            balance: res.data.data.balance,
-            freeze: res.data.data.freeze,
-            score: res.data.data.score
+        if (res.data.respCode == 'R000') {
+
+          if (res.data.respData.shopName){
+            if (res.data.respData.vipStatus == 1) {
+              vipStr: 'VIP商家'
+            }
+            that.setData({
+              shopName: res.data.respData.shopName,
+              butText:'修改信息',
+              remake: '商家电话：' + res.data.respData.bossTel + '(' + res.data.respData.bossName+')'
+            });
+          }else{
+            console.log('未登录！！');
+            that.setData({
+              shopName: '您还没有加入我们哦',
+              remake: '真诚的欢迎您的到来'
+            });
+          }
+
+        }else{
+          wx.showToast({
+            title: res.data.respMsg,
+            icon: 'none',
+            duration: 3000
           });
         }
       }
@@ -41,22 +62,34 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-    var that = this;
-    wx.request({
-      url: app.globalData.urls + '/user/amount',
-      data: {
-        token: app.globalData.token
-      },
-      success: function (res) {
-        if (res.data.code == 0) {
-          that.setData({
-            balance: res.data.data.balance,
-            freeze: res.data.data.freeze,
-            score: res.data.data.score
-          });
-        }
-      }
+  // onShow: function () {
+  //   var that = this;
+  //   wx.request({
+  //     url: app.globalData.urls + '/user/amount',
+  //     data: {
+  //       token: app.globalData.token
+  //     },
+  //     success: function (res) {
+  //       if (res.data.code == 0) {
+  //         that.setData({
+  //           balance: res.data.data.balance,
+  //           freeze: res.data.data.freeze,
+  //           score: res.data.data.score
+  //         });
+  //       }
+  //     }
+  //   })
+  // },
+
+  joinShop: function () {
+    wx.navigateTo({
+      url: "/pages/shopadd/shop-add"
+    })
+  },
+
+  editShop: function (e) {
+    wx.navigateTo({
+      url: "/pages/address-add/address-add?id=" + e.currentTarget.dataset.id
     })
   },
 

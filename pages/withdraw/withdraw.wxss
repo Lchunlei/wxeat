@@ -1,6 +1,25 @@
 page{
     height: 100%;
 }
+.bottom-box {
+  position: fixed;
+  bottom: 0;
+  background-color: #fcfcfc;
+  width: 100%;
+  text-align: center;
+  height: 48px;
+  font-size: 30rpx;
+  line-height: 48px;
+  color: #b4282d;
+  box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.bottom-box image {
+  width: 15px;
+  height: 15px;
+  margin: -2px 0;
+}
+
 .container{
     background-color: #ffffff;
     justify-content: initial;
@@ -19,7 +38,7 @@ page{
 }
 .tixian-name .money{
   display:block;
-  font-size:60rpx;
+  font-size:50rpx;
   margin-top:15px;
 }
 .tixian-name .tips{

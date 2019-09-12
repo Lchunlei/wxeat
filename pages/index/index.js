@@ -95,46 +95,46 @@ Page({
 		  }
 		})
 		//获取推荐商品信息
-		wx.request({
-      url: app.globalData.urls + '/config/show',
-		  data: {
-		    key: 'topgoods'
-		  },
-		  success: function (res) {
-        if (res.data.respCode == 'R000') {
-		      that.setData({
-            topgoods: res.data.respData
-		      });
-		      wx.request({
-		        url: app.globalData.urls + '/goods/list',
-		        data: {
-              recommendStatus: 1,
-              pageNum: 1,
-		          pageSize: 10
-		        },
-		        success: function (res) {
-		          that.setData({
-		            goods: [],
-		            loadingMoreHidden: true
-		          });
-		          var goods = [];
-              if (res.data.respCode != 'R000' || res.data.respData.length == 0) {
-		            that.setData({
-		              loadingMoreHidden: false,
-		            });
-		            return;
-		          }
-              for (var i = 0; i < res.data.respData.length; i++) {
-                goods.push(res.data.respData[i]);
-		          }
-		          that.setData({
-		            goods: goods,
-		          });
-		        }
-		      })
-		    }
-		  }
-		})
+		// wx.request({
+    //   url: app.globalData.urls + '/config/show',
+		//   data: {
+		//     key: 'topgoods'
+		//   },
+		//   success: function (res) {
+    //     if (res.data.respCode == 'R000') {
+		//       that.setData({
+    //         topgoods: res.data.respData
+		//       });
+		//       wx.request({
+		//         url: app.globalData.urls + '/goods/list',
+		//         data: {
+    //           recommendStatus: 1,
+    //           pageNum: 1,
+		//           pageSize: 10
+		//         },
+		//         success: function (res) {
+		//           that.setData({
+		//             goods: [],
+		//             loadingMoreHidden: true
+		//           });
+		//           var goods = [];
+    //           if (res.data.respCode != 'R000' || res.data.respData.length == 0) {
+		//             that.setData({
+		//               loadingMoreHidden: false,
+		//             });
+		//             return;
+		//           }
+    //           for (var i = 0; i < res.data.respData.length; i++) {
+    //             goods.push(res.data.respData[i]);
+		//           }
+		//           that.setData({
+		//             goods: goods,
+		//           });
+		//         }
+		//       })
+		//     }
+		//   }
+		// })
 	},
 	swiperchange: function(e) {
 		this.setData({

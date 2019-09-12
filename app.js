@@ -41,6 +41,7 @@ App({
 	  }
 	  wx.login({
 	    success: function (res) {
+        //用户无感快捷登录
 	      wx.request({
           url: that.globalData.urls + "/user/wxLogin",
 	        data: {

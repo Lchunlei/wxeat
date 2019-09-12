@@ -70,10 +70,10 @@ Page({
     }
   },
   onShow() {
-    this.getUserApiInfo();
-    this.getUserAmount();
-    this.checkScoreSign();
-    this.getInfo();
+    // this.getUserApiInfo();
+    // this.getUserAmount();
+    // this.checkScoreSign();
+    // this.getInfo();
 		// this.getUserInfo();
     //更新订单状态
     var that = this;
@@ -124,90 +124,139 @@ Page({
     //   }
     // })
   },	
-  getUserApiInfo: function () {
-    //更新用户信息
-    // var that = this;
-    // wx.request({
-    //   url: app.globalData.urls + '/user/detail',
-    //   data: {
-    //     token: app.globalData.token
-    //   },
-    //   success: function (res) {
-    //     if (res.data.code == 0) {
-    //       that.setData({
-    //         apiUserInfoMap: res.data.data
-    //       });
-    //     }
-    //   }
-    // })
+  addShopInfo: function () {
+    // 更新用户信息
+    var that = this;
+    if (app.globalData.userInfo == null){
+      wx.showToast({
+        title: '请点击头像登录！',
+        icon: 'none',
+        duration: 2000
+      });
+    }else{
+      wx.navigateTo({
+        url: "/pages/withdraw/withdraw"
+      });
+    }
   },
-  getUserAmount: function () {
-    //查看用户账户
-    // var that = this;
-    // wx.request({
-    //   url: app.globalData.urls + '/user/amount',
-    //   data: {
-    //     token: app.globalData.token
-    //   },
-    //   success: function (res) {
-    //     if (res.data.code == 0) {
-    //       that.setData({
-    //         balance: res.data.data.balance,
-    //         freeze: res.data.data.freeze,
-    //         score: res.data.data.score
-    //       });
-    //     }
-    //   }
-    // })
+  shopFood: function () {
+    // 更新店铺菜单
+    var that = this;
+    if (app.globalData.userInfo == null) {
+      wx.showToast({
+        title: '请点击头像登录！',
+        icon: 'none',
+        duration: 2000
+      });
+    } else {
+      wx.navigateTo({
+        url: "/pages/shopfood/shopfood"
+      });
+    }
   },
-  getInfo: function () {
-    // var that = this;
-    // wx.request({
-    //   url: app.globalData.urls + '/config/get-value',
-    //   data: {
-    //     key: "mallinfo"
-    //   },
-    //   success: function (res) {
-    //     if (res.data.code == 0) {
-    //       that.setData({
-    //         getInfo: res.data.data.value
-    //       });
-    //     }
-    //   }
-    // })
+  staffSet: function () {
+    // 更新店铺菜单
+    var that = this;
+    if (app.globalData.userInfo == null) {
+      wx.showToast({
+        title: '请点击头像登录！',
+        icon: 'none',
+        duration: 2000
+      });
+    } else {
+      wx.showToast({
+        title: '功能维护中，请稍后！',
+        icon: 'none',
+        duration: 2000
+      });
+    }
   },
-  checkScoreSign: function () {
-    //查看今日是否签到
-    // var that = this;
-    // wx.request({
-    //   url: app.globalData.urls + '/score/today-signed',
-    //   data: {
-    //     token: app.globalData.token
-    //   },
-    //   success: function (res) {
-    //     if (res.data.code == 0) {
-    //       that.setData({
-    //         score_sign_continuous: res.data.data.continuous
-    //       });
-    //     }
-    //   }
-    // })
+  billsCore: function () {
+    //订单中心跳转
+    var that = this;
+    if (app.globalData.userInfo==null) {
+      wx.showToast({
+        title: '请点击头像登录！',
+        icon: 'none',
+        duration: 2000
+      });
+    } else {
+      wx.navigateTo({
+        url: "/pages/order-list/order-list"
+      });
+    }
   },
-// 	getUserInfo: function (cb) {
-//       console.log("获取用户基础信息");
-//       var that = this
-//       wx.login({
-//         success: function () {
-//           wx.getUserInfo({
-//             success: function (res) {
-//               that.setData({
-//                 userInfo: res.userInfo
-//               });
-//             }
-//           })
-//         }
-//       })
-// },
+  gkdd: function () {
+    var that = this;
+    if (app.globalData.userInfo == null) {
+      wx.showToast({
+        title: '请点击头像登录！',
+        icon: 'none',
+        duration: 2000
+      });
+    } else {
+      wx.navigateTo({
+        url: "/pages/order-list/order-list?currentType=0"
+      });
+    }
+  },
+  ccdd: function () {
+    var that = this;
+    if (app.globalData.userInfo == null) {
+      wx.showToast({
+        title: '请点击头像登录！',
+        icon: 'none',
+        duration: 2000
+      });
+    } else {
+      wx.navigateTo({
+        url: "/pages/order-list/order-list?currentType=1"
+      });
+    }
+  },
+  dkxd: function () {
+    var that = this;
+    if (app.globalData.userInfo == null) {
+      wx.showToast({
+        title: '请点击头像登录！',
+        icon: 'none',
+        duration: 2000
+      });
+    } else {
+      wx.navigateTo({
+        url: "/pages/order-list/order-list?currentType=2"
+      });
+    }
+  },
+  syfx: function () {
+    var that = this;
+    if (app.globalData.userInfo == null) {
+      wx.showToast({
+        title: '请点击头像登录！',
+        icon: 'none',
+        duration: 2000
+      });
+    } else {
+      wx.navigateTo({
+        url: "/pages/order-list/order-list?currentType=2"
+      });
+    }
+  },
+	getUserInfo: function (cb) {
+      console.log("获取用户基础信息");
+      var that = this
+      wx.login({
+        success: function () {
+          wx.getUserInfo({
+            success: function (res) {
+              that.setData({
+                userInfo: res.userInfo
+              });
+            }
+          })
+        }
+      })
+},
   scoresign: function () {
     // var that = this;
     // wx.request({

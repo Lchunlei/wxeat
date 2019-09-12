@@ -1,0 +1,32 @@
+<navigation id='Navigation' show-icon="{{true}}" title="菜单信息" show-title="{{true}}" class=""></navigation>
+<view class="container">
+  <form bindsubmit="bindSave">
+    <view class="form-box">
+
+      <view class="row-wrap">
+        <view class="label">菜名</view>
+        <view class="label-right">
+          <input name="foodName" class="input" type="text" placeholder="建议2~15个字为宜" value="{{addressData.foodName}}{{wxaddress.foodName}}" />
+        </view>
+      </view>
+
+      <view class="row-wrap">
+        <view class="label">售价</view>
+        <view class="label-right">
+          <input name="foodPrice" class="input" type="text" placeholder="单位元（例：12.5）" value="{{addressData.mobile}}{{wxaddress.telNumber}}" />
+        </view>
+      </view>
+     
+      <view class="row-wrap">
+        <view class="label">推荐指数</view>
+        <view class="label-right">
+          <input name="paixu" class="input" type="text"  placeholder="请填写1~5整数"  value="{{addressData.code}}{{wxaddress.postalCode}}" />
+        </view>
+      </view>
+
+    </view>
+    <button type="warn" class="save-btn" formType="submit">保存</button>
+    <button type="default" class="save-btn" bindtap="deleteShopFood" data-id="{{addressData.foodId}}" wx:if="{{addressData}}">删除</button>
+    <button type="default" class="cancel-btn" bindtap="bindCancel">取消</button>
+  </form>
+</view>

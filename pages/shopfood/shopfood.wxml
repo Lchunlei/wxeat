@@ -1,0 +1,27 @@
+<navigation id='Navigation' show-icon="{{true}}" title="店铺菜单" show-title="{{true}}" class=""></navigation>
+<view class="container">
+  <view class="address-list">
+    <view class="a-address" wx:for-items="{{shopfoodList}}" wx:key="{{index}}">
+      <view class="left-text {{item.sellStatus? 'active':'xiajia'}}" data-id="{{item.foodId}}">
+        <view class="name-tel">
+          {{item.foodName}} （{{item.foodPrice/100}}元）
+        </view>
+        <view class="address-box">
+          推荐级别：{{item.paixu}} 
+          <text decode="{{true}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</text>
+          状态：{{item.sellStatus?'售卖中':'已下架'}}
+        </view>
+      </view>
+      <view class="right-edit" bindtap="editFood" data-id="{{item.foodId}}"></view>
+    </view>
+  </view>
+  <view hidden="{{loadingMoreHidden ? true : false}}" class="no-more-goods">
+    <image src="/images/address_empty.png" class="no-order-img"></image>
+    <view class="text">还没有添加菜单呢</view>
+  </view>
+  <view class="bottom-box" bindtap="addAddess">
+    <image src="../../images/address_add.png"></image>
+    新增菜单
+  </view>
+
+</view>

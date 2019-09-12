@@ -73,8 +73,8 @@ page {
 
 .userinfo-item {
   width: 100%;
-  background: url(https://cdn.it120.cc/apifactory/2018/03/02/bccdaf7292464a539efa6a1ea9a11ee6.png) no-repeat 750rpx center;
-  background-size: 16rpx auto;
+  background: url(https://yuxian.oss-cn-qingdao.aliyuncs.com/turnr.png) no-repeat 750rpx center;
+  background-size: 20rpx auto;
   border-bottom: 1px solid #fbfbfb;
   line-height: 100rpx;
   padding-left: 30px;

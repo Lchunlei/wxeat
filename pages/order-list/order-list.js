@@ -2,9 +2,9 @@ var wxpay = require('../../utils/pay.js')
 var app = getApp()
 Page({
   data: {
-    statusType: ["待付款", "待发货", "待收货", "待评价", "已完成"],
+    statusType: ["待处理", "待出餐", "月订单", "历史订单"],
     currentType: 0,
-    tabClass: ["", "", "", "", ""],
+    tabClass: ["", "", "", ""],
 		bodyHeight:null
   },
 
@@ -122,6 +122,7 @@ Page({
 
   },
   getOrderStatistics: function () {
+    //统计当前订单数量
     var that = this;
     wx.request({
       url: app.siteInfo.url + app.siteInfo.subDomain + '/order/statistics',
@@ -200,31 +201,33 @@ Page({
 	  })
 	},
   onShow: function (e) {
+    console.log("--展示订单中心数据--");
     // 获取订单列表
     wx.showLoading();
     var that = this;
     var postData = {
-      token: app.globalData.token
+      eToken: app.globalData.token
     };
-    postData.status = that.data.currentType;
-    this.getOrderStatistics();
+    postData.billStatus = that.data.currentType;
+    //刷新当前订单统计数量
+    // this.getOrderStatistics();
     wx.request({
-      url: app.siteInfo.url + app.siteInfo.subDomain + '/order/list',
+      url: app.globalData.urls + '/bill/list',
       data: postData,
       success: (res) => {
 				console.log(res)
         wx.hideLoading();
-        if (res.data.code == 0) {
+        if (res.data.respCode == 'R000') {
           that.setData({
-            orderList: res.data.data.orderList,
-            logisticsMap: res.data.data.logisticsMap,
-            goodsMap: res.data.data.goodsMap
+            orderList: res.data.respData.orderList
+            // logisticsMap: res.data.data.logisticsMap,
+            // goodsMap: res.data.data.goodsMap
           });
         } else {
           this.setData({
-            orderList: null,
-            logisticsMap: {},
-            goodsMap: {}
+            orderList: null
+            // logisticsMap: {},
+            // goodsMap: {}
           });
         }
       }
