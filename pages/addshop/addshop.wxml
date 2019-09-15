@@ -15,6 +15,6 @@
 
   <view class="bottom-box" bindtap="joinShop">
     <image src="../../images/address_add.png"></image>
-    店铺信息
+    {{butText}}
   </view>
 </view>

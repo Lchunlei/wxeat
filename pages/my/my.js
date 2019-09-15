@@ -135,7 +135,7 @@ Page({
       });
     }else{
       wx.navigateTo({
-        url: "/pages/withdraw/withdraw"
+        url: "/pages/addshop/addshop"
       });
     }
   },
@@ -171,6 +171,21 @@ Page({
       });
     }
   },
+  vip: function () {
+    // 更新店铺菜单
+    var that = this;
+    if (app.globalData.userInfo == null) {
+      wx.showToast({
+        title: '请点击头像登录！',
+        icon: 'none',
+        duration: 2000
+      });
+    } else {
+      wx.navigateTo({
+        url: "/pages/vip/vip"
+      });
+    }
+  },
   billsCore: function () {
     //订单中心跳转
     var that = this;
@@ -200,7 +215,7 @@ Page({
       });
     }
   },
-  ccdd: function () {
+  cclb: function () {
     var that = this;
     if (app.globalData.userInfo == null) {
       wx.showToast({
@@ -223,8 +238,8 @@ Page({
         duration: 2000
       });
     } else {
-      wx.navigateTo({
-        url: "/pages/order-list/order-list?currentType=2"
+      wx.switchTab({
+        url: "/pages/userbill/userbill"
       });
     }
   },

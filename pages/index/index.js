@@ -4,6 +4,7 @@ const app = getApp()
 
 Page({
 	data: {
+    myfoodList: [],
 		indicatorDots: true,
 		autoplay: true,
 		interval: 6000,
@@ -12,8 +13,9 @@ Page({
 		iphone:false,
 		loadingHidden: false, // loading
 		wxlogin: true,
-		loadingMoreHidden: true,
+		loadingMoreHidden: false,
 		showSearch: true,
+    userId:0
 	},
 	onShow(){
 		var that = this

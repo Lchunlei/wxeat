@@ -29,9 +29,9 @@ Page({
   },
   
   editFood: function (e) {
-    console.log("修改一个菜品-->" + e.currentTarget.dataset.foodId);
+    console.log("修改一个菜品-->" + e.currentTarget.dataset.id);
     wx.navigateTo({
-      url: "/pages/address-add/address-add?id=" + e.currentTarget.dataset.foodId
+      url: "/pages/shopfoodadd/shopfoodadd?foodId=" + e.currentTarget.dataset.id
     })
   },
   

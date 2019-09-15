@@ -1,0 +1,16 @@
+<view class="container {{iphone}}">
+  <view class="header-container">
+    <navigator open-type="navigateBack" delta="1" hover-class="navigator-hover">
+      <image class="goback" src="../../images/goback.png" />
+    </navigator>
+  </view>
+  <view class="score-title">
+    <image class="score-img" src="../../images/score_bg.png"></image>
+    <view class="score-title-name">欢迎使用旺铺掌柜</view>
+    <view class="score-title-score">微信扫一扫</view>
+  </view>
+
+    <view class="qrimg">
+      <image class="qrimg" src="https://yuxian.oss-cn-qingdao.aliyuncs.com/wpzg.jpg"></image>
+    </view>
+</view>

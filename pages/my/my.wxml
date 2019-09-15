@@ -37,7 +37,7 @@
       顾客订单
     </view>
 
-    <view hover-class="none" class="cart-list" bindtap="ccdd">
+    <view hover-class="none" class="cart-list" bindtap="cclb">
       <view wx:if="{{notransfer}}" class="red-dot">{{notransfer}}</view>
       <image src="../../images/order-details/orderform_ship.png"></image>
       出餐列表
@@ -77,15 +77,15 @@
       <view>店员管理</view>
     </view>
 
-    <view hover-class="none" class="userinfo-item" url="/pages/fav-list/fav-list">
+    <view hover-class="none" class="userinfo-item" bindtap="vip">
       <image src="../../images/profile_collection.png"></image>
       <text>限时优惠</text>
       <view>店铺升级</view>
     </view>
 
-    <navigator hover-class="none" class="userinfo-item" url="/pages/address/address">
+    <navigator hover-class="none" class="userinfo-item" url="/pages/share/share">
       <image src="../../images/profile_address.png"></image>
-      <view>赚钱推广</view>
+      <view>友情推广</view>
     </navigator>
 
     <view class="userinfo-item">

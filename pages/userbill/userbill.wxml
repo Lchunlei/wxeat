@@ -1,0 +1,149 @@
+<view class="container">
+  <!--购物车s-->
+      <view class="cart-tab-wrp">
+        <view class="cart-item-total cart-tab-item">
+          <view class="cart-item-icon-wrp">
+              <image class="cart-item-icon" src="../../images/pic/orderBox.png" />
+              <text hidden="{{total.count}}" class="cart-item-total-num bc_red">{{total.count}}</text>
+          </view>
+          <text class="cart-item-total-price">￥{{total.money/100}}</text>
+        </view>
+        <view class="cart-tab-item">
+          <view class="cart-tab-item-btn" hover-class="navigator-hover" bindtap="makeBill">选好了</view>
+        </view>
+    </view>
+  <!--购物车e-->
+  <view class="type-container-boxx">
+  <!--类目s-->
+    <view class="type-container">
+      <view wx:for-items="{{categories}}" wx:key="categoryId" class="type-box" bindtap="tabClick" id="{{item.categoryId}}">
+        <view class="type-navbar-item {{activeCategoryId == item.categoryId ? 'type-item-on' : ''}}">
+          {{item.cateName}}
+        </view>
+      </view>
+    </view>
+<!--类目e-->
+
+<!--轮播s-->
+    <view class="type-list">
+      <view class="swiper-container">
+        <swiper class="swiper_box" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" bindchange="swiperchange">
+          <block wx:for="{{banners}}" wx:key="categoryId">
+            <swiper-item>
+              <image bindtap="toDetailsTap" data-id="{{item.businessId}}" src="{{item.picUrl}}_m" class="slide-image" mode="widthFix" />
+            </swiper-item>
+          </block>
+        </swiper>
+        <view class="dots">
+          <block wx:for="{{banners}}" wx:key="unique">
+            <view class="dot{{index == swiperCurrent ? ' active' : ''}}"></view>
+          </block>
+        </view>
+      </view>
+    <!--
+      <view if="{{item.level == 2}}" class="type-menu">
+        <view class="type-level-box" wx:for-items="{{categorieslist}}" wx:key="categoryId">
+          <view id="{{item.categoryId}}" class="type-level-item " bindtap="levelClick" data-id="{{item.categoryId}}">
+            <image class="type-img" src="{{item.cateIcon}}"></image>
+            <text>{{item.cateName}}</text>
+          </view>
+        </view>
+      </view>
+  -->
+  <!--菜单列表S-->
+  <view class="menu-wrp">
+   <!--菜单类目
+        <scroll-view scroll-y="true" class="left-side">
+            <block wx:for="{{menus}}"  wx:key="cateId" wx:for-item="menu">
+                <view class="menu-item" data-id="{{menu.cateId}}" data-tag="火" bindtap="selectMenu">
+                    <view class="menu-item-wrp">
+                        <view class="{{selectedMenuId == menu.cateId ? 'bc_red' : 'bc_gray'}} m-item-icon">
+                            <image class="image" src="../../images/pic/ding-ico1.png" />
+                        </view>
+                        <view>
+                            <text class="m-item-title">{{menu.cateName}}</text>
+                        </view>
+                    </view>
+                </view>
+            </block>
+            <view class="menu-footer"></view>
+        </scroll-view>
+        -->
+           <!--具体菜单-->
+        <scroll-view scroll-y="true" scroll-into-view="{{toView}}" class="right-side">
+            <view class="dish-header"></view>
+            <block wx:for="{{menus}}"  wx:key="id" wx:for-item="menu">
+                <view>
+                    <view id="{{'s'+menu.cateId}}" class="dish-category-title">{{menu.cateName}}</view>
+                    <block wx:for="{{menu.dishs}}"  wx:key="foodId" wx:for-item="dish">
+                        <view class="dish-item">
+                            <view class="dish-item-wrp">
+                                <view class="dish-item-pic">
+                                    <image class="image" src="../../images/pic/dish-1.jpg" />
+                                </view>
+                                <view class="dish-item-info" style="">
+                                    <view>
+                                        <text class="dish-item-name">{{dish.foodName}}</text>
+                                    </view>
+                                    <!--
+                                    <view>
+                                        <text class="dish-item-sales">月销量{{dish.sales}}</text>
+                                    </view>
+                                    -->
+                                    <view>
+                                        <text class="dish-item-money">¥{{dish.foodPrice/100}}</text>
+                                    </view>
+                                </view>
+
+                                <view class="dish-item-count" style="">
+                                    <view class="dish-item-tab">
+                                        <view hidden="{{dish.count == 0}}" class="dish-item-count-minus" data-id="{{dish.foodId}}"
+                                        data-cid="{{menu.cateId}}" bindtap="minusCount">
+                                            <image class="image" src="../../images/pic/countMinus.png" />
+                                        </view>
+                                    </view>
+                                    <view class="dish-item-count-text dish-item-tab">
+                                        <text hidden="{{dish.count == 0}}">{{dish.count}}</text>
+                                    </view>
+                                    <view class="dish-item-count-plus" data-id="{{dish.foodId}}" 
+                                    data-cid="{{menu.cateId}}" bindtap="addCount">
+                                        <image class="image" src="../../images/pic/countSelAdd.png" />
+                                    </view>
+                                </view>
+                            </view>
+                        </view>                   
+                    </block>
+
+                </view>
+            </block>        
+            <view class="dish-footer"></view>
+        </scroll-view>
+    </view>
+ 
+  <!--菜单列表E-->
+    </view>
+  </view>
+</view>
+<!--轮播e-->
+
+<view hidden="{{search}}" class="search-box {{iponesc}}">
+  <view hidden="{{searchidden}}" class="goods-box" wx:for-items="{{searchs}}" wx:key="{{index}}" bindtap="toDetailsTap" data-id="{{item.id}}">
+    <view class="img-box">
+      <image src="{{item.pic}}_m" class="image" mode="widthFix" lazy-load="true" />
+      <view class="goods-characteristic">
+        <text>{{item.characteristic}}</text>
+      </view>
+    </view>
+    <view class="goods-title">{{item.name}}</view>
+    <view style='display:flex;'>
+      <view class="goods-price">Ұ{{item.minPrice}}</view>
+      <view class="goods-price-naver">已售{{item.numberOrders}}</view>
+    </view>
+  </view>
+  <view hidden="{{nonehidden}}" class="goods-none">
+    <image src="../../images/search_empty.png" />
+    <text>您寻找的商品还未上架</text>
+  </view>
+</view>
+<view class="top-line"></view>
+<view class="bottom-lin"></view>

@@ -1,6 +1,7 @@
 <!--index.wxml-->
 <navigation id='Navigation' show-search='{{showSearch}}' class="fix-top" animation="{{fadeAni}}"></navigation>
 <view class="container">
+<!--置顶轮播-->
 	<view class="swiper-container">
 		<swiper class="swiper_box" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" bindchange="swiperchange"
 		 circular="circular">
@@ -16,33 +17,43 @@
 			</block>
 		</view>
 	</view>
-	<view class="index-menu-bg">
-		<view class="index-menu flex">
-			<view class="menu-list" wx:for="{{sales}}" wx:key="id" bindtap="tapSales" data-id="{{item.linkUrl}}">
-			  <image src="{{item.picUrl}}" />
-			  <view class="text">{{item.banTitle}}</view>
-			</view>
-		</view>
-		<view class="index-hot flex">
-			<block wx:for="{{hot}}" wx:key="hot">
-				<navigator hover-class="none" class="hot-item" url="{{item.linkUrl}}">
-					<image src="{{item.picUrl}}"></image>
-				</navigator>
-			</block>
-		</view>
-	</view>
-	<view wx:if="{{topgoods}}" class="goods-container">
+  <!--店铺欢迎-->
+	<view class="goods-container">
 	  <view class="goods-title" bindtap="tapSales" data-id="{{topgoods.conRemark}}">
-	    <view class="line"></view><view class="text">{{topgoods.conValue}}</view><view class="line"></view>
+	    <view class="line"></view><view class="text">{{}}欢迎您{{userId}}号客</view><view class="line"></view>
 	  </view>
-	  <navigator url="/pages/goods-detail/goods-detail?ductId={{item.ductId}}" class="goods-list" wx:for-items="{{goods}}" wx:key="{{index}}">
-	    <image src="{{item.pic}}" />
-	    <view class="goods-list-title">{{item.name}}</view>
-	    <view class="goods-list-text">{{item.characteristic}}</view>
-	    <view class="goods-list-money">Ұ{{item.minPrice/100}}</view>
-	  </navigator>
 	</view>
+<!--顾客订单-->
+  <view class="address-list">
+    <view class="a-address" wx:for-items="{{myfoodList}}" wx:key="{{index}}">
+      <view class="left-text {{item.sellStatus? 'active':'xiajia'}}" data-id="{{item.foodId}}">
+        <view class="name-tel">
+          {{item.foodName}} （{{item.foodPrice/100}}元）
+        </view>
+        <view class="address-box">
+          推荐级别：{{item.paixu}} 
+          <text decode="{{true}}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</text>
+          状态：{{item.sellStatus?'售卖中':'已下架'}}
+        </view>
+      </view>
+      <view class="right-edit" bindtap="editFood" data-id="{{item.foodId}}"></view>
+    </view>
+  </view>
+  <view hidden="{{loadingMoreHidden ? true : false}}" class="no-more-goods">
+    <image src="/images/address_empty.png" class="no-order-img"></image>
+    <view class="text">您还没有点餐呢</view>
+  </view>
+<!--顾客排队号-->
+	<view class="goods-container" hidden="{{loadingMoreHidden ? false : true}}">
+	  <view class="goods-title" bindtap="tapSales" data-id="{{topgoods.conRemark}}">
+	    <view class="text">您当前排在第{{0}}位</view>
+	  </view>
+    <button type="primary" class="save-btn" formType="submit">刷一刷</button>
+	</view>
+
 </view>
+<!--授权弹窗-->
+<!--
 <view class="show-container" hidden="{{wxlogin}}">
   <view class="show-box">
     <view class="show-logo-box">
@@ -61,3 +72,4 @@
     <button open-type="getUserInfo" bindgetuserinfo="userlogin">允许</button>
   </view>
 </view>
+-->

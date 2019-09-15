@@ -6,27 +6,36 @@
       <view class="row-wrap">
         <view class="label">菜名</view>
         <view class="label-right">
-          <input name="foodName" class="input" type="text" placeholder="建议2~15个字为宜" value="{{addressData.foodName}}{{wxaddress.foodName}}" />
+          <input name="foodName" class="input" type="text" placeholder="建议2~15个字为宜" value="{{foodName}}" />
         </view>
+      </view>
+
+      <view class="row-wrap" style="height:170rpx;">
+        <view class="label">类别</view>
+        <checkbox-group bindchange="checkboxChange">
+          <label class="checkbox" wx:for="{{items}}"wx:key="id">
+            <checkbox value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
+          </label>
+        </checkbox-group>
       </view>
 
       <view class="row-wrap">
         <view class="label">售价</view>
         <view class="label-right">
-          <input name="foodPrice" class="input" type="text" placeholder="单位元（例：12.5）" value="{{addressData.mobile}}{{wxaddress.telNumber}}" />
+          <input name="foodPrice" class="input" type="text" placeholder="单位元（例：12.5）" value="{{foodPrice/100}}" />
         </view>
       </view>
      
       <view class="row-wrap">
         <view class="label">推荐指数</view>
         <view class="label-right">
-          <input name="paixu" class="input" type="text"  placeholder="请填写1~5整数"  value="{{addressData.code}}{{wxaddress.postalCode}}" />
+          <input name="paixu" class="input" type="text"  placeholder="请填写1~5整数"  value="{{paixu}}" />
         </view>
       </view>
 
     </view>
-    <button type="warn" class="save-btn" formType="submit">保存</button>
-    <button type="default" class="save-btn" bindtap="deleteShopFood" data-id="{{addressData.foodId}}" wx:if="{{addressData}}">删除</button>
+    <button type="primary" class="save-btn" formType="submit">保存</button>
+    <button type="warn" class="save-btn" bindtap="deleteShopFood" data-id="{{foodId}}" wx:if="{{foodId}}">{{sellStatus?'下架':'上架'}}</button>
     <button type="default" class="cancel-btn" bindtap="bindCancel">取消</button>
   </form>
 </view>

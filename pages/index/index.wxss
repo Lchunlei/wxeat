@@ -38,7 +38,7 @@ page{
 
 .swiper-container .swiper_box {
   width: 750rpx;
-  height: 750rpx;
+  height: 450rpx;
 	border-bottom-right-radius: 20rpx;
 	border-bottom-left-radius: 20rpx;
 	overflow: hidden;
@@ -56,7 +56,7 @@ page{
   bottom: 0;
   display: flex;
   justify-content: center;
-  top: 680rpx;
+  top: 420rpx;
   height: 10rpx;
 }
 
@@ -307,4 +307,56 @@ page{
   display: block;
   margin: auto;
   margin-top: 10px;
+}
+/*顾客菜单列表**/
+
+.address-list {
+  width: 100%;
+}
+
+.address-list .a-address {
+  width: 720rpx;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25rpx 30rpx;
+  border-bottom: 1rpx solid #f5f5f5;
+  background-color: #fff;
+}
+
+.a-address .left-text {
+  width: 610rpx;
+  box-sizing: border-box;
+  padding-left: 58rpx;
+}
+
+.a-address .left-text.active {
+  background: url(https://yuxian.oss-cn-qingdao.aliyuncs.com/addr-active.png) no-repeat left center;
+  background-size: 28rpx auto;
+}
+
+.a-address .left-text.xiajia {
+  background: url(https://yuxian.oss-cn-qingdao.aliyuncs.com/xiajia.jpg) no-repeat left center;
+  background-size: 28rpx auto;
+}
+
+.a-address .left-text .name-tel {
+  margin-bottom: 10rpx;
+  font-size: 30rpx;
+  color: #333;
+}
+
+.a-address .left-text .address-box {
+  font-size: 24rpx;
+  color: #888;
+  line-height: 36rpx;
+}
+
+.a-address .right-edit {
+  width: 109rpx;
+  height: 100%;
+  padding: 50rpx 0 50rpx 58rpx;
+  box-sizing: border-box;
+  background: url(https://cdn.it120.cc/images/weappshop/addr-edit.png) no-repeat 43rpx center;
+  background-size: 35rpx auto;
 }

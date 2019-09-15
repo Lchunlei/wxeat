@@ -18,36 +18,25 @@ Page({
   },
   bindSave: function (e) {
     var that = this;
-    var bossName = e.detail.value.bossName;
-    var shopName = e.detail.value.shopName;
+    var linkMan = e.detail.value.linkMan;
     var address = e.detail.value.address;
-    var bossTel = e.detail.value.bossTel;
-    var bossName = e.detail.value.bossName;
-    var inviteCode = e.detail.value.inviteCode;
+    var mobile = e.detail.value.mobile;
+    var code = e.detail.value.code;
 
-    if (shopName == "") {
-      wx.showToast({
-        title: '请填写店铺名',
-        icon: 'none',
-        duration: 2000
-      });
+    if (linkMan == "") {
+      wx.showModal({
+        title: '提示',
+        content: '请填写联系人姓名',
+        showCancel: false
+      })
       return
     }
-
-    if (bossName == "") {
-      wx.showToast({
-        title: '请填写掌柜姓名',
-        icon: 'none',
-        duration: 2000
-      });
-      return
-    }
-    if (bossTel == "") {
-      wx.showToast({
-        title: '请填写手机号码',
-        icon: 'none',
-        duration: 2000
-      });
+    if (mobile == "") {
+      wx.showModal({
+        title: '提示',
+        content: '请填写手机号码',
+        showCancel: false
+      })
       return
     }
     if (this.data.selProvince == "请选择") {
@@ -81,32 +70,44 @@ Page({
       })
       return
     }
-
+    if (code == "") {
+      wx.showModal({
+        title: '提示',
+        content: '请填写邮编',
+        showCancel: false
+      })
+      return
+    }
+    var apiAddoRuPDATE = "add";
+    var apiAddid = that.data.id;
+    if (apiAddid) {
+      apiAddoRuPDATE = "update";
+    } else {
+      apiAddid = 0;
+    }
     wx.request({
-      url: app.globalData.urls + '/shop/join',
-      method: 'POST',
+      url: app.globalData.urls + '/user/shipping-address/' + apiAddoRuPDATE,
       data: {
-        wxOpenId: app.globalData.token,
-        // province: commonCityData.cityData[this.data.selProvinceIndex].provinceName,
-        province: this.data.selProvince,
-        city: this.data.selCity,
-        district: this.data.selDistrict,
+        token: app.globalData.token,
+        id: apiAddid,
+        provinceId: commonCityData.cityData[this.data.selProvinceIndex].id,
+        cityId: cityId,
+        districtId: districtId,
+        linkMan: linkMan,
         address: address,
-        bossTel: bossTel,
-        bossName: bossName,
-        shopName: shopName,
-        inviteCode: inviteCode
+        mobile: mobile,
+        code: code,
+        isDefault: 'true'
       },
       success: function (res) {
-        if (res.data.respCode != 'R000') {
+        if (res.data.code != 0) {
           // 登录错误 
           wx.hideLoading();
           wx.showModal({
             title: '失败',
-            content: res.data.respMsg,
-            duration: 2000,
+            content: res.data.msg,
             showCancel: false
-          });
+          })
           return;
         }
         // 跳转到结算页面
@@ -179,35 +180,32 @@ Page({
     var that = this;
     if (app.globalData.iphone == true) { that.setData({ iphone: 'iphone' }) }
     this.initCityData(1);
-    console.log("需要编辑的商户-->" + e.shopId);
-    var shopId = e.shopId;
-    if (shopId) {
+    var id = e.id;
+    if (id) {
       // 初始化原数据
       wx.showLoading();
       wx.request({
-        url: app.globalData.urls + '/shop/info',
-        // method: "POST",
+        url: app.globalData.urls + '/user/shipping-address/detail',
         data: {
-          eToken: app.globalData.token
+          token: app.globalData.token,
+          id: id
         },
         success: function (res) {
           wx.hideLoading();
-          if (res.data.respCode == 'R000') {
+          if (res.data.code == 0) {
             that.setData({
-              shopId: shopId,
-              addressData: res.data.respData,
-              selProvince: res.data.respData.province,
-              selCity: res.data.respData.city,
-              selDistrict: res.data.respData.district,
-              bossTel:res.data.respData.bossTel,
-              bossName:res.data.respData.bossName
+              id: id,
+              addressData: res.data.data,
+              selProvince: res.data.data.provinceStr,
+              selCity: res.data.data.cityStr,
+              selDistrict: res.data.data.areaStr
             });
-            that.setDBSaveAddressId(res.data.respData);
+            that.setDBSaveAddressId(res.data.data);
             return;
           } else {
             wx.showModal({
               title: '提示',
-              content: res.data.respMsg,
+              content: '无法获取快递地址数据',
               showCancel: false
             })
           }

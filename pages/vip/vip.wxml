@@ -1,0 +1,47 @@
+<view class="container {{iphone}}">
+  <view class="header-container">
+    <navigator open-type="navigateBack" delta="1" hover-class="navigator-hover">
+      <image class="goback" src="../../images/goback.png" />
+    </navigator>
+  </view>
+  <view class="tixian-bg">
+    <image class="tixian-img" src="../../images/withdraw.png"></image>
+    <view class="tixian-name">
+      公测版大优惠
+      <text class="money">1、30天VIP服务（10元）；</text>
+      <text class="money">2、90天VIP服务（28元）；</text>
+      <text class="money">3、180天VIP服务（55元）；</text>
+      <text class="money">4、360天VIP服务（100元）；</text>
+      <text class="tips">*打款审核通过后将为您升级为VIP商家</text>
+    </view>
+  </view>
+  <form bindsubmit="bindSave">
+    <view class="form-box">
+      <view class="row-wrap">
+        <view class="label">打款单号</view>
+        <view class="label-right">
+          <input name="amount" class="input" type="text" placeholder="请输入（微信转账单号）或（支付宝订单号）"/>
+        </view>
+        <view class="lable-text">*打款审核时间约30分钟</view>
+      </view>
+    </view>
+    <button class="save-btn" formType="submit">提交申请</button>
+    <button type="default" class="cancel-btn" bindtap="bindCancel">取消</button>
+  </form>
+
+  <view class="biaoti">
+      <text class="biaoti"> --店铺VIP升级介绍--</text>
+  </view>
+
+  <view class="section tc" style="text-align:center">
+    <video style="text-align:center" src="https://yuxian.oss-cn-qingdao.aliyuncs.com/jiaocheng.mp4"   controls ></video>
+  </view>
+
+  <view class="shoukuan">
+    <image class="shoukuan" src="https://yuxian.oss-cn-qingdao.aliyuncs.com/lclzfb.jpg"></image>
+  </view>
+  <view class="shoukuan">
+    <image class="shoukuan" src="https://yuxian.oss-cn-qingdao.aliyuncs.com/lclwx.png"></image>
+  </view>
+  
+</view>
