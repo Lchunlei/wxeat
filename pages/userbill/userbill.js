@@ -53,7 +53,7 @@ Page({
       selectedMenuId: e.currentTarget.id,
       activeCategoryId: e.currentTarget.id
     });
-    this.getGoodsList(this.data.activeCategoryId);
+    // this.getGoodsList(this.data.activeCategoryId);
   },
   addCount: function (event) {
     let nowMenus = [];
@@ -210,7 +210,7 @@ Page({
       //默认被选中的ID
       activeCategoryId: 1
     });
-    that.getGoodsList(0);
+    // that.getGoodsList(0);
 
     wx.getSystemInfo({
       success: function (res) {
@@ -240,8 +240,8 @@ Page({
     wx.request({
       url: app.globalData.urls + '/food/can/eat',
       data: {
-        shopId: 3,
-        cateId:0
+        shopId: 0,
+        eToken: app.globalData.token
       },
       success: function (res) {
         if (res.data.respCode == 'R000') {
@@ -255,37 +255,37 @@ Page({
           //默认被选中的ID
           activeCategoryId: 1
         });
-        that.getGoodsList(0);
+        // that.getGoodsList(0);
       }
     });
   },
-  getGoodsList: function (categoryId) {
-    //获取商品
-    var that = this;
-    wx.request({
-      url: app.globalData.urls + '/food/can/eat',
-      data: {
-        shopId: 0,
-        eToken: app.globalData.token
-      },
-      success: function (res) {
-        if (res.data.respCode == 'R000') {
-          that.setData({
-            menus: res.data.respData,
-          });
-        }else{
-          that.setData({
-            menus: [],
-          });
-          wx.showToast({
-            title: res.data.respMsg,
-            icon: 'none',
-            duration: 1000
-          });
-        }
-      }
-    })
-  },
+  // getGoodsList: function (categoryId) {
+  //   //获取商品
+  //   var that = this;
+  //   wx.request({
+  //     url: app.globalData.urls + '/food/can/eat',
+  //     data: {
+  //       shopId: 0,
+  //       eToken: app.globalData.token
+  //     },
+  //     success: function (res) {
+  //       if (res.data.respCode == 'R000') {
+  //         that.setData({
+  //           menus: res.data.respData,
+  //         });
+  //       }else{
+  //         that.setData({
+  //           menus: [],
+  //         });
+  //         wx.showToast({
+  //           title: res.data.respMsg,
+  //           icon: 'none',
+  //           duration: 1000
+  //         });
+  //       }
+  //     }
+  //   })
+  // },
   makeBill: function (e){
     //选好下单
     var that = this;

@@ -24,21 +24,21 @@ App({
 	login: function () {
 	  var that = this;
 	  var token = that.globalData.token;
-	  if (token) {
-	    wx.request({
-	      url: that.globalData.urls + "/user/check-token",
-	      data: {
-	        token: token
-	      },
-	      success: function (res) {
-	        if (res.data.code != 0) {
-	          that.globalData.token = null;
-	          that.login();
-	        }
-	      }
-	    });
-	    return;
-	  }
+	  // if (token) {
+	  //   wx.request({
+	  //     url: that.globalData.urls + "/user/check-token",
+	  //     data: {
+	  //       token: token
+	  //     },
+	  //     success: function (res) {
+	  //       if (res.data.code != 0) {
+	  //         that.globalData.token = null;
+	  //         that.login();
+	  //       }
+	  //     }
+	  //   });
+	  //   return;
+	  // }
 	  wx.login({
 	    success: function (res) {
         //用户无感快捷登录

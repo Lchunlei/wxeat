@@ -2,7 +2,7 @@ var wxpay = require('../../utils/pay.js')
 var app = getApp()
 Page({
   data: {
-    statusType: ["待处理", "待出餐", "月订单", "历史订单"],
+    statusType: ["客单", "出餐单", "月订单", "历史订单"],
     currentType: 0,
     tabClass: ["", "", "", ""],
 		bodyHeight:null
@@ -104,6 +104,8 @@ Page({
   },
   onLoad: function (e) {
     var that = this;
+    console.log(e.share);
+    console.log(e.currentType);
     if (e.share) {
       that.setData({ share: e.share });
     }
@@ -205,21 +207,52 @@ Page({
     // 获取订单列表
     wx.showLoading();
     var that = this;
-    var postData = {
-      eToken: app.globalData.token
-    };
-    postData.billStatus = that.data.currentType;
+    // var postData = {
+    //   eToken: app.globalData.token
+    // };
+    // postData.billStatus = that.data.currentType;
     //刷新当前订单统计数量
     // this.getOrderStatistics();
+    if (that.data.currentType==0){
+      //查看客单
+      wx.request({
+        url: app.globalData.urls + '/bill/ctmBill',
+        data: {
+          eToken: app.globalData.token,
+          billStatus: that.data.currentType
+        },
+        success: (res) => {
+          console.log(res)
+          wx.hideLoading();
+          if (res.data.respCode == 'R000') {
+            that.setData({
+              ctmBills: res.data.respData,
+              isEmpty: false,
+              // goodsMap: res.data.data.goodsMap
+            });
+          } else {
+            this.setData({
+              ctmBills: null
+              // logisticsMap: {},
+              // goodsMap: {}
+            });
+          }
+        }
+      })
+
+    }
     wx.request({
       url: app.globalData.urls + '/bill/list',
-      data: postData,
+      data: {
+        eToken: app.globalData.token,
+        billStatus:that.data.currentType
+      },
       success: (res) => {
 				console.log(res)
         wx.hideLoading();
         if (res.data.respCode == 'R000') {
           that.setData({
-            orderList: res.data.respData.orderList
+            orderList: res.data.respData
             // logisticsMap: res.data.data.logisticsMap,
             // goodsMap: res.data.data.goodsMap
           });
