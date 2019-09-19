@@ -5,6 +5,22 @@ page{
     background-color: #ffffff;
     justify-content: initial;
 }
+.title {
+  color: #333;
+  font-weight:700;
+  font-size: 32rpx;
+  margin-bottom: 10rpx;
+  text-align: center;
+  height: 90rpx;
+  line-height: 90rpx;
+  padding-top: 20rpx;
+}
+
+.text {
+  font-size: 30rpx;
+  width: 95%;
+  margin: 0 auto;
+}
 .shoukuan {
   height: 80%;
   text-align: center;

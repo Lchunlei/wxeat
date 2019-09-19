@@ -1,12 +1,11 @@
 const app = getApp()
 Page({
 	data: {
-    balance:0,
-    freeze:0,
-    score:0,
-    loginName:"点击头像登录",
-    score_sign_continuous:0,
-    tabClass: ["", "", "", "", ""]
+    companyInfo:'北京智合联动科技有限公司',
+    versionInfo: 'V-1.0.0',
+    // freeze:0,
+    // score:0,
+    loginName:"点击头像登录"
   },
   onGotUserInfo: function (e) {
     console.log("--->" + app.globalData.userInfo);
@@ -40,6 +39,9 @@ Page({
     this.setData({
         loginName: e.detail.userInfo.nickName
     });
+  },
+  onTabItemTap:function(){
+
   },
   onLoad: function () {
     var that = this;
@@ -154,8 +156,7 @@ Page({
       });
     }
   },
-  staffSet: function () {
-    // 更新店铺菜单
+  shopSet: function () {
     var that = this;
     if (app.globalData.userInfo == null) {
       wx.showToast({
@@ -164,10 +165,8 @@ Page({
         duration: 2000
       });
     } else {
-      wx.showToast({
-        title: '功能维护中，请稍后！',
-        icon: 'none',
-        duration: 2000
+      wx.navigateTo({
+        url: "/pages/shopset/shopset"
       });
     }
   },
@@ -238,7 +237,7 @@ Page({
         duration: 2000
       });
     } else {
-      wx.switchTab({
+      wx.navigateTo({
         url: "/pages/userbill/userbill"
       });
     }

@@ -98,8 +98,17 @@ Page({
         inviteCode: inviteCode
       },
       success: function (res) {
-        if (res.data.respCode != 'R000') {
-          // 登录错误 
+        if (res.data.respCode == 'R000') {
+          wx.showToast({
+            title: '操作成功',
+            icon: 'success',
+            image: '../../images/active.png',
+            duration: 2000
+          });
+          wx.navigateTo({
+            url: "/pages/addshop/addshop"
+          });
+        }else{
           wx.hideLoading();
           wx.showModal({
             title: '失败',
@@ -110,7 +119,7 @@ Page({
           return;
         }
         // 跳转到结算页面
-        wx.navigateBack({})
+        // wx.navigateBack({})
       }
     })
   },
@@ -236,30 +245,30 @@ Page({
   selectCity: function () {
 
   },
-  deleteAddress: function (e) {
-    var that = this;
-    var id = e.currentTarget.dataset.id;
-    wx.showModal({
-      title: '提示',
-      content: '确定要删除该收货地址吗？',
-      success: function (res) {
-        if (res.confirm) {
-          wx.request({
-            url: app.siteInfo.url + app.siteInfo.subDomain + '/user/shipping-address/delete',
-            data: {
-              token: app.globalData.token,
-              id: id
-            },
-            success: (res) => {
-              wx.navigateBack({})
-            }
-          })
-        } else if (res.cancel) {
-          console.log('用户点击取消')
-        }
-      }
-    })
-  },
+  // deleteAddress: function (e) {
+  //   var that = this;
+  //   var id = e.currentTarget.dataset.id;
+  //   wx.showModal({
+  //     title: '提示',
+  //     content: '确定要删除该收货地址吗？',
+  //     success: function (res) {
+  //       if (res.confirm) {
+  //         wx.request({
+  //           url: app.siteInfo.url + app.siteInfo.subDomain + '/user/shipping-address/delete',
+  //           data: {
+  //             token: app.globalData.token,
+  //             id: id
+  //           },
+  //           success: (res) => {
+  //             wx.navigateBack({})
+  //           }
+  //         })
+  //       } else if (res.cancel) {
+  //         console.log('用户点击取消')
+  //       }
+  //     }
+  //   })
+  // },
   readFromWx: function () {
     let that = this;
     wx.chooseAddress({

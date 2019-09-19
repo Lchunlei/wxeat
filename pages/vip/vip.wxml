@@ -20,7 +20,7 @@
       <view class="row-wrap">
         <view class="label">打款单号</view>
         <view class="label-right">
-          <input name="amount" class="input" type="text" placeholder="请输入（微信转账单号）或（支付宝订单号）"/>
+          <input name="payNum" class="input" type="text" placeholder="请输入（微信转账单号）或（支付宝订单号）"/>
         </view>
         <view class="lable-text">*打款审核时间约30分钟</view>
       </view>
@@ -28,20 +28,18 @@
     <button class="save-btn" formType="submit">提交申请</button>
     <button type="default" class="cancel-btn" bindtap="bindCancel">取消</button>
   </form>
-
-  <view class="biaoti">
-      <text class="biaoti"> --店铺VIP升级介绍--</text>
-  </view>
-
+    <view class="title">
+        --店铺VIP升级介绍--
+    </view>
   <view class="section tc" style="text-align:center">
-    <video style="text-align:center" src="https://yuxian.oss-cn-qingdao.aliyuncs.com/jiaocheng.mp4"   controls ></video>
+    <video style="text-align:center" src="https://yuxian.oss-cn-qingdao.aliyuncs.com/jiaocheng.mp4" controls></video>
   </view>
 
   <view class="shoukuan">
-    <image class="shoukuan" src="https://yuxian.oss-cn-qingdao.aliyuncs.com/lclzfb.jpg"></image>
+    <image class="shoukuan" src="https://yuxian.oss-cn-qingdao.aliyuncs.com/lclzfb.jpg" mode='widthFix'></image>
   </view>
   <view class="shoukuan">
-    <image class="shoukuan" src="https://yuxian.oss-cn-qingdao.aliyuncs.com/lclwx.png"></image>
+    <image class="shoukuan" src="https://yuxian.oss-cn-qingdao.aliyuncs.com/lclwx.png" mode='widthFix'></image>
   </view>
   
 </view>

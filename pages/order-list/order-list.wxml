@@ -12,23 +12,23 @@
     <view class="text">还没有订单呢</view>
   </view>
     <!--客单展示S-->
-  <view class="order-list" hidden="{{ctmBills ? false : true}}">
+  <view class="order-list" hidden="{{currentType==0 ? false : true}}">
     <view class="a-order" wx:for-items="{{ctmBills}}" wx:key="{{index}}">
-      <view class="order-date" bindtap="orderDetail" data-id="{{item.userId}}">
+      <view class="order-date">
         <view class="date-box">下单时间：{{item.makeTime}}</view>
-        <!--
-        <view class="status {{(item.billStatus==0 || item.billStatus==1) ? '':'red'}}">{{item.billStatus}}</view>
-        -->
+        <view class="status">顾客号：{{item.userId}}</view>
+        <view class="status">餐桌号：{{item.deskCode}}</view>
       </view>
-      <view class="goods-info" bindtap="orderDetail" data-id="{{item.userId}}">
-        <view class="goods-des">
-          <view><text decode="{{true}}">顾客号：{{item.userId}} &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 餐桌号：{{item.deskCode}} </text></view>
-          <!--遍历该客人点餐-->
+      <view class="a-order">
         <view wx:for-items="{{item.bills}}" wx:key="{{index}}">
-          <view>
-            <text decode="{{true}}">菜名： {{item.foodName}} &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 份数：{{item.eatNum}} </text>
+          <view class="order-date">
+            <view class="date-box">菜名：{{item.foodName}}</view>
+            <view class="status">份数：{{item.eatNum}}</view>
+            <view class="status">价格：{{item.totalPrice/100}}</view>
+            <view class="status {{(item.billStatus==0 || item.billStatus==1) ? 'red':''}}">{{item.billStatus==0 ? '待上菜':'已上菜'}}</view>
           </view>
-        </view>
+        <view>
+      </view>
 
         </view>
       </view>
@@ -44,28 +44,24 @@
       <view class="price-box">
         <view class="total-price">合计：¥ {{item.totalPay/100}}</view>
 				<view class="btn-box">
-					<view class="btn cancel-btn" bindtap="cancelOrderTap" data-id="{{item.id}}">取消订单</view>
-					<view class="btn topay-btn" bindtap="toPayTap" data-id="{{item.id}}" data-money="{{item.amountReal}}">收款完成</view>
+					<view class="btn cancel-btn" hidden="{{item.userId==0? true:false}}"  bindtap="cancelOrder" data-id="{{item.userId}}">拒单删除</view>
+					<view class="btn topay-btn" bindtap="toPay" data-id="{{item.userId}}">收款完成</view>
 				</view>
       </view>
     </view>
   </view>
     <!--客单展示E-->
     <!--出餐单S-->
-  <view class="order-list" hidden="{{orderList ? false : true}}">
+  <view class="order-list" hidden="{{currentType==1 ? false : true}}">
     <view class="a-order" wx:for-items="{{orderList}}" wx:key="{{index}}">
-      <view class="order-date" bindtap="orderDetail" data-id="{{item.billId}}">
-        <view class="date-box">下单时间：{{item.cTime}}</view>
-        <view class="status {{(item.billStatus==0 || item.billStatus==1) ? '':'red'}}">{{item.billStatus}}</view>
-      </view>
-      <view class="goods-info" bindtap="orderDetail" data-id="{{item.billId}}">
-        <view class="goods-des">
-          <view><text decode="{{true}}">顾客号：{{item.userId}} &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 餐桌号：{{item.deskCode}} </text></view>
-          <view wx:if="{{item.foodName && item.foodName != ''}}">
-            <text decode="{{true}}">菜名： {{item.foodName}} &nbsp;&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 份数：{{item.eatNum}} </text>
-          </view>
+        <view class="order-date">
+          <view class="date-box">下单时间：{{item.cTime}}</view>
+          <view class="status">顾客号：{{item.userId}}</view>
         </view>
-      </view>
+        <view class="order-date">
+          <view class="date-box">{{item.foodName}}</view>
+          <view class="status">x{{item.eatNum}}</view>
+        </view>
       <!--
       <view bindtap="orderDetail" data-id="{{item.id}}">
         <scroll-view class="goods-img-container" scroll-x="true">
@@ -76,16 +72,10 @@
       </view>
       -->
       <view class="price-box">
-        <view class="total-price">合计：¥ {{item.totalPrice/100}}</view>
+        <view class="total-price">餐桌号：{{item.deskCode}}</view>
 				<view class="btn-box">
-					<view class="btn cancel-btn" hidden="{{item.billStatus==0? false : true}}" bindtap="cancelOrderTap" data-id="{{item.id}}">取消订单</view>
-					<view class="btn topay-btn" hidden="{{item.billStatus==0? false: true}}" bindtap="toPayTap" data-id="{{item.id}}" data-money="{{item.amountReal}}">立即支付</view>
-					<view class="btn topay-btn" hidden="{{item.billStatus==3? false: true}}" bindtap="orderDetail" data-id="{{item.id}}">去评价</view>
-					<form bindsubmit="toConfirmTap" report-submit="true" data-id="{{item.id}}">
-					  <view wx:if="{{item.billStatus==2}}">
-					    <button class="btn topay-btn" formType="submit">确认收货</button>
-					  </view>
-					</form>
+					<view class="btn cancel-btn" bindtap="cancelOneBill" data-id="{{item.billId}}">拒单删除</view>
+					<view class="btn topay-btn" bindtap="sendDishe" data-id="{{item.billId}}">上菜完成</view>
 				</view>
       </view>
     </view>

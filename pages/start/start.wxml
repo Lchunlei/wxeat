@@ -1,7 +1,7 @@
 <!--pages/start/start.wxml-->
 <view class="container" wx:for="{{sales}}" wx:key="id">
   <view class="tab-image">
-    <image data-id="{{item.businessId}}" class="bgImages" src="{{item.picUrl}}" />
+    <image data-id="{{item.businessId}}" class="bgImages" src="{{item.picUrl}}" mode='widthFix'/>
     <view class="gohome" bindtap="goHome">跳过广告 {{second}}</view>
   </view>
   <!--

@@ -2,6 +2,7 @@
 var app = getApp()
 Page({
   data: {
+    pageTitle:"店铺菜单",
     text: "Page main",
     background: [
       {
@@ -247,6 +248,7 @@ Page({
         if (res.data.respCode == 'R000') {
           wx.hideLoading();
           that.setData({
+            pageTitle: res.data.respMsg,
             menus: res.data.respData
           });
         }

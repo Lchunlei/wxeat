@@ -27,7 +27,7 @@
 
   <view class="userinfo-item" bindtap="billsCore">
     <image src="../../images/profile_dfunding.png"></image>
-    <navigator hover-class="none">订单中心</navigator>
+    <text hover-class="none">订单中心</text>
   </view>
 
   <view class="user-cart-list">
@@ -72,9 +72,9 @@
       <view>菜单设置</view>
     </view>
 
-    <view hover-class="none" class="userinfo-item" bindtap="staffSet">
+    <view hover-class="none" class="userinfo-item" bindtap="shopSet">
       <image src="../../images/profile_ticket.png"></image>
-      <view>店员管理</view>
+      <view>店铺管理</view>
     </view>
 
     <view hover-class="none" class="userinfo-item" bindtap="vip">
@@ -95,7 +95,10 @@
     </view>
 
   </view>
+    <view class="userinfo-info">
+    {{companyInfo}}
+  </view>
   <view class="userinfo-info">
-    {{getInfo}}
+    {{versionInfo}}
   </view>
 </view>

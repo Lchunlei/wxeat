@@ -5,6 +5,7 @@
     "pages/logs/logs",
     "pages/my/my",
     "pages/cart/cart",
+    "pages/shopset/shopset",
     "pages/goods-detail/goods-detail",
     "pages/template-cart/template-cart",
     "pages/topic/topic",
@@ -41,14 +42,7 @@
         "iconPath": "images/nav/home-off.png",
         "selectedIconPath": "images/nav/home-on.png",
         "text": "首页"
-      },
-      {
-        "pagePath": "pages/userbill/userbill",
-        "iconPath": "images/nav/cart-off.png",
-        "selectedIconPath": "images/nav/cart-on.png",
-        "text": "买单"
-      },
-      {
+      },{
         "pagePath": "pages/my/my",
         "iconPath": "images/nav/my-off.png",
         "selectedIconPath": "images/nav/my-on.png",

@@ -2,7 +2,7 @@ var wxpay = require('../../utils/pay.js')
 var app = getApp()
 Page({
   data: {
-    statusType: ["客单", "出餐单", "月订单", "历史订单"],
+    statusType: ["客单", "上菜单", "月订单", "历史订单"],
     currentType: 0,
     tabClass: ["", "", "", ""],
 		bodyHeight:null
@@ -26,78 +26,128 @@ Page({
     });
     this.onShow();
   },
-  orderDetail: function (e) {
-    var orderId = e.currentTarget.dataset.id;
-    wx.navigateTo({
-      url: "/pages/order-detail/order-detail?id=" + orderId + '&share=1'
-    })
-  },
-  cancelOrderTap: function (e) {
+  // orderDetail: function (e) {
+  //   var orderId = e.currentTarget.dataset.id;
+  //   wx.navigateTo({
+  //     url: "/pages/order-detail/order-detail?id=" + orderId + '&share=1'
+  //   })
+  // },
+  cancelOrder: function (e) {
+    //取消订单
     var that = this;
-    var orderId = e.currentTarget.dataset.id;
+    var userId = e.currentTarget.dataset.id;
     wx.showModal({
-      title: '确定要取消该订单吗？',
+      title: '确定删除此客户订单吗？',
       content: '',
       success: function (res) {
         if (res.confirm) {
           wx.showLoading();
           wx.request({
-            url: app.siteInfo.url + app.siteInfo.subDomain + '/order/close',
+            url: app.globalData.urls + '/bill/del',
             data: {
-              token: app.globalData.token,
-              orderId: orderId
+              eToken: app.globalData.token,
+              userId: userId
             },
             success: (res) => {
               wx.hideLoading();
-              if (res.data.code == 0) {
+              if (res.data.respCode == 'R000') {
                 that.onShow();
+              }else{
+                wx.showToast({
+                  title: res.data.respMsg,
+                  icon: 'none',
+                  duration: 2000
+                });
               }
             }
           })
         }
       }
-    })
+    });
   },
-  toPayTap: function (e) {
+  toPay: function (e) {
     var that = this;
-    var orderId = e.currentTarget.dataset.id;
-    var money = e.currentTarget.dataset.money;
-    wx.request({
-      url: app.siteInfo.url + app.siteInfo.subDomain + '/user/amount',
-      data: {
-        token: app.globalData.token
-      },
+    var userId = e.currentTarget.dataset.id;
+    wx.showModal({
+      title: '确定已收款交易完成吗？',
+      content: '',
       success: function (res) {
-        if (res.data.code == 0) {
-          // res.data.data.balance
-          money = money - res.data.data.balance;
-          if (money <= 0) {
-            // 直接使用余额支付
-            wx.request({
-              url: app.siteInfo.url + app.siteInfo.subDomain + '/order/pay',
-              method: 'POST',
-              header: {
-                'content-type': 'application/x-www-form-urlencoded'
-              },
-              data: {
-                token: app.globalData.token,
-                orderId: orderId
-              },
-              success: function (res2) {
-                wx.reLaunch({
-                  url: "/pages/my/my"
+        if (res.confirm) {
+          wx.showLoading();
+          wx.request({
+            url: app.globalData.urls + '/bill/complete',
+            data: {
+              eToken: app.globalData.token,
+              userId: userId
+            },
+            success: (res) => {
+              wx.hideLoading();
+              if (res.data.respCode == 'R000') {
+                that.onShow();
+              }else{
+                wx.showToast({
+                  title: res.data.respMsg,
+                  icon: 'none',
+                  duration: 2000
                 });
               }
-            })
-          } else {
-            wxpay.wxpay(app, money, orderId, "/pages/my/my");
-          }
-        } else {
-          wx.showModal({
-            title: '错误',
-            content: '无法获取用户资金信息',
-            showCancel: false
+            }
           })
+        }
+      }
+    });
+  },
+  cancelOneBill: function (e) {
+    var that = this;
+    var billId = e.currentTarget.dataset.id;
+    wx.showModal({
+      title: '确定删除此订单吗？',
+      content: '',
+      success: function (res) {
+        if (res.confirm) {
+          wx.showLoading();
+          wx.request({
+            url: app.globalData.urls + '/bill/delOne',
+            data: {
+              eToken: app.globalData.token,
+              billId: billId
+            },
+            success: (res) => {
+              wx.hideLoading();
+              if (res.data.respCode == 'R000') {
+                that.onShow();
+              } else {
+                wx.showToast({
+                  title: res.data.respMsg,
+                  icon: 'none',
+                  duration: 2000
+                });
+              }
+            }
+          })
+        }
+      }
+    });
+  },
+  sendDishe: function (e) {
+    var that = this;
+    var billId = e.currentTarget.dataset.id;
+    wx.request({
+      url: app.globalData.urls + '/bill/sendDishe',
+      data: {
+        eToken: app.globalData.token,
+        billId: billId
+      },
+      success: (res) => {
+        wx.hideLoading();
+        if (res.data.respCode == 'R000') {
+          that.onShow();
+        } else {
+          wx.showToast({
+            title: res.data.respMsg,
+            icon: 'none',
+            duration: 2000
+          });
         }
       }
     })
@@ -166,44 +216,44 @@ Page({
       }
     })
   },
-	toConfirmTap:function(e){
-	  let that = this;
-	  let orderId = e.currentTarget.dataset.id;
-	  let formId = e.detail.formId;
-	  wx.showModal({
-	      title: '确认您已收到商品？',
-	      content: '',
-	      success: function(res) {
-	        if (res.confirm) {
-	          wx.showLoading();
-	          wx.request({
-	            url: app.globalData.urls + '/order/delivery',
-	            data: {
-	              token: app.globalData.token,
-	              orderId: orderId
-	            },
-	            success: (res) => {
-	              if (res.data.code == 0) {
-	                that.onShow();
-	                // 模板消息，提醒用户进行评价
-	                let postJsonString = {};
-	                postJsonString.keyword1 = { value: that.data.orderDetail.orderInfo.orderNumber, color: '#173177' }
-	                let keywords2 = '您已确认收货，期待您的再次光临！';
-	                if (app.globalData.order_reputation_score) {
-	                  keywords2 += '立即好评，系统赠送您' + app.globalData.order_reputation_score +'积分奖励。';
-	                }
-	                postJsonString.keyword2 = { value: keywords2, color: '#173177' }
-	                app.sendTempleMsgImmediately(app.siteInfo.assessorderkey , formId,
-	                  '/pages/order-detail/order-detail?id=' + orderId, JSON.stringify(postJsonString));
-	              }
-	            }
-	          })
-	        }
-	      }
-	  })
-	},
+	// toConfirmTap:function(e){
+	//   let that = this;
+	//   let orderId = e.currentTarget.dataset.id;
+	//   let formId = e.detail.formId;
+	//   wx.showModal({
+	//       title: '确认您已收到商品？',
+	//       content: '',
+	//       success: function(res) {
+	//         if (res.confirm) {
+	//           wx.showLoading();
+	//           wx.request({
+	//             url: app.globalData.urls + '/order/delivery',
+	//             data: {
+	//               token: app.globalData.token,
+	//               orderId: orderId
+	//             },
+	//             success: (res) => {
+	//               if (res.data.code == 0) {
+	//                 that.onShow();
+	//                 // 模板消息，提醒用户进行评价
+	//                 let postJsonString = {};
+	//                 postJsonString.keyword1 = { value: that.data.orderDetail.orderInfo.orderNumber, color: '#173177' }
+	//                 let keywords2 = '您已确认收货，期待您的再次光临！';
+	//                 if (app.globalData.order_reputation_score) {
+	//                   keywords2 += '立即好评，系统赠送您' + app.globalData.order_reputation_score +'积分奖励。';
+	//                 }
+	//                 postJsonString.keyword2 = { value: keywords2, color: '#173177' }
+	//                 app.sendTempleMsgImmediately(app.siteInfo.assessorderkey , formId,
+	//                   '/pages/order-detail/order-detail?id=' + orderId, JSON.stringify(postJsonString));
+	//               }
+	//             }
+	//           })
+	//         }
+	//       }
+	//   })
+	// },
   onShow: function (e) {
-    console.log("--展示订单中心数据--");
+    // console.log("--展示订单中心数据--");
     // 获取订单列表
     wx.showLoading();
     var that = this;
@@ -222,7 +272,7 @@ Page({
           billStatus: that.data.currentType
         },
         success: (res) => {
-          console.log(res)
+          // console.log(res)
           wx.hideLoading();
           if (res.data.respCode == 'R000') {
             that.setData({
@@ -245,7 +295,7 @@ Page({
       url: app.globalData.urls + '/bill/list',
       data: {
         eToken: app.globalData.token,
-        billStatus:that.data.currentType
+        tabNum:that.data.currentType
       },
       success: (res) => {
 				console.log(res)
@@ -253,8 +303,6 @@ Page({
         if (res.data.respCode == 'R000') {
           that.setData({
             orderList: res.data.respData
-            // logisticsMap: res.data.data.logisticsMap,
-            // goodsMap: res.data.data.goodsMap
           });
         } else {
           this.setData({

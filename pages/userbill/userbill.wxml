@@ -1,3 +1,4 @@
+<navigation id='Navigation' show-icon="{{true}}" title="{{pageTitle}}" show-title="{{true}}" class=""></navigation>
 <view class="container">
   <!--购物车s-->
       <view class="cart-tab-wrp">

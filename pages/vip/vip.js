@@ -5,9 +5,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    balance: 0
+    agreement:'我的你的客户催出',
+    payNum: ''
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
@@ -99,27 +99,28 @@ Page({
   },
   bindSave: function (e) {
     var that = this;
-    var amount = e.detail.value.amount;
+    var payNum = e.detail.value.payNum;
 
-    if (amount == "" || amount * 1 < 100) {
+    if (payNum == "") {
       wx.showModal({
         title: '错误',
-        content: '请填写正确的提现金额',
+        content: '请填写正确的打款单号',
         showCancel: false
       })
       return
     }
     wx.request({
-      url: app.globalData.urls + '/user/withDraw/apply',
+      url: app.globalData.urls + '/shop/vip',
+      method:'POST',
       data: {
-        token: app.globalData.token,
-        money: amount
+        eToken: app.globalData.token,
+        payNum: payNum
       },
       success: function (res) {
-        if (res.data.code == 0) {
+        if (res.data.respCode == 'R000') {
           wx.showModal({
             title: '成功',
-            content: '您的提现申请已提交，等待财务打款',
+            content: '您的打款已提交，30分钟内审核完毕',
             showCancel: false,
             success: function (res) {
               if (res.confirm) {
@@ -130,7 +131,7 @@ Page({
         } else {
           wx.showModal({
             title: '错误',
-            content: res.data.msg,
+            content: res.data.respMsg,
             showCancel: false
           })
         }
