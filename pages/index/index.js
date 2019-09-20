@@ -138,29 +138,53 @@ Page({
 		//   }
 		// })
 	},
+  makeBills: function (e) {
+    wx.navigateTo({
+      url: "/pages/userbill/userbill?role=1"
+    });
+  },
 	swiperchange: function(e) {
 		this.setData({
 			swiperCurrent: e.detail.current
-		})
+		});
 	},
 	toDetailsTap: function(e) {
-		wx.navigateTo({
-			url: "/pages/goods-detail/goods-detail?id=" + e.currentTarget.dataset.id
-		})
+		// wx.navigateTo({
+		// 	url: "/pages/goods-detail/goods-detail?id=" + e.currentTarget.dataset.id
+		// })
 	},
 	tapBanner: function(e) {
-		if (e.currentTarget.dataset.id != 0) {
-			wx.navigateTo({
-				url: "/pages/goods-detail/goods-detail?id=" + e.currentTarget.dataset.id
-			})
-		}
+		// if (e.currentTarget.dataset.id != 0) {
+		// 	wx.navigateTo({
+		// 		url: "/pages/goods-detail/goods-detail?id=" + e.currentTarget.dataset.id
+		// 	})
+		// }
 	},
 	tapSales: function (e) {
-	  if (e.currentTarget.dataset.id != 0) {
+    var batId = e.currentTarget.dataset.id;
+    if (batId == 1) {
 	    wx.navigateTo({
-	      url: e.currentTarget.dataset.id
-	    })
-	  }
+        url: '/pages/userbill/userbill'
+	    });
+    } else if (batId == 2){
+      wx.showToast({
+        title: '您稍等，服务员马上就到',
+        icon:'none',
+        duration: 2000
+      });
+    } else if (batId == 3){
+      wx.showToast({
+        title: '就餐排名已刷新',
+        icon: 'none',
+        duration: 2000
+      });
+    }else{
+      wx.showToast({
+        title: '您的服务马上就到',
+        icon: 'none',
+        duration: 2000
+      });
+    }
 	},
 	userlogin: function (e) {
 	  var that = this;

@@ -3,11 +3,14 @@
   <view class="tab-image">
     <image data-id="{{item.businessId}}" class="bgImages" src="{{item.picUrl}}" mode='widthFix'/>
     <view class="gohome" bindtap="goHome">跳过广告 {{second}}</view>
+    
+      <view bindtap="home" class="logo">
+        <view class="title">{{homeTitle}}</view>
+        <view class="subtitle">{{homeRemark}}</view>
+      </view>
+
   </view>
-  <!--
-  <view bindtap="home" class="logo">
-    <view class="title">{{item.banTitle}}</view>
-    <view class="subtitle">{{item.banRemark}}</view>
-  </view>
-  -->
+
+
+
 </view>

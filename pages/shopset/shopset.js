@@ -145,12 +145,17 @@ Page({
   qrBinding: function () {
     wx.navigateTo({
       url: "/pages/coupons/coupons"
-    })
+    });
   },
   staffManage: function () {
-    wx.navigateTo({
-      url: "/pages/coupons/coupons"
+    wx.showToast({
+      title: '功能维护中，请稍后',
+      icon: 'none',
+      duration: 2000
     })
+    // wx.navigateTo({
+    //   url: "/pages/staffs/staffs"
+    // });
   }
 
 })

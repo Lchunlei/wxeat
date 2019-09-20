@@ -7,7 +7,7 @@
   <view class="score-title">
     <image class="score-img" src="../../images/score_bg.png"></image>
     <view class="score-title-name">旺铺掌柜欢迎您</view>
-    <view class="score-title-score">{{shopInfo.shopName}}</view>
+    <view class="score-title-score">{{shopInfo.shopName?shopInfo.shopName:'暂无'}}</view>
  
     <view class="score-times">
       <view class="times-day">店铺桌牌数：{{shopInfo.qrTotal}}</view>

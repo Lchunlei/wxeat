@@ -21,6 +21,8 @@ function countdown(that) {
 }
 Page({
   data: {
+    homeTitle:'旺铺掌柜',
+    homeRemark:'北京智合联动科技有限公司',
     second: 5,
     home: 0
   },
@@ -44,6 +46,7 @@ Page({
   //   }
   // },
   onLoad: function () {
+    console.log(wx.getSystemInfoSync().windowWidth + '-' + wx.getSystemInfoSync().windowHeight);
     var that = this;
     countdown(that);
     wx.request({
