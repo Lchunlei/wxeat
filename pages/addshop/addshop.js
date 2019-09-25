@@ -85,6 +85,7 @@ Page({
 
   joinShop: function () {
     var that = this;
+    console.log(that.data.shopId);
     if (that.data.shopId){
       console.log('修改店铺');
       wx.navigateTo({

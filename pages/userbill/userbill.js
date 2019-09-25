@@ -195,7 +195,14 @@ Page({
   //     searchinput: false
   //   })
   // },
-  onLoad: function () {
+  onLoad: function (options) {
+    let scene = decodeURIComponent(options.scene);
+    if (scene){
+      //请求这个二维码的店铺信息
+      app.globalData.eatQrId = scene;
+    }else{
+      app.globalData.eatQrId = 0;
+    }
     wx.showLoading();
     var that = this;
     //加载分类
@@ -239,9 +246,9 @@ Page({
     });
     //加载默认菜品
     wx.request({
-      url: app.globalData.urls + '/food/can/eat',
+      url: app.globalData.urls + '/food/deskCode',
       data: {
-        shopId: 0,
+        qrId: app.globalData.eatQrId,
         eToken: app.globalData.token
       },
       success: function (res) {
@@ -296,9 +303,8 @@ Page({
         url: app.globalData.urls + '/bill/make',
         method:'POST',
         data: {
-          shopId: 3,
+          shopId: app.globalData.eatQrId,
           eToken: app.globalData.token,
-          deskCode:1,
           billInfos:that.data.myMenus
         },
         success: function (res) {

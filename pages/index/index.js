@@ -12,6 +12,7 @@ Page({
 		swiperCurrent: 0,
 		iphone:false,
 		loadingHidden: false, // loading
+    paiMingHidden: true, 
 		wxlogin: true,
 		loadingMoreHidden: false,
 		showSearch: true,
@@ -39,6 +40,11 @@ Page({
 				iphone: true
 			})
 		}
+    if (app.globalData.uid){
+      that.setData({
+        userId: app.globalData.uid
+      })
+    }
 		//首页顶部Logo
 		wx.request({
       url: app.globalData.urls + '/banner/show',
@@ -138,11 +144,11 @@ Page({
 		//   }
 		// })
 	},
-  makeBills: function (e) {
-    wx.navigateTo({
-      url: "/pages/userbill/userbill?role=1"
-    });
-  },
+  // makeBills: function (e) {
+  //   wx.navigateTo({
+  //     url: "/pages/userbill/userbill?role=1"
+  //   });
+  // },
 	swiperchange: function(e) {
 		this.setData({
 			swiperCurrent: e.detail.current
@@ -161,11 +167,20 @@ Page({
 		// }
 	},
 	tapSales: function (e) {
+    var that = this;
     var batId = e.currentTarget.dataset.id;
     if (batId == 1) {
-	    wx.navigateTo({
-        url: '/pages/userbill/userbill'
-	    });
+      if (app.globalData.eatQrId!=null && app.globalData.eatQrId!=0){
+        wx.navigateTo({
+          url: '/pages/userbill/userbill'
+        });
+      }else{
+        wx.showToast({
+          title: '请先扫码占座点餐哦',
+          icon: 'none',
+          duration: 2000
+        });
+      }
     } else if (batId == 2){
       wx.showToast({
         title: '您稍等，服务员马上就到',
@@ -173,11 +188,28 @@ Page({
         duration: 2000
       });
     } else if (batId == 3){
-      wx.showToast({
-        title: '就餐排名已刷新',
-        icon: 'none',
-        duration: 2000
-      });
+      //请求个人点餐详情
+      wx.request({
+        url: app.globalData.urls + '/bill/rate',
+        data: {
+          userId: that.data.userId
+        },
+        success: function (res) {
+          if (res.data.respCode == 'R000') {
+            that.setData({
+              paiMingHidden: false,
+              paiduiInfo: res.data.respData
+            });
+          }else{
+            wx.showToast({
+              title: res.data.respMsg,
+              icon: 'none',
+              duration: 2000
+            });
+          }
+        }
+      })
+
     }else{
       wx.showToast({
         title: '您的服务马上就到',
@@ -186,41 +218,11 @@ Page({
       });
     }
 	},
-	userlogin: function (e) {
-	  var that = this;
-	  var iv = e.detail.iv;
-	  var encryptedData = e.detail.encryptedData;
-	  wx.login({
-	    success: function (wxs) {
-	      wx.request({
-	        url: app.globalData.urls + '/user/wxapp/register/complex',
-	        data: {
-	          code: wxs.code,
-	          encryptedData: encryptedData,
-	          iv: iv
-	        },
-	        success: function (res) {
-	          if (res.data.code != 0) {
-	            wx.showModal({
-	              title: '温馨提示',
-	              content: '需要您的授权，才能正常使用哦～',
-	              showCancel: false,
-	              success: function (res) { }
-	            })
-	          } else {
-	            that.setData({ wxlogin: true })
-	            app.login();
-	            wx.showToast({
-	              title: '授权成功',
-	              duration: 2000
-	            })
-	            app.globalData.usinfo = 1;
-	            wx.showTabBar();
-	          }
-	        }
-	      })
-	    }
-	  })
+  closePaiMing: function () {
+    var that = this;
+    that.setData({
+      paiMingHidden: true
+    });
 	},
 	onPageScroll: function(t) {
 		if(t.scrollTop >= 180){

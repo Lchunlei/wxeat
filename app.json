@@ -21,6 +21,7 @@
     "pages/order-detail/order-detail",
     "pages/notice/notice",
     "pages/cate/cate",
+    "pages/sqrbind/sqrbind",
     "pages/logistics/logistics",
     "pages/success/success",
     "pages/pay-order/pay-order",

@@ -48,10 +48,10 @@ App({
 	          code: res.code
 	        },
 	        success: function (res) {
-	          if (res.data.respCode == 1e4) {
-	            that.globalData.usinfo = 0;
-	            return;
-	          }
+	          // if (res.data.respCode == 1e4) {
+	          //   that.globalData.usinfo = 0;
+	          //   return;
+	          // }
             if (res.data.respCode != 'R000') {
 	            wx.hideLoading();
 	            wx.showModal({
@@ -62,7 +62,7 @@ App({
 	            return;
 	          }
             that.globalData.token = res.data.respData;
-	          that.globalData.uid = '1';
+            that.globalData.uid = res.data.respMsg;
 	        }
 	      });
 	    }

@@ -196,7 +196,6 @@ page{
 .show-container .show-box {
   width: 70%;
   margin: 0 auto;
-  height: 600rpx;
   background-color: #fff;
   margin-top: 40%;
   border-radius: 10rpx;
@@ -220,7 +219,7 @@ page{
 
 .show-mall-name {
   font-size: 32rpx;
-  margin-top: 20rpx;
+  margin-top: 1rpx;
   margin-bottom: 20rpx;
   color: #333;
 }

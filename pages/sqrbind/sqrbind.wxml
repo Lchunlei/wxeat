@@ -1,0 +1,16 @@
+<navigation id='Navigation' show-icon="{{true}}" title="桌码绑定" show-title="{{true}}" class=""></navigation>
+<view class="container">
+  <form bindsubmit="bindSave">
+    <view class="form-box">
+      <view class="row-wrap">
+        <view class="label">桌号</view>
+        <view class="label-right">
+          <input name="deskCode" class="input" type="number" placeholder="请输入要绑定的餐桌或包间编号" value="{{deskCode}}"/>
+        </view>
+      </view>
+    </view>
+    <button type="primary" class="save-btn" formType="submit">确认绑定</button>
+    <button type="warn" class="save-btn" bindtap="deleteBind">解除绑定</button>
+    <button type="default" class="cancel-btn" bindtap="bindCancel">取消</button>
+  </form>
+</view>

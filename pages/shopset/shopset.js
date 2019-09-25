@@ -114,26 +114,25 @@ Page({
   },
   clickScan: function () {
     var that = this;
+    // wx.navigateTo({
+    //   url: "/pages/sqrbind/sqrbind?sceneId=4"
+    // });
     var show;
     wx.scanCode({
       success: (res) => {
+        //pages/userbill/userbill?scene=6
         console.log(res);
-        this.show = "--result:" + res.result + "--scanType:" + res.scanType + "--charSet:" + res.charSet + "--path:" + res.path;
-        
-        that.setData({
-          show: this.show
-        })
-        console.log(show);
-        wx.showToast({
-          title: '成功',
-          icon: 'success',
-          duration: 2000
-        })
+        let sceneId = res.path.split('=')[1];
+        console.log("sceneId--->"+sceneId);
+        wx.navigateTo({
+          url: "/pages/sqrbind/sqrbind?sceneId=" + sceneId
+        });
+   
       },
       fail: (res) => {
         wx.showToast({
-          title: '失败',
-          icon: 'success',
+          title: '扫码失败，请稍后再试',
+          icon: 'none',
           duration: 2000
         })
       },
