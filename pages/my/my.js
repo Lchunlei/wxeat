@@ -52,7 +52,6 @@ Page({
         eToken: app.globalData.token
       },
       success: function (res) {
-        console.log(res);
         if (res.data.respCode == 'R000') {
           that.setData({
             noticeList: res.data.respData

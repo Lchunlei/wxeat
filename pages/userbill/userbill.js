@@ -155,70 +155,37 @@ Page({
       swiperCurrent: e.detail.current
     })
   },
-  // search: function(e){
-  //   var that = this
-  //   wx.request({
-  //     url: app.globalData.urls + '/shop/goods/list',
-  //     data: {
-  //       nameLike: e.detail.value
-  //     },
-  //     success: function (res) {
-  //       if (res.data.code == 0) {
-  //         var searchs = [];
-  //         for (var i = 0; i < res.data.data.length; i++) {
-  //           searchs.push(res.data.data[i]);
-  //         }
-  //         that.setData({
-  //           searchs: searchs,
-  //           searchidden: false,
-  //           nonehidden: true
-  //         });
-  //       }else{
-  //         that.setData({
-  //           searchidden: true,
-  //           nonehidden: false
-  //         });
-  //       }
-  //     }
-  //   })
-    
-  // },
-  // searchfocus: function(){
-  //   this.setData({
-  //     search: false,
-  //     searchinput: true
-  //   })
-  // },
-  // searchclose: function(){
-  //   this.setData({
-  //     search: true,
-  //     searchinput: false
-  //   })
-  // },
   onLoad: function (options) {
-    let scene = decodeURIComponent(options.scene);
-    if (scene){
-      //请求这个二维码的店铺信息
-      app.globalData.eatQrId = scene;
-    }else{
-      app.globalData.eatQrId = 0;
-    }
     wx.showLoading();
     var that = this;
     //加载分类
     var categories = [{ categoryId: 1, cateName: "招牌" }, { categoryId: 2, cateName: "热销" }, { categoryId: 3, cateName: "主食" }, { categoryId: 4, cateName: "酒水" }, { categoryId: 5, cateName: "其他" }];
-    wx.hideLoading();
-    // for (var i = 0; i < res.data.respData.length; i++) {
-    //   if (res.data.respData[i].cateLevel == 1) {
-    //     categories.push(res.data.respData[i]);
-    //   }
-    // }
-    that.setData({
-      categories: categories,
-      //默认被选中的ID
-      activeCategoryId: 1
-    });
-    // that.getGoodsList(0);
+    //更新桌码缓存
+    let scene = decodeURIComponent(options.scene);
+    if (options.scene){
+      console.log('扫码进入-->' + scene);
+      that.setData({
+        categories: categories,
+        eatQrId: scene,
+        activeCategoryId: 1
+      });
+    }else{
+      if (options.eatQrId){
+        console.log('用户扫码后首页跳转进入-->' + options.eatQrId);
+        that.setData({
+          categories: categories,
+          eatQrId: options.eatQrId,
+          activeCategoryId: 1
+        });
+      }else{
+        console.log('--代客点餐跳转进入--');
+        that.setData({
+          categories: categories,
+          eatQrId: 0,
+          activeCategoryId: 1
+        });
+      }
+    }
 
     wx.getSystemInfo({
       success: function (res) {
@@ -244,66 +211,41 @@ Page({
         }
       }
     });
-    //加载默认菜品
-    wx.request({
-      url: app.globalData.urls + '/food/deskCode',
-      data: {
-        qrId: app.globalData.eatQrId,
-        eToken: app.globalData.token
-      },
-      success: function (res) {
-        if (res.data.respCode == 'R000') {
-          wx.hideLoading();
-          that.setData({
-            pageTitle: res.data.respMsg,
-            menus: res.data.respData
-          });
-        }
-        that.setData({
-          categories: categories,
-          //默认被选中的ID
-          activeCategoryId: 1
-        });
-        // that.getGoodsList(0);
-      }
-    });
+    wx.hideLoading();
   },
-  // getGoodsList: function (categoryId) {
-  //   //获取商品
-  //   var that = this;
-  //   wx.request({
-  //     url: app.globalData.urls + '/food/can/eat',
-  //     data: {
-  //       shopId: 0,
-  //       eToken: app.globalData.token
-  //     },
-  //     success: function (res) {
-  //       if (res.data.respCode == 'R000') {
-  //         that.setData({
-  //           menus: res.data.respData,
-  //         });
-  //       }else{
-  //         that.setData({
-  //           menus: [],
-  //         });
-  //         wx.showToast({
-  //           title: res.data.respMsg,
-  //           icon: 'none',
-  //           duration: 1000
-  //         });
-  //       }
-  //     }
-  //   })
-  // },
   makeBill: function (e){
+    if (!app.globalData.token){
+      console.log('用户还未登录');
+      //用户无感快捷登录
+      wx.request({
+        url: that.globalData.urls + "/user/wxLogin",
+        data: {
+          code: res.code
+        },
+        success: function (res) {
+          if (res.data.respCode != 'R000') {
+            wx.hideLoading();
+            wx.showModal({
+              title: "提示",
+              content: "无法登录，请重试",
+              showCancel: false
+            });
+            return;
+          }
+          that.globalData.token = res.data.respData;
+          that.globalData.uid = res.data.respMsg;
+        }
+      });
+    }
     //选好下单
     var that = this;
     if (that.data.total.money>0){
+      app.globalData.eatQrId = that.data.eatQrId;
       wx.request({
         url: app.globalData.urls + '/bill/make',
         method:'POST',
         data: {
-          shopId: app.globalData.eatQrId,
+          shopId: that.data.eatQrId,
           eToken: app.globalData.token,
           billInfos:that.data.myMenus
         },
@@ -346,46 +288,52 @@ Page({
   },
   onShow: function () {
     var that = this;
-    wx.getStorage({
-      key: 'shopCarInfo',
-      success: function (res) {
-        if (res.data) {
-          that.data.shopCarInfo = res.data
-          if (res.data.shopNum > 0) {
-            wx.setTabBarBadge({
-              index: 2,
-              text: '' + res.data.shopNum + ''
-            })
-          } else {
-            wx.removeTabBarBadge({
-              index: 2,
-            })
-          }
-        } else {
-          wx.removeTabBarBadge({
-            index: 2,
-          })
-        }
-      }
-    })
-    // wx.request({
-    //   url: app.globalData.urls + '/order/statistics',
-    //   data: { token: app.globalData.token },
+    // wx.getStorage({
+    //   key: 'shopCarInfo',
     //   success: function (res) {
-    //     if (res.data.code == 0) {
-    //       if (res.data.data.count_id_no_pay > 0) {
+    //     if (res.data) {
+    //       that.data.shopCarInfo = res.data
+    //       if (res.data.shopNum > 0) {
     //         wx.setTabBarBadge({
-    //           index: 3,
-    //           text: '' + res.data.data.count_id_no_pay + ''
+    //           index: 2,
+    //           text: '' + res.data.shopNum + ''
     //         })
     //       } else {
     //         wx.removeTabBarBadge({
-    //           index: 3,
+    //           index: 2,
     //         })
     //       }
+    //     } else {
+    //       wx.removeTabBarBadge({
+    //         index: 2,
+    //       })
     //     }
     //   }
-    // })
+    // });
+    //加载默认菜品
+    wx.request({
+      url: app.globalData.urls + '/food/deskCode',
+      data: {
+        qrId: that.data.eatQrId,
+        eToken: app.globalData.token
+      },
+      success: function (res) {
+        if (res.data.respCode == 'R000') {
+          wx.hideLoading();
+          app.globalData.eatQrId = that.data.eatQrId;
+          that.setData({
+            pageTitle: res.data.respMsg,
+            menus: res.data.respData
+          });
+        }
+        that.setData({
+          categories: that.data.categories,
+          //默认被选中的ID
+          activeCategoryId: 1
+        });
+        // that.getGoodsList(0);
+      }
+    });
   },
 
 });

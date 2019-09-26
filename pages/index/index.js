@@ -170,9 +170,10 @@ Page({
     var that = this;
     var batId = e.currentTarget.dataset.id;
     if (batId == 1) {
+      console.log('跳转时的桌码ID-->' + app.globalData.eatQrId);
       if (app.globalData.eatQrId!=null && app.globalData.eatQrId!=0){
         wx.navigateTo({
-          url: '/pages/userbill/userbill'
+          url: '/pages/userbill/userbill?eatQrId=' + app.globalData.eatQrId
         });
       }else{
         wx.showToast({
