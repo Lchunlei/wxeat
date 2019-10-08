@@ -1,0 +1,43 @@
+<navigation id='Navigation' show-icon="{{true}}" title="全部订单" show-title="{{true}}" class=""></navigation>
+<view class="container">
+  <!---->
+  <view class="status-box">
+    <view class="status-label active">
+     本店全部订单
+      <view class=""></view>
+    </view>
+  </view>
+
+  <view class="no-order" hidden="{{isEmpty ? false : true}}" style="height: {{bodyHeight}}px;">
+    <image src="/images/empty_order.png" class="no-order-img"></image>
+    <view class="text">还没有订单呢</view>
+  </view>
+  
+  <!--月订单S-->
+  <view class="order-list" hidden="{{isEmpty ? true:false}}">
+    <view class="a-order" wx:for-items="{{orderList}}" wx:key="{{index}}">
+        <view class="order-date">
+          <view class="date-box">下单时间：{{item.cTime}}</view>
+          <view class="status">顾客号：{{item.userId}}</view>
+        </view>
+        <view class="order-date">
+          <view class="date-box">{{item.foodName}}</view>
+          <view class="status">x{{item.eatNum}}</view>
+        </view>
+      <!--
+      <view bindtap="orderDetail" data-id="{{item.id}}">
+        <scroll-view class="goods-img-container" scroll-x="true">
+          <view class="img-box" wx:for-items="{{goodsMap[item.id]}}" wx:key="{{index}}">
+            <image src="{{item.pic}}" class="goods-img"></image>
+          </view>
+        </scroll-view>
+      </view>
+      -->
+      <view class="price-box">
+        <view class="total-price">餐桌号：{{item.deskCode}}</view>
+      </view>
+    </view>
+  </view>
+<!--月订单E-->
+
+</view>

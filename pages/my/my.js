@@ -241,7 +241,7 @@ Page({
       });
     }
   },
-  syfx: function () {
+  qbdd: function () {
     var that = this;
     if (app.globalData.userInfo == null) {
       wx.showToast({
@@ -251,7 +251,7 @@ Page({
       });
     } else {
       wx.navigateTo({
-        url: "/pages/order-list/order-list?currentType=2"
+        url: "/pages/allbill/allbill"
       });
     }
   },

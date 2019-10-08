@@ -23,7 +23,7 @@ Page({
   data: {
     homeTitle:'旺铺掌柜',
     homeRemark:'北京智合联动科技有限公司',
-    second: 5,
+    second: 3,
     home: 0
   },
 

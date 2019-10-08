@@ -4,6 +4,8 @@
     "pages/index/index",
     "pages/logs/logs",
     "pages/my/my",
+    "pages/allbill/allbill",
+    "pages/vip/vip",
     "pages/cart/cart",
     "pages/shopset/shopset",
     "pages/goods-detail/goods-detail",

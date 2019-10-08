@@ -1,5 +1,7 @@
 <!--index.wxml-->
+<!--
 <navigation id='Navigation' show-search='{{showSearch}}' class="fix-top" animation="{{fadeAni}}"></navigation>
+-->
 <view class="container">
 <!--顶部轮播-->
 	<view class="swiper-container">

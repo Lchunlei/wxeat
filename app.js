@@ -108,18 +108,18 @@ App({
 	    }
 	  });
 	},
-	fadeInOut:function(that,param,opacity){
-		var animation = wx.createAnimation({
-			//持续时间800ms
-      duration: 300,
-      timingFunction: 'ease',
-		})
-		animation.opacity(opacity).step()
-		var json = '{"' + param + '":""}'
-    json = JSON.parse(json);
-    json[param] = animation.export()
-    that.setData(json)
-	},
+	// fadeInOut:function(that,param,opacity){
+	// 	var animation = wx.createAnimation({
+	// 		//持续时间800ms
+  //     duration: 300,
+  //     timingFunction: 'ease',
+	// 	})
+	// 	animation.opacity(opacity).step()
+	// 	var json = '{"' + param + '":""}'
+  //   json = JSON.parse(json);
+  //   json[param] = animation.export()
+  //   that.setData(json)
+	// },
 	isStrInArray:function(item, arr) {
 		for (var i = 0; i < arr.length; i++) {
 			if (arr[i] == item) {

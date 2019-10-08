@@ -42,4 +42,12 @@
     <image class="shoukuan" src="https://yuxian.oss-cn-qingdao.aliyuncs.com/lclwx.png" mode='widthFix'></image>
   </view>
   
+    <view class="title">
+        --详细截图介绍--
+    </view>
+
+  <view class="shoukuan">
+    <image class="shoukuan" src="https://yuxian.oss-cn-qingdao.aliyuncs.com/jiaoimg.jpg" mode='widthFix'></image>
+  </view>
+
 </view>

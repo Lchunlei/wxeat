@@ -2,9 +2,9 @@ var wxpay = require('../../utils/pay.js')
 var app = getApp()
 Page({
   data: {
-    statusType: ["客单", "上菜单", "月订单", "历史订单"],
+    statusType: ["客单", "上菜单"],
     currentType: 0,
-    tabClass: ["", "", "", ""],
+    tabClass: ["", ""],
 		bodyHeight:null
   },
 
@@ -245,17 +245,26 @@ Page({
               // goodsMap: res.data.data.goodsMap
             });
           } else {
+            that.setData({
+              isEmpty: true
+            });
+            wx.showToast({
+              title: res.data.respMsg,
+              icon: 'none',
+              duration: 1000
+            });
             this.setData({
               ctmBills: null
             });
           }
         }
       })
-    } else if (viewId == 1){
+    } else if (viewId == 1 || viewId == 2){
       wx.request({
         url: app.globalData.urls + '/bill/list',
         data: {
           eToken: app.globalData.token,
+          pageNum:1,
           tabNum: that.data.currentType
         },
         success: (res) => {
@@ -266,14 +275,20 @@ Page({
               orderList: res.data.respData
             });
           } else {
+            wx.showToast({
+              title: res.data.respMsg,
+              icon: 'none',
+              duration: 1000
+            });
             this.setData({
+              isEmpty: true,
               orderList: null
             });
           }
         }
       })
 
-    } else if (viewId == 2){
+    } else{
 
 
     }

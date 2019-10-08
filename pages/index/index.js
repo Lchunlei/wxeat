@@ -19,22 +19,22 @@ Page({
     userId:0
 	},
 	onShow(){
-		var that = this
+		// var that = this
 		// app.fadeInOut(this,'fadeAni',0)
-		setTimeout(function () {
-		  if (app.globalData.usinfo == 0) {
-		    that.setData({
-		      wxlogin: false
-		    })
-		    wx.hideTabBar();
-		  }
-		}, 800)
+		// setTimeout(function () {
+		//   if (app.globalData.usinfo == 0) {
+		//     that.setData({
+		//       wxlogin: false
+		//     })
+		//     wx.hideTabBar();
+		//   }
+		// }, 800)
 		//获取购物车商品数量
-		app.getShopCartNum()
+		// app.getShopCartNum()
 	},
 	onLoad: function() {
 		var that = this;
-		app.fadeInOut(this,'fadeAni',0)
+		// app.fadeInOut(this,'fadeAni',0)
 		if (app.globalData.iphone == true) {
 			that.setData({
 				iphone: true
@@ -44,6 +44,40 @@ Page({
       that.setData({
         userId: app.globalData.uid
       })
+    }else{
+      //重新登录
+      wx.login({
+        success: function (res) {
+          //用户无感快捷登录
+          wx.request({
+            url: app.globalData.urls + "/user/wxLogin",
+            data: {
+              code: res.code
+            },
+            success: function (res) {
+              // if (res.data.respCode == 1e4) {
+              //   that.globalData.usinfo = 0;
+              //   return;
+              // }
+              if (res.data.respCode != 'R000') {
+                wx.hideLoading();
+                wx.showModal({
+                  title: "提示",
+                  content: "无法登录，请重试",
+                  showCancel: false
+                });
+                return;
+              }
+              app.globalData.token = res.data.respData;
+              app.globalData.uid = res.data.respMsg;
+              that.setData({
+                userId: app.globalData.uid
+              })
+            }
+          });
+        }
+      });
+
     }
 		//首页顶部Logo
 		wx.request({

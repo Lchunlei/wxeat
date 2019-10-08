@@ -49,10 +49,10 @@
       代客下单
     </view>
 
-    <view hover-class="none" class="cart-list" bindtap="syfx">
+    <view hover-class="none" class="cart-list" bindtap="qbdd">
       <view wx:if="{{noreputation}}" class="red-dot">{{noreputation}}</view>
       <image src="../../images/order-details/orderform.png"></image>
-      收益分析
+      全部订单
     </view>
 
   </view>

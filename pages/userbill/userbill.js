@@ -91,7 +91,7 @@ Page({
     //已经有的元素直接删除，换成新元素
     if (this.data.myMenus.length > 0) {
       for (let i = 0; i < this.data.myMenus.length; i++) {
-        console.log("--" + this.data.myMenus[i].foodId);
+        // console.log("--" + this.data.myMenus[i].foodId);
         if (this.data.myMenus[i].foodId === dish.foodId){
           // console.log("替换--"+dish.foodId);
           // console.log("替换--" + this.data.myMenus[i].foodId);
@@ -144,11 +144,11 @@ Page({
     });
     console.log(this.data.myMenus)
   },
-  levelClick: function (e) {
-    wx.navigateTo({
-      url: "/pages/cate-list/cate-list?id=" + e.currentTarget.dataset.id
-    })
-  },
+  // levelClick: function (e) {
+  //   wx.navigateTo({
+  //     url: "/pages/cate-list/cate-list?id=" + e.currentTarget.dataset.id
+  //   })
+  // },
   swiperchange: function (e) {
     //console.log(e.detail.current)
     this.setData({
@@ -218,7 +218,7 @@ Page({
       console.log('用户还未登录');
       //用户无感快捷登录
       wx.request({
-        url: that.globalData.urls + "/user/wxLogin",
+        url: app.globalData.urls + "/user/wxLogin",
         data: {
           code: res.code
         },
@@ -232,8 +232,8 @@ Page({
             });
             return;
           }
-          that.globalData.token = res.data.respData;
-          that.globalData.uid = res.data.respMsg;
+          app.globalData.token = res.data.respData;
+          app.globalData.uid = res.data.respMsg;
         }
       });
     }
@@ -260,7 +260,7 @@ Page({
               showCancel: false,
               success: function (res) {
                 if (res.confirm) {
-                  that.onShow();
+                  // that.onShow();
                   wx.switchTab({
                     url: "/pages/index/index"
                   });
