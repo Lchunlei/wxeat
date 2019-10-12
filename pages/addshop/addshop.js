@@ -98,7 +98,45 @@ Page({
       })
     }
   },
+  staffManage: function () {
+    wx.showToast({
+      title: '功能维护中，请稍后',
+      icon: 'none',
+      duration: 2000
+    })
+    // wx.navigateTo({
+    //   url: "/pages/staffs/staffs"
+    // });
+  },
+  clickScan: function () {
+    var that = this;
+    // wx.navigateTo({
+    //   url: "/pages/sqrbind/sqrbind?sceneId=4"
+    // });
+    var show;
+    wx.scanCode({
+      success: (res) => {
+        //pages/userbill/userbill?scene=6
+        console.log(res);
+        let sceneId = res.path.split('=')[1];
+        console.log("sceneId--->" + sceneId);
+        wx.navigateTo({
+          url: "/pages/sqrbind/sqrbind?sceneId=" + sceneId
+        });
 
+      },
+      fail: (res) => {
+        wx.showToast({
+          title: '扫码失败，请稍后再试',
+          icon: 'none',
+          duration: 2000
+        })
+      },
+      complete: (res) => {
+
+      }
+    })
+  },
   editShop: function (e) {
     wx.navigateTo({
       url: "/pages/address-add/address-add?id=" + e.currentTarget.dataset.id
@@ -142,44 +180,10 @@ Page({
   bindCancel: function () {
     wx.navigateBack({})
   },
-  bindSave: function (e) {
+  getScan: function () {
     var that = this;
-    var amount = e.detail.value.amount;
-
-    if (amount == "" || amount * 1 < 100) {
-      wx.showModal({
-        title: '错误',
-        content: '请填写正确的提现金额',
-        showCancel: false
-      })
-      return
-    }
-    wx.request({
-      url: app.globalData.urls + '/user/withDraw/apply',
-      data: {
-        token: app.globalData.token,
-        money: amount
-      },
-      success: function (res) {
-        if (res.data.code == 0) {
-          wx.showModal({
-            title: '成功',
-            content: '您的提现申请已提交，等待财务打款',
-            showCancel: false,
-            success: function (res) {
-              if (res.confirm) {
-                that.bindCancel();
-              }
-            }
-          })
-        } else {
-          wx.showModal({
-            title: '错误',
-            content: res.data.msg,
-            showCancel: false
-          })
-        }
-      }
+    wx.navigateTo({
+      url: "/pages/getqr/getqr"
     })
   }
 })

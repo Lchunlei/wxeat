@@ -8,7 +8,7 @@
 		<image src="{{bgPic.picUrl}}" style="height: {{bgPic.remark}}rpx;"></image>
 	</view>
 	<view class="coupons-pic" style="margin-top: {{couponsTop}};">
-		<image src="../../images/coupons-pic.jpg"></image>
+		<image src="https://yuxian.oss-cn-qingdao.aliyuncs.com/coupons-pic.jpg"></image>
 		<view class="text">
 			<view class="number"><text class="money">{{coupons.moneyMax}}</text><text class="unit">元</text></view>
 			<view class="condition" wx:if="{{coupons.moneyHreshold == 0}}">无门槛优惠券</view>

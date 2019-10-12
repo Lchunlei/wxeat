@@ -22,14 +22,14 @@
       <view class="row-wrap">
         <view class="label">售价</view>
         <view class="label-right">
-          <input name="foodPrice" class="input" type="text" placeholder="单位元（例：12.5）" value="{{foodPrice/100}}" />
+          <input name="foodPrice" class="input" type="number" placeholder="单位元（例：12.5）" value="{{foodPrice/100}}" />
         </view>
       </view>
      
       <view class="row-wrap">
         <view class="label">推荐指数</view>
         <view class="label-right">
-          <input name="paixu" class="input" type="text"  placeholder="请填写1~5整数"  value="{{paixu}}" />
+          <input name="paixu" class="input" type="number"  placeholder="请填写1~5整数"  value="{{paixu}}" />
         </view>
       </view>
 

@@ -256,7 +256,7 @@ Page({
             });
             wx.showModal({
               title: '提示',
-              content: '订餐成功，用餐完毕后请联系老板买单哦',
+              content: '预约成功，请勿离开当前座位哦',
               showCancel: false,
               success: function (res) {
                 if (res.confirm) {

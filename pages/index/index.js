@@ -19,7 +19,14 @@ Page({
     userId:0
 	},
 	onShow(){
-		// var that = this
+    var that = this
+    if (!app.globalData.uid) {
+      app.login();
+    }
+    that.setData({
+      userId: app.globalData.uid
+    })
+
 		// app.fadeInOut(this,'fadeAni',0)
 		// setTimeout(function () {
 		//   if (app.globalData.usinfo == 0) {
@@ -40,45 +47,6 @@ Page({
 				iphone: true
 			})
 		}
-    if (app.globalData.uid){
-      that.setData({
-        userId: app.globalData.uid
-      })
-    }else{
-      //重新登录
-      wx.login({
-        success: function (res) {
-          //用户无感快捷登录
-          wx.request({
-            url: app.globalData.urls + "/user/wxLogin",
-            data: {
-              code: res.code
-            },
-            success: function (res) {
-              // if (res.data.respCode == 1e4) {
-              //   that.globalData.usinfo = 0;
-              //   return;
-              // }
-              if (res.data.respCode != 'R000') {
-                wx.hideLoading();
-                wx.showModal({
-                  title: "提示",
-                  content: "无法登录，请重试",
-                  showCancel: false
-                });
-                return;
-              }
-              app.globalData.token = res.data.respData;
-              app.globalData.uid = res.data.respMsg;
-              that.setData({
-                userId: app.globalData.uid
-              })
-            }
-          });
-        }
-      });
-
-    }
 		//首页顶部Logo
 		wx.request({
       url: app.globalData.urls + '/banner/show',
@@ -135,64 +103,14 @@ Page({
 		      });
 		    }
 		  }
-		})
-		//获取推荐商品信息
-		// wx.request({
-    //   url: app.globalData.urls + '/config/show',
-		//   data: {
-		//     key: 'topgoods'
-		//   },
-		//   success: function (res) {
-    //     if (res.data.respCode == 'R000') {
-		//       that.setData({
-    //         topgoods: res.data.respData
-		//       });
-		//       wx.request({
-		//         url: app.globalData.urls + '/goods/list',
-		//         data: {
-    //           recommendStatus: 1,
-    //           pageNum: 1,
-		//           pageSize: 10
-		//         },
-		//         success: function (res) {
-		//           that.setData({
-		//             goods: [],
-		//             loadingMoreHidden: true
-		//           });
-		//           var goods = [];
-    //           if (res.data.respCode != 'R000' || res.data.respData.length == 0) {
-		//             that.setData({
-		//               loadingMoreHidden: false,
-		//             });
-		//             return;
-		//           }
-    //           for (var i = 0; i < res.data.respData.length; i++) {
-    //             goods.push(res.data.respData[i]);
-		//           }
-		//           that.setData({
-		//             goods: goods,
-		//           });
-		//         }
-		//       })
-		//     }
-		//   }
-		// })
+		});
 	},
-  // makeBills: function (e) {
-  //   wx.navigateTo({
-  //     url: "/pages/userbill/userbill?role=1"
-  //   });
-  // },
 	swiperchange: function(e) {
 		this.setData({
 			swiperCurrent: e.detail.current
 		});
 	},
-	toDetailsTap: function(e) {
-		// wx.navigateTo({
-		// 	url: "/pages/goods-detail/goods-detail?id=" + e.currentTarget.dataset.id
-		// })
-	},
+
 	tapBanner: function(e) {
 		// if (e.currentTarget.dataset.id != 0) {
 		// 	wx.navigateTo({
@@ -204,6 +122,9 @@ Page({
     var that = this;
     var batId = e.currentTarget.dataset.id;
     if (batId == 1) {
+      if (!app.globalData.uid) {
+        app.login();
+      }
       console.log('跳转时的桌码ID-->' + app.globalData.eatQrId);
       if (app.globalData.eatQrId!=null && app.globalData.eatQrId!=0){
         wx.navigateTo({
@@ -211,12 +132,15 @@ Page({
         });
       }else{
         wx.showToast({
-          title: '请先扫码占座点餐哦',
+          title: '请先扫码占座哦',
           icon: 'none',
           duration: 2000
         });
       }
     } else if (batId == 2){
+      if (!app.globalData.uid) {
+        app.login();
+      }
       wx.showToast({
         title: '您稍等，服务员马上就到',
         icon:'none',
@@ -224,10 +148,13 @@ Page({
       });
     } else if (batId == 3){
       //请求个人点餐详情
+      if (!app.globalData.uid){
+        app.login();
+      }
       wx.request({
         url: app.globalData.urls + '/bill/rate',
         data: {
-          userId: that.data.userId
+          userId: app.globalData.uid
         },
         success: function (res) {
           if (res.data.respCode == 'R000') {

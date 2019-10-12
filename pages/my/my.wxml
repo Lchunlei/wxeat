@@ -61,7 +61,7 @@
     <view hover-class="none" class="userinfo-item" bindtap="addShopInfo">
       <image src="../../images/profile_tegral.png"></image>
       <text>免费</text>
-      <view>开店入驻</view>
+      <view>旺铺入驻</view>
     </view>
 
     <view hover-class="none" class="userinfo-item" bindtap="shopFood">
@@ -69,12 +69,12 @@
       <!--
 			<text>{{score}}积分</text>
       -->
-      <view>菜单设置</view>
+      <view>菜谱设置</view>
     </view>
 
-    <view hover-class="none" class="userinfo-item" bindtap="shopSet">
+    <view hover-class="none" class="userinfo-item" bindtap="sincome">
       <image src="../../images/profile_ticket.png"></image>
-      <view>店铺管理</view>
+      <view>业绩预览</view>
     </view>
 
     <view hover-class="none" class="userinfo-item" bindtap="vip">
@@ -90,7 +90,7 @@
 
     <view class="userinfo-item">
       <image src="../../images/profile_service.png"></image>
-      <view>投诉建议</view>
+      <view>人工客服</view>
       <button open-type="contact" session-from="weapp"></button>
     </view>
 

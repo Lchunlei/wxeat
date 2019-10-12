@@ -24,21 +24,6 @@ App({
 	login: function () {
 	  var that = this;
 	  var token = that.globalData.token;
-	  // if (token) {
-	  //   wx.request({
-	  //     url: that.globalData.urls + "/user/check-token",
-	  //     data: {
-	  //       token: token
-	  //     },
-	  //     success: function (res) {
-	  //       if (res.data.code != 0) {
-	  //         that.globalData.token = null;
-	  //         that.login();
-	  //       }
-	  //     }
-	  //   });
-	  //   return;
-	  // }
 	  wx.login({
 	    success: function (res) {
         //用户无感快捷登录
@@ -48,10 +33,6 @@ App({
 	          code: res.code
 	        },
 	        success: function (res) {
-	          // if (res.data.respCode == 1e4) {
-	          //   that.globalData.usinfo = 0;
-	          //   return;
-	          // }
             if (res.data.respCode != 'R000') {
 	            wx.hideLoading();
 	            wx.showModal({
@@ -61,6 +42,7 @@ App({
 	            });
 	            return;
 	          }
+            console.log('快捷登录成功');
             that.globalData.token = res.data.respData;
             that.globalData.uid = res.data.respMsg;
 	        }

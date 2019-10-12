@@ -10,7 +10,7 @@
           <text class="cart-item-total-price">￥{{total.money/100}}</text>
         </view>
         <view class="cart-tab-item">
-          <view class="cart-tab-item-btn" hover-class="navigator-hover" bindtap="makeBill">选好了</view>
+          <view class="cart-tab-item-btn" hover-class="navigator-hover" bindtap="makeBill">预约餐位</view>
         </view>
     </view>
   <!--购物车e-->

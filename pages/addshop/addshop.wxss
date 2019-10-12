@@ -144,3 +144,39 @@ picker {
 .hui{
     color: #777;
 }
+.score-share{
+  padding:15px;
+}
+.share-list{
+  background-color:#f4ebe2;
+  border-radius:5px;
+  padding:15px 10px;
+  height: 55px;
+  margin-bottom: 15px;
+}
+.share-img{
+  width:60px;
+  height:60px;
+  float:left;
+  margin:12px 0px;
+  padding-right:15px;
+}
+.share-title{
+  color:#e1b68c;
+  font-size:28rpx;
+  margin-top:5px;
+}
+.share-text{
+  color:#e1b68c;
+  font-size:24rpx;
+  margin-top:5px;
+}
+.share-btn{
+  float:right;
+  background-color:#e1b68c;
+  color:#ffffff;
+  font-size:26rpx;
+  padding:3px 5px;
+  border-radius:3px;
+  margin:-30px 5px;
+}

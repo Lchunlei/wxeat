@@ -2,20 +2,21 @@ const app = getApp()
 Page({
 	data: {
     companyInfo:'北京智合联动科技有限公司',
-    versionInfo: 'V-1.0.0',
+    versionInfo: 'V-1.0.6',
     // freeze:0,
     // score:0,
     loginName:"点击头像登录"
   },
   onGotUserInfo: function (e) {
+    if (!app.globalData.token){
+      app.login();
+    }
     console.log("--->" + app.globalData.userInfo);
     if (app.globalData.userInfo != null) {
       console.log("登录者--->" + app.globalData.userInfo.nickName);
         return;
     }
-    console.log(e.detail.errMsg);
-    console.log(e.detail.userInfo);
-    console.log(e.detail.rawData);
+
     wx.request({
       url: app.globalData.urls + '/shop/userLogin',
       method:'POST',
@@ -155,7 +156,7 @@ Page({
       });
     }
   },
-  shopSet: function () {
+  sincome: function () {
     var that = this;
     if (app.globalData.userInfo == null) {
       wx.showToast({
@@ -165,7 +166,7 @@ Page({
       });
     } else {
       wx.navigateTo({
-        url: "/pages/shopset/shopset"
+        url: "/pages/sincome/sincome"
       });
     }
   },
@@ -270,7 +271,7 @@ Page({
         }
       })
 },
-  scoresign: function () {
+scoresign: function () {
     // var that = this;
     // wx.request({
     //   url: app.globalData.urls + '/score/sign',
@@ -290,34 +291,5 @@ Page({
     //     }
     //   }
     // })
-  },
-  relogin:function(){
-    var that = this;
-    wx.authorize({
-      scope: 'scope.userInfo',
-      success() {
-        app.globalData.token = null;
-        app.login();
-        wx.showModal({
-          title: '提示',
-          content: '重新登陆成功',
-          showCancel: false,
-          success: function (res) {
-            if (res.confirm) {
-              that.onShow();
-            }
-          }
-        })
-      },
-      fail(res){
-        //console.log(res);
-        wx.openSetting({});
-      }
-    })
-  },
-	score: function () {
-	  wx.navigateTo({
-	    url: "/pages/score/score"
-	  })
-	},
+  }
 })

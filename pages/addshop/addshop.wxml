@@ -5,11 +5,32 @@
     </navigator>
   </view>
   <view class="tixian-bg">
-    <image class="tixian-img" src="../../images/withdraw.png"></image>
+    <image class="tixian-img" src="https://yuxian.oss-cn-qingdao.aliyuncs.com/withdraw.png"></image>
     <view class="tixian-name">
       {{vipStr}}
       <text class="money">{{shopName}}</text>
       <text class="tips">{{remake}}</text>
+    </view>
+  </view>
+  <!--申购桌码-->
+  <view class="score-share">
+    <view class="share-list">
+      <image class="share-img" src="https://yuxian.oss-cn-qingdao.aliyuncs.com/shopping.png"></image>
+      <view class="share-title">申领桌码</view>
+      <view class="share-text">精美桌码，您值得拥有</view>
+      <view class="share-btn" bindtap="getScan">去申领</view>
+    </view>
+    <view class="share-list">
+      <image class="share-img" src="https://yuxian.oss-cn-qingdao.aliyuncs.com/shopping.png"></image>
+      <view class="share-title">扫码绑定</view>
+      <view class="share-text">绑定专属餐码，坐等八方食客</view>
+      <view class="share-btn" bindtap="clickScan">去绑定</view>
+    </view>
+    <view class="share-list avict">
+      <image class="share-img" src="https://yuxian.oss-cn-qingdao.aliyuncs.com/score.png"></image>
+      <view class="share-title">店员管理</view>
+      <view class="share-text">员工分工好，生意会更旺</view>
+      <view class="share-btn" bindtap="staffManage">去管理</view>
     </view>
   </view>
 

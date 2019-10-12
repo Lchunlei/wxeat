@@ -1,0 +1,70 @@
+<navigation id='Navigation' show-icon="{{true}}" title="申领桌码" show-title="{{true}}" class=""></navigation>
+<view class="container">
+  <form bindsubmit="bindSave">
+    <view class="form-box">
+
+      <view class="row-wrap">
+        <view class="label">收货人</view>
+        <view class="label-right">
+          <input name="receiveName" class="input" type="text" placeholder="收货人姓名" value="{{receiveName}}" />
+        </view>
+      </view>
+
+      <view class="row-wrap">
+        <view class="label">电话</view>
+         <view class="label-right">
+          <input name="receiveTel" class="input" type="number" placeholder="收货手机号" value="{{receiveTel}}" />
+        </view>
+      </view>
+
+      <view class="row-wrap">
+        <view class="label">收货地址</view>
+        <view class="label-right">
+          <input name="receiveAddr" class="input" type="text" placeholder="收货详细地址" value="{{receiveAddr}}" />
+        </view>
+      </view>
+     
+      <view class="row-wrap">
+        <view class="label">领取个数</view>
+        <view class="label-right">
+          <input name="getNum" class="input" type="number"  placeholder="桌码申请个数"  value="{{getNum}}" />
+        </view>
+      </view>
+
+      <view class="row-wrap">
+        <view class="label">打赏单号</view>
+        <view class="label-right">
+          <input name="payCode" class="input" type="text"  placeholder="微信或支付宝打赏单号"  value="{{payCode}}" />
+        </view>
+      </view>
+
+    </view>
+    <button type="primary" class="save-btn" formType="submit">立即申领</button>
+    <button type="default" class="cancel-btn" bindtap="bindCancel">取消</button>
+  </form>
+  <view class="title">
+        --您的打赏是我们前进的动力--
+  </view>
+  <view class="testdesc">
+        >打赏10元可获得5个精美桌码贴纸
+  </view>
+  <view class="testdesc">
+        >打赏20元可获得20个精美桌码贴纸
+  </view>
+  <view class="testdesc">
+        >打赏30元可获得40个精美桌码贴纸
+  </view>
+  <view class="testdesc">
+        >真狠心不打赏也能获得桌码
+  </view>
+  <view class="testdesc">
+        ***如需帮助别忘联系客服哦***
+  </view>
+  <view class="shoukuan">
+    <image class="shoukuan" src="https://yuxian.oss-cn-qingdao.aliyuncs.com/lclwx.png" mode='widthFix'></image>
+  </view>
+  <view class="shoukuan">
+    <image class="shoukuan" src="https://yuxian.oss-cn-qingdao.aliyuncs.com/lclzfb.jpg" mode='widthFix'></image>
+  </view>
+
+</view>
