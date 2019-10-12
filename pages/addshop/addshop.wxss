@@ -180,3 +180,21 @@ picker {
   border-radius:3px;
   margin:-30px 5px;
 }
+.title {
+  color: #333;
+  font-weight:700;
+  font-size: 42rpx;
+  margin-bottom: 10rpx;
+  text-align: center;
+  height: 90rpx;
+  line-height: 90rpx;
+  padding-top: 20rpx;
+}
+
+.testdesc {
+  color: rgb(70, 62, 62);
+  font-weight:700;
+  font-size: 30rpx;
+  margin-bottom: 10rpx;
+  margin-left: 120rpx;
+}

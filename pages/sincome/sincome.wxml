@@ -10,9 +10,9 @@
     <view class="score-title-score">生意兴隆</view>
  
     <view class="score-times">
-      <view class="times-day">今日收益：{{shopInfo.qrTotal}}</view>
-      <view class="times-day">今日订单量：1</view>
-      <view class="times-day">今日客流量：{{shopInfo.expireTime?shopInfo.expireTime:'暂无'}}</view>
+      <view class="times-day">今日收益：{{shopKpi.toDayIncome/100}}元</view>
+      <view class="times-day">今日订单量：{{shopKpi.toDayBills}}单</view>
+      <view class="times-day">今日客流量：{{shopKpi.toDayClient}}人</view>
       
       <!--
       <view wx:for="{{rules}}" wx:key="rules" class="times-list {{ score_sign_continuous >= item.continuous ? 'item-on':'' }}">

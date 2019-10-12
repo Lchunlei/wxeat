@@ -12,6 +12,23 @@
       <text class="tips">{{remake}}</text>
     </view>
   </view>
+
+  <view class="title">
+        --成功入驻旺铺掌柜仅需三步--
+  </view>
+  <view class="testdesc">
+        >1.点击下方注册店铺基本信息
+  </view>
+  <view class="testdesc">
+        >2.申领店铺专属桌码
+  </view>
+  <view class="testdesc">
+        >3.扫码绑定已申请的桌码到自己旺铺
+  </view>
+  <view class="testdesc">
+        >最后就是设置菜谱贴好桌码坐等顾客上门啦
+  </view>
+
   <!--申购桌码-->
   <view class="score-share">
     <view class="share-list">

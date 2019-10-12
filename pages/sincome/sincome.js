@@ -1,77 +1,28 @@
 var app = getApp()
 Page({
   data: {
-
+    shopKpi:{
+      toDayIncome: 0,
+      toDayBills: 0,
+      toDayClient:0
+    }
   },
-
   onShow() {
 
   },
-  // //签到按钮
-  // scoresign: function () {
-  //   var that = this;
-  //   wx.request({
-  //     url: app.globalData.urls + '/score/info',
-  //     data: {
-  //       token: app.globalData.token
-  //     },
-  //     success: function (res) {
-  //       if (res.data.code == 0) {
-  //         that.onLoad();
-  //         that.checkScoreSign();
-  //       }
-  //       wx.showToast({
-  //         title: '签到成功',
-  //         icon: 'success',
-  //         duration: 2000
-  //       })
-  //     }
-  //   })
-  // },
-  // checkScoreSign: function () {
-  //   var that = this;
-  //   wx.request({
-  //     url: app.globalData.urls + '/score/today-signed',
-  //     data: {
-  //       token: app.globalData.token
-  //     },
-  //     success: function (res) {
-
-  //       if (res.data.code == 0) {
-  //         that.setData({
-  //           ci: 1
-  //         });
-  //       }
-  //       wx.request({
-  //         url: app.globalData.urls + '/score/sign/logs',
-  //         data: {
-  //           token: app.globalData.token,
-  //         },
-  //         success: function (res) {
-  //           if (res.data.code == 0) {
-  //             that.setData({
-  //               score_sign_continuous: res.data.data.result[0].continuous
-  //             });
-  //           }
-  //         }
-  //       })
-  //     }
-  //   })
-
-  // },
   onLoad: function () {
     var that = this;
     if (app.globalData.iphone == true) { that.setData({ iphone: 'iphone' }) }
     //加载店铺详细信息
     wx.request({
-      url: app.globalData.urls + '/shop/info',
+      url: app.globalData.urls + '/sKpi/today',
       data: {
         eToken: app.globalData.token
       },
       success: function (res) {
         if (res.data.respCode == 'R000') {
           that.setData({
-            shopInfo: res.data.respData
+            shopKpi: res.data.respData
           });
         }else{
           wx.showToast({
@@ -82,35 +33,6 @@ Page({
         }
       }
     })
-    //获取签到规则
-    // wx.request({
-    //   url: app.globalData.urls + '/score/sign/rules',
-    //   data: {
-    //   },
-    //   success: function (res) {
-
-    //     if (res.data.code == 0) {
-    //       that.setData({
-    //         rules: res.data.data
-    //       });
-    //     }
-    //   }
-    // })
-    //获取签到记录
-
-    /*wx.request({
-      url: app.siteInfo.url + app.siteInfo.subDomain + '/score/sign/logs',
-      data: {
-        token:app.globalData.token,
-      },
-      success: function (res) {
-        if (res.data.code == 0) {
-          that.setData({
-            score_sign_continuous: res.data.data.result[0].continuous
-          });
-        }
-      }
-    })*/
   },
   clickScan: function () {
     var that = this;
@@ -147,9 +69,6 @@ Page({
       icon: 'none',
       duration: 2000
     })
-    // wx.navigateTo({
-    //   url: "/pages/staffs/staffs"
-    // });
   }
 
 })

@@ -58,6 +58,20 @@
         </view>
       </view>
 
+      <view class="row-wrap">
+        <view class="label">WIFI名称</view>
+        <view class="label-right">
+          <input name="wifiName" class="input" type="text" placeholder="提供顾客上网账号（可不填）" value="{{addressData.wifiName}}{{wxaddress.wifiName}}"/>
+        </view>
+      </view>
+
+      <view class="row-wrap">
+        <view class="label">WIFI密码</view>
+        <view class="label-right">
+          <input name="wifiPwd" class="input" type="text" placeholder="可不填" value="{{addressData.wifiPwd}}{{wxaddress.wifiPwd}}"/>
+        </view>
+      </view>
+
     </view>
     <button type="warn" class="save-btn" formType="submit">保存</button>
     <button type="default" class="cancel-btn" bindtap="bindCancel">取消</button>

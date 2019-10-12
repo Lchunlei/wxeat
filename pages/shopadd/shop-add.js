@@ -24,6 +24,8 @@ Page({
     var bossTel = e.detail.value.bossTel;
     var bossName = e.detail.value.bossName;
     var inviteCode = e.detail.value.inviteCode;
+    var wifiName = e.detail.value.wifiName;
+    var wifiPwd = e.detail.value.wifiPwd;
 
     if (shopName == "") {
       wx.showToast({
@@ -95,6 +97,8 @@ Page({
         bossTel: bossTel,
         bossName: bossName,
         shopName: shopName,
+        wifiName: wifiName,
+        wifiPwd: wifiPwd,
         inviteCode: inviteCode
       },
       success: function (res) {
@@ -209,6 +213,8 @@ Page({
               selCity: res.data.respData.city,
               selDistrict: res.data.respData.district,
               bossTel:res.data.respData.bossTel,
+              wifiName: res.data.respData.wifiName,
+              wifiPwd: res.data.respData.wifiPwd,
               bossName:res.data.respData.bossName
             });
             that.setDBSaveAddressId(res.data.respData);

@@ -173,11 +173,46 @@ Page({
       })
 
     }else{
-      wx.showToast({
-        title: '您的服务马上就到',
-        icon: 'none',
-        duration: 2000
-      });
+      //查看本店WIFI
+      if (app.globalData.eatQrId){
+        wx.request({
+          url: app.globalData.urls + '/qr/wifi',
+          data: {
+            qrId: app.globalData.eatQrId
+          },
+          success: function (res) {
+            if (res.data.respCode == 'R000') {
+              wx.showModal({
+                title: 'WIFI：' + res.data.respData.wifiName,
+                content: '密码：' + res.data.respData.wifiPwd,
+                showCancel: false,
+                success: function (res) {
+
+                }
+              });
+            } else {
+              wx.showToast({
+                title: res.data.respMsg,
+                icon: 'none',
+                duration: 2000
+              });
+            }
+          },
+          fail:function(){
+            wx.showToast({
+              title: '系统繁忙，请稍后再试！',
+              icon: 'none',
+              duration: 2000
+            });
+          }
+        })
+      }else{
+        wx.showToast({
+          title: '请先到店扫码哦',
+          icon: 'none',
+          duration: 2000
+        });
+      }
     }
 	},
   closePaiMing: function () {
