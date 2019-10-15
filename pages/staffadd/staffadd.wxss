@@ -1,0 +1,94 @@
+page {
+  height: 100%;
+}
+.form-box {
+  width: 100%;
+  background-color: #fff;
+  margin-top: 20rpx;
+}
+
+.row-wrap {
+  width: 690rpx;
+  height: 88rpx;
+  line-height: 88rpx;
+  margin-left: 30rpx;
+  border-bottom: 1rpx solid #eee;
+  display: flex;
+  font-size: 28rpx;
+  /*justify-content: space-between;*/
+}
+
+.row-wrap .label {
+  width: 160rpx;
+  color: #000;
+}
+
+.row-wrap .label-right {
+  flex: 1;
+  height: 88rpx;
+  line-height: 88rpx;
+}
+
+.row-wrap .label-right input {
+  height: 100%;
+  font-size: 28rpx;
+  padding-right: 30rpx;
+}
+
+.row-wrap .right-box {
+  margin-right: 30rpx;
+}
+
+.arrow-right {
+  width: 15rpx;
+  height: 24rpx;
+}
+
+.save-btn, .cancel-btn {
+  width: 690rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  margin-top: 30rpx;
+  border-radius: 6rpx;
+  box-sizing: border-box;
+}
+
+.save-btn {
+  background-color: #e64340;
+  color: #fff;
+}
+
+button[type="default"] {
+  background-color: #fff;
+  color: #000;
+}
+
+.title {
+  color: #333;
+  font-weight:700;
+  font-size: 42rpx;
+  margin-bottom: 10rpx;
+  text-align: center;
+  height: 90rpx;
+  line-height: 90rpx;
+  padding-top: 20rpx;
+}
+
+.testdesc {
+  color: rgb(70, 62, 62);
+  font-weight:700;
+  font-size: 30rpx;
+  margin-bottom: 10rpx;
+  margin-left: 80rpx;
+}
+
+picker {
+  min-width: 20rpx;
+  height: 100%;
+  margin-right: 20rpx;
+}
+
+.hui {
+  color: #777;
+}

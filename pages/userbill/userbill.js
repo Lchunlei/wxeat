@@ -288,34 +288,16 @@ Page({
   },
   onShow: function () {
     var that = this;
-    // wx.getStorage({
-    //   key: 'shopCarInfo',
-    //   success: function (res) {
-    //     if (res.data) {
-    //       that.data.shopCarInfo = res.data
-    //       if (res.data.shopNum > 0) {
-    //         wx.setTabBarBadge({
-    //           index: 2,
-    //           text: '' + res.data.shopNum + ''
-    //         })
-    //       } else {
-    //         wx.removeTabBarBadge({
-    //           index: 2,
-    //         })
-    //       }
-    //     } else {
-    //       wx.removeTabBarBadge({
-    //         index: 2,
-    //       })
-    //     }
-    //   }
-    // });
+    let nowToken = app.globalData.token;
+    if (app.globalData.sToken){
+      nowToken = app.globalData.sToken
+    }
     //加载默认菜品
     wx.request({
       url: app.globalData.urls + '/food/deskCode',
       data: {
         qrId: that.data.eatQrId,
-        eToken: app.globalData.token
+        eToken: nowToken
       },
       success: function (res) {
         if (res.data.respCode == 'R000') {

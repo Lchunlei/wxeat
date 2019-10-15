@@ -84,8 +84,9 @@
     </view>
 
     <navigator hover-class="none" class="userinfo-item" url="/pages/share/share">
+     <view wx:if="{{myMsg}}" class="my-msg">{{myMsg}}</view>
       <image src="../../images/profile_address.png"></image>
-      <view>友情推广</view>
+      <view>邀请推广</view>
     </navigator>
 
     <view class="userinfo-item">

@@ -5,12 +5,23 @@
     </navigator>
   </view>
   <view class="score-title">
-    <image class="score-img" src="../../images/score_bg.png"></image>
+    <image class="score-img" src="https://yuxian.oss-cn-qingdao.aliyuncs.com/score_bg.png"></image>
     <view class="score-title-name">欢迎使用旺铺掌柜</view>
     <view class="score-title-score">微信扫一扫</view>
   </view>
-
-    <view class="qrimg">
-      <image class="qrimg" src="https://yuxian.oss-cn-qingdao.aliyuncs.com/wpzg.jpg" mode='widthFix'></image>
+   <view wx:if="{{inviShopName}}">
+    <view class="title">
+          --旺铺邀请--
     </view>
+    <view class="testdesc">
+          >{{inviShopName}}：邀请您加入
+    </view>
+    <view>
+      <button class="score-btn" type="primary"  bindtap="acceptBtn">接受邀请</button>
+      <button class="score-btn" type="warn" bindtap="refuseBtn">残忍拒绝</button>
+    </view>
+  </view>
+  <view class="qrimg">
+      <image class="qrimg" src="https://yuxian.oss-cn-qingdao.aliyuncs.com/wpzg.jpg" mode='widthFix'></image>
+  </view>
 </view>

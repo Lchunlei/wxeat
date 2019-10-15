@@ -2,12 +2,11 @@ const app = getApp()
 Page({
 	data: {
     companyInfo:'北京智合联动科技有限公司',
-    versionInfo: 'V-1.0.6',
-    // freeze:0,
-    // score:0,
+    versionInfo: 'V-1.0.7',
     loginName:"点击头像登录"
   },
   onGotUserInfo: function (e) {
+    var that = this;
     if (!app.globalData.token){
       app.login();
     }
@@ -16,7 +15,6 @@ Page({
       console.log("登录者--->" + app.globalData.userInfo.nickName);
         return;
     }
-
     wx.request({
       url: app.globalData.urls + '/shop/userLogin',
       method:'POST',
@@ -28,17 +26,24 @@ Page({
       success: function (res) {
         if (res.data.respCode == 'R000') {
           console.log("登录成功！");
-          app.globalData.token = res.data.respData;
+          app.globalData.token = res.data.respMsg;
+          if (res.data.respData.userRole!=1){
+            app.globalData.sToken = res.data.respData.wxOpenId;
+          }
           app.globalData.userInfo = {
-            eToken: res.data.respData,
+            eToken: res.data.respMsg,
+            userRole: res.data.respData.userRole,
             nickName: e.detail.userInfo.nickName,
             headUrl: e.detail.userInfo.avatarUrl
           };
+          that.setData({
+            loginName: e.detail.userInfo.nickName,
+            userRole: res.data.respData.userRole,
+            sToken: res.data.respMsg
+          });
+          that.getMyMsg();
         }
       }
-    });
-    this.setData({
-        loginName: e.detail.userInfo.nickName
     });
   },
   onTabItemTap:function(){
@@ -65,66 +70,25 @@ Page({
       that.setData({
         loginName: app.globalData.userInfo.userName
       });
-      // that.getUserApiInfo();
-      // that.getUserAmount();
-      // that.checkScoreSign();
-      // that.getInfo();
     }
   },
   onShow() {
-    // this.getUserApiInfo();
-    // this.getUserAmount();
-    // this.checkScoreSign();
-    // this.getInfo();
-		// this.getUserInfo();
-    //更新订单状态
     var that = this;
-    // wx.request({
-      // url: app.globalData.urls + '/order/statistics',
-      // data: { token: app.globalData.token },
-      // success: function (res) {
-      //   if (res.data.code == 0) {
-      //     if (res.data.data.count_id_no_pay > 0) {
-      //       wx.setTabBarBadge({
-      //         index: 3,
-      //         text: '' + res.data.data.count_id_no_pay + ''
-      //       })
-      //     } else {
-      //       wx.removeTabBarBadge({
-      //         index: 3,
-      //       })
-      //     }
-      //     that.setData({
-      //       noplay: res.data.data.count_id_no_pay,
-      //       notransfer: res.data.data.count_id_no_transfer,
-      //       noconfirm: res.data.data.count_id_no_confirm,
-      //       noreputation: res.data.data.count_id_no_reputation
-      //     });
-      //   }
-      // }
-    // })
-    // wx.getStorage({
-    //   key: 'shopCarInfo',
-    //   success: function (res) {
-    //     if (res.data) {
-    //       that.data.shopCarInfo = res.data
-    //       if (res.data.shopNum > 0) {
-    //         wx.setTabBarBadge({
-    //           index: 2,
-    //           text: '' + res.data.shopNum + ''
-    //         })
-    //       } else {
-    //         wx.removeTabBarBadge({
-    //           index: 2,
-    //         })
-    //       }
-    //     } else {
-    //       wx.removeTabBarBadge({
-    //         index: 2,
-    //       })
-    //     }
-    //   }
-    // })
+    //加载有无邀请信息未处理
+    wx.request({
+      url: app.globalData.urls + '/notice/show',
+      data: {
+        eToken: app.globalData.token
+      },
+      success: function (res) {
+        if (res.data.respCode == 'R000') {
+          that.setData({
+            noticeList: res.data.respData
+          });
+        }
+      }
+    });
+    that.getMyMsg();
   },	
   addShopInfo: function () {
     // 更新用户信息
@@ -136,9 +100,17 @@ Page({
         duration: 2000
       });
     }else{
-      wx.navigateTo({
-        url: "/pages/addshop/addshop"
-      });
+      if (that.data.userRole==1){
+        wx.navigateTo({
+          url: "/pages/addshop/addshop"
+        });
+      }else{
+        wx.showToast({
+          title: '仅店长有权访问',
+          icon: 'none',
+          duration: 2000
+        });
+      }
     }
   },
   shopFood: function () {
@@ -165,9 +137,17 @@ Page({
         duration: 2000
       });
     } else {
-      wx.navigateTo({
-        url: "/pages/sincome/sincome"
-      });
+      if (that.data.userRole == 1) {
+        wx.navigateTo({
+          url: "/pages/sincome/sincome"
+        });
+      } else {
+        wx.showToast({
+          title: '仅店长有权访问',
+          icon: 'none',
+          duration: 2000
+        });
+      }
     }
   },
   vip: function () {
@@ -180,9 +160,17 @@ Page({
         duration: 2000
       });
     } else {
-      wx.navigateTo({
-        url: "/pages/vip/vip"
-      });
+      if (that.data.userRole == 1) {
+        wx.navigateTo({
+          url: "/pages/vip/vip"
+        });
+      } else {
+        wx.showToast({
+          title: '仅店长有权访问',
+          icon: 'none',
+          duration: 2000
+        });
+      }
     }
   },
   billsCore: function () {
@@ -271,25 +259,26 @@ Page({
         }
       })
 },
-scoresign: function () {
-    // var that = this;
-    // wx.request({
-    //   url: app.globalData.urls + '/score/sign',
-    //   data: {
-    //     token: app.globalData.token
-    //   },
-    //   success: function (res) {
-    //     if (res.data.code == 0) {
-    //       that.getUserAmount();
-    //       that.checkScoreSign();
-    //     } else {
-    //       wx.showModal({
-    //         title: '错误',
-    //         content: res.data.msg,
-    //         showCancel: false
-    //       })
-    //     }
-    //   }
-    // })
+getMyMsg: function () {
+  var that = this;
+  if (that.data.sToken){
+    wx.request({
+      url: app.globalData.urls + '/staff/lookup',
+      data: {
+        eToken: that.data.sToken
+      },
+      success: function (res) {
+        if (res.data.respCode == 'R000') {
+          that.setData({
+            myMsg: res.data.respData
+          });
+        }else{
+          that.setData({
+            myMsg: null
+          });
+        }
+      }
+    })
+    }
   }
 })

@@ -38,13 +38,11 @@ page{
 }
 .score-btn{
   color:#fff;
-  background-color:#b4a078;
-  width:170px;
   height:35px;
   border-radius:20px;
   line-height:35px;
   font-size:32rpx;
-  margin:0 auto;
+  margin:32rpx;
 }
 .score-btn-none{
   color:#fff;
@@ -154,4 +152,22 @@ page{
   display:block;
   padding-top:35px;
   animation: shake-hard 3s ease-in-out infinite;
+}
+.title {
+  color: #333;
+  font-weight:700;
+  font-size: 42rpx;
+  margin-bottom: 10rpx;
+  text-align: center;
+  height: 90rpx;
+  line-height: 90rpx;
+  padding-top: 20rpx;
+}
+
+.testdesc {
+  color: rgb(70, 62, 62);
+  font-weight:700;
+  font-size: 35rpx;
+  margin-bottom: 10rpx;
+  margin-left: 120rpx;
 }

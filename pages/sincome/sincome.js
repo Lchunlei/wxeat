@@ -32,43 +32,7 @@ Page({
           });
         }
       }
-    })
-  },
-  clickScan: function () {
-    var that = this;
-    // wx.navigateTo({
-    //   url: "/pages/sqrbind/sqrbind?sceneId=4"
-    // });
-    var show;
-    wx.scanCode({
-      success: (res) => {
-        //pages/userbill/userbill?scene=6
-        console.log(res);
-        let sceneId = res.path.split('=')[1];
-        console.log("sceneId--->"+sceneId);
-        wx.navigateTo({
-          url: "/pages/sqrbind/sqrbind?sceneId=" + sceneId
-        });
-   
-      },
-      fail: (res) => {
-        wx.showToast({
-          title: '扫码失败，请稍后再试',
-          icon: 'none',
-          duration: 2000
-        })
-      },
-      complete: (res) => {
-
-      }
-    })
-  },
-  staffManage: function () {
-    wx.showToast({
-      title: '功能维护中，请稍后',
-      icon: 'none',
-      duration: 2000
-    })
+    });
   }
 
 })

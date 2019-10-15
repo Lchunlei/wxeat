@@ -1,4 +1,3 @@
-var wxpay = require('../../utils/pay.js')
 var app = getApp()
 Page({
   data: {
@@ -66,6 +65,10 @@ Page({
   toPay: function (e) {
     var that = this;
     var userId = e.currentTarget.dataset.id;
+    let token = app.globalData.token;
+    if (app.globalData.sToken) {
+      token = app.globalData.sToken;
+    }
     wx.showModal({
       title: '确定已收款交易完成吗？',
       content: '',
@@ -75,7 +78,7 @@ Page({
           wx.request({
             url: app.globalData.urls + '/bill/complete',
             data: {
-              eToken: app.globalData.token,
+              eToken: token,
               userId: userId
             },
             success: (res) => {
@@ -227,12 +230,16 @@ Page({
   showView:function(viewId){
     wx.showLoading();
     var that = this;
+    let token = app.globalData.token;
+    if (app.globalData.sToken){
+      token = app.globalData.sToken;
+    }
     if (viewId == 0) {
       //查看客单
       wx.request({
         url: app.globalData.urls + '/bill/ctmBill',
         data: {
-          eToken: app.globalData.token,
+          eToken: token,
           billStatus: viewId
         },
         success: (res) => {
@@ -263,7 +270,7 @@ Page({
       wx.request({
         url: app.globalData.urls + '/bill/list',
         data: {
-          eToken: app.globalData.token,
+          eToken: token,
           pageNum:1,
           tabNum: that.data.currentType
         },

@@ -22,10 +22,14 @@ Page({
   getPage: function (pageNum){
     wx.showLoading();
     var that = this;
+    let token = app.globalData.token;
+    if (app.globalData.sToken) {
+      token = app.globalData.sToken;
+    }
     wx.request({
       url: app.globalData.urls + '/bill/list',
       data: {
-        eToken: app.globalData.token,
+        eToken: token,
         pageNum: pageNum,
         tabNum: that.data.currentType
       },

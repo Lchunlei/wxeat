@@ -38,12 +38,12 @@
       <view class="share-btn" bindtap="getScan">去申领</view>
     </view>
     <view class="share-list">
-      <image class="share-img" src="https://yuxian.oss-cn-qingdao.aliyuncs.com/shopping.png"></image>
+      <image class="share-img" src="https://yuxian.oss-cn-qingdao.aliyuncs.com/qrscan.png"></image>
       <view class="share-title">扫码绑定</view>
       <view class="share-text">绑定专属餐码，坐等八方食客</view>
       <view class="share-btn" bindtap="clickScan">去绑定</view>
     </view>
-    <view class="share-list avict">
+    <view class="share-end">
       <image class="share-img" src="https://yuxian.oss-cn-qingdao.aliyuncs.com/score.png"></image>
       <view class="share-title">店员管理</view>
       <view class="share-text">员工分工好，生意会更旺</view>

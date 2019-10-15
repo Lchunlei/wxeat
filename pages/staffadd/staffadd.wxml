@@ -1,0 +1,42 @@
+<navigation id='Navigation' show-icon="{{true}}" title="邀请员工" show-title="{{true}}" class=""></navigation>
+<view class="container">
+  <form bindsubmit="bindSave">
+    <view class="form-box">
+      <view class="row-wrap">
+        <view class="label">顾客号</view>
+        <view class="label-right">
+          <input name="inviteId" class="input" type="number" placeholder="输入邀请人首页顾客号" value="{{inviteId}}" />
+        </view>
+      </view>
+    </view>
+    <button type="primary" class="save-btn" formType="submit">发出邀请</button>
+    <button type="default" class="cancel-btn" bindtap="bindCancel">取消</button>
+  </form>
+  <view class="title">
+        --邀请新员工介绍--
+  </view>
+  <view class="testdesc">
+        >1.新员工微信小程序搜索“旺铺掌柜”并登陆;
+  </view>
+  <view class="testdesc">
+        >2.店长查看新员工顾客号发出邀请（如下图）;
+  </view>
+  <view class="testdesc">
+        >3.新员工在小程序内接受邀请即可;
+  </view>
+  <view class="testdesc">
+        *店铺员工可以协助店长处理订单;
+  </view>
+  <view class="testdesc">
+        *新员工也可扫本页末尾二维码进入小程序;
+  </view>
+  <view>
+    <image src="https://yuxian.oss-cn-qingdao.aliyuncs.com/gukehao.png" mode='widthFix'></image>
+  </view>
+  <view>
+      <image src="https://yuxian.oss-cn-qingdao.aliyuncs.com/wpzg.jpg" mode='widthFix'></image>
+  </view>
+  <view class="title">
+        --结束--
+  </view>
+</view>

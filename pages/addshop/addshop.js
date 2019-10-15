@@ -60,29 +60,6 @@ Page({
   onReady: function () {
   
   },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  // onShow: function () {
-  //   var that = this;
-  //   wx.request({
-  //     url: app.globalData.urls + '/user/amount',
-  //     data: {
-  //       token: app.globalData.token
-  //     },
-  //     success: function (res) {
-  //       if (res.data.code == 0) {
-  //         that.setData({
-  //           balance: res.data.data.balance,
-  //           freeze: res.data.data.freeze,
-  //           score: res.data.data.score
-  //         });
-  //       }
-  //     }
-  //   })
-  // },
-
   joinShop: function () {
     var that = this;
     console.log(that.data.shopId);
@@ -99,14 +76,14 @@ Page({
     }
   },
   staffManage: function () {
-    wx.showToast({
-      title: '功能维护中，请稍后',
-      icon: 'none',
-      duration: 2000
-    })
-    // wx.navigateTo({
-    //   url: "/pages/staffs/staffs"
-    // });
+    // wx.showToast({
+    //   title: '功能维护中，请稍后',
+    //   icon: 'none',
+    //   duration: 2000
+    // })
+    wx.navigateTo({
+      url: "/pages/staffs/staffs"
+    });
   },
   clickScan: function () {
     var that = this;

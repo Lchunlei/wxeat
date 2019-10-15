@@ -3,59 +3,66 @@
 var app = getApp()
 Page({
   data: {
-    addressList:[]
+    staffList: []
   },
-
-  selectTap: function (e) {
-    var id = e.currentTarget.dataset.id;
-    wx.request({
-      url: app.globalData.urls +'/user/shipping-address/update',
-      data: {
-        token:app.globalData.token,
-        id:id,
-        isDefault:'true'
-      },
-      success: (res) =>{
-        wx.navigateBack({})
+  addStaff: function () {
+    wx.navigateTo({
+      url: "/pages/staffadd/staffadd"
+    })
+  },
+  delStaff: function (e) {
+    var that = this;
+    console.log("删除店员-->" + e.currentTarget.dataset.id);
+    wx.showModal({
+      title: '提示',
+      content: '确认删除该员工吗？',
+      showCancel: false,
+      success: function (res) {
+        if (res.confirm) {
+          wx.request({
+            url: app.globalData.urls + '/staff/del',
+            data: {
+              eToken: app.globalData.token,
+              shopId: e.currentTarget.dataset.id
+            },
+            success: (res) => {
+              if (res.data.respCode == 'R000') {
+                that.initShopStaffs();
+              }
+              wx.showToast({
+                title: res.data.respMsg,
+                icon: 'none',
+                duration: 3000
+              });
+            }
+          })
+        }
       }
-    })
+    });
   },
-
-  addAddess : function () {
-    wx.navigateTo({
-      url:"/pages/address-add/address-add"
-    })
-  },
-  
-  editAddess: function (e) {
-    wx.navigateTo({
-      url: "/pages/address-add/address-add?id=" + e.currentTarget.dataset.id
-    })
-  },
-  
   onLoad: function () {
     var that = this;
     if (app.globalData.iphone == true) { that.setData({ iphone: 'iphone' }) }
   },
-  onShow : function () {
-    this.initShippingAddress();
+  onShow: function () {
+    this.initShopStaffs();
   },
-  initShippingAddress: function () {
+  initShopStaffs: function () {
     var that = this;
     wx.request({
-      url: app.globalData.urls +'/user/shipping-address/list',
+      url: app.globalData.urls + '/staff/all',
       data: {
-        token:app.globalData.token
+        eToken: app.globalData.token
       },
-      success: (res) =>{
-        if (res.data.code == 0) {
+      success: (res) => {
+        if (res.data.respCode == 'R000') {
           that.setData({
-            addressList:res.data.data,
+            staffList: res.data.respData,
             loadingMoreHidden: true
           });
-        } else if (res.data.code == 700){
+        } else {
           that.setData({
-            addressList: null,
+            staffList: null,
             loadingMoreHidden: false
           });
         }

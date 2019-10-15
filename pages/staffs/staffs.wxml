@@ -1,25 +1,22 @@
-<navigation id='Navigation' show-icon="{{true}}" title="店铺成员" show-title="{{true}}" class=""></navigation>
+<navigation id='Navigation' show-icon="{{true}}" title="旺铺员工" show-title="{{true}}" class=""></navigation>
 <view class="container">
   <view class="address-list">
-    <view class="a-address" wx:for-items="{{addressList}}" wx:key="{{index}}">
-      <view class="left-text {{item.isDefault? 'active':''}}" bindtap="selectTap" data-id="{{item.id}}">
+    <view class="a-address" wx:for-items="{{staffList}}" wx:key="{{index}}">
+      <view class="left-text active" data-id="{{item.shopId}}">
         <view class="name-tel">
-          {{item.linkMan}} {{item.mobile}}
-        </view>
-        <view class="address-box">
-          {{item.provinceStr}}{{item.cityStr}}{{item.areaStr?item.areaStr:""}}{{item.address}}
+          {{item.nickName}}
         </view>
       </view>
-      <view class="right-edit" bindtap="editAddess" data-id="{{item.id}}"></view>
+      <view class="right-edit" bindtap="delStaff" data-id="{{item.shopId}}"></view>
     </view>
   </view>
   <view hidden="{{loadingMoreHidden ? true : false}}" class="no-more-goods">
     <image src="/images/address_empty.png" class="no-order-img"></image>
-    <view class="text">还没有添加地址呢</view>
+    <view class="text">还没有添加店员呢</view>
   </view>
-  <view class="bottom-box" bindtap="addAddess">
+  <view class="bottom-box" bindtap="addStaff">
     <image src="../../images/address_add.png"></image>
-    新增地址
+    新增店员
   </view>
 
 </view>

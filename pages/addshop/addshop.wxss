@@ -154,11 +154,18 @@ picker {
   height: 55px;
   margin-bottom: 15px;
 }
+.share-end{
+  background-color:#f4ebe2;
+  border-radius:5px;
+  padding:15px 10px;
+  height: 55px;
+  margin-bottom: 55px;
+}
 .share-img{
   width:60px;
   height:60px;
   float:left;
-  margin:12px 0px;
+  margin:10px 0px;
   padding-right:15px;
 }
 .share-title{

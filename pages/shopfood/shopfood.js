@@ -44,10 +44,14 @@ Page({
   },
   initShippingAddress: function () {
     var that = this;
+    let token = app.globalData.token;
+    if (app.globalData.sToken) {
+      token = app.globalData.sToken;
+    }
     wx.request({
       url: app.globalData.urls +'/food/all',
       data: {
-        eToken:app.globalData.token
+        eToken: token
       },
       success: (res) =>{
         if (res.data.respCode == 'R000') {

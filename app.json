@@ -3,6 +3,8 @@
     "pages/start/start",
     "pages/index/index",
     "pages/shopfood/shopfood",
+    "pages/staffs/staffs",
+    "pages/staffadd/staffadd",
     "pages/my/my",
     "pages/addshop/addshop",
     "pages/allbill/allbill",
