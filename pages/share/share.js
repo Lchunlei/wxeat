@@ -28,6 +28,7 @@ Page({
     that.cofInvite(1);
   },
   refuseBtn: function () {
+    var that = this;
     that.cofInvite(0);
   },
   cofInvite:function(confStatus){

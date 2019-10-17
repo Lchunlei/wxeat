@@ -30,11 +30,11 @@
   <view class="testdesc">
         *新员工也可扫本页末尾二维码进入小程序;
   </view>
-  <view>
-    <image src="https://yuxian.oss-cn-qingdao.aliyuncs.com/gukehao.png" mode='widthFix'></image>
+  <view class="imgcenter" >
+    <image class="imgcenter" src="https://yuxian.oss-cn-qingdao.aliyuncs.com/gukehao.png" mode='widthFix'></image>
   </view>
-  <view>
-      <image src="https://yuxian.oss-cn-qingdao.aliyuncs.com/wpzg.jpg" mode='widthFix'></image>
+  <view class="imgcenter" >
+      <image class="imgcenter" src="https://yuxian.oss-cn-qingdao.aliyuncs.com/wpzg.jpg" mode='widthFix'></image>
   </view>
   <view class="title">
         --结束--

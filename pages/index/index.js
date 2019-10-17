@@ -11,7 +11,7 @@ Page({
 		duration: 800,
 		swiperCurrent: 0,
 		iphone:false,
-		loadingHidden: false, // loading
+		loadingHidden: false,
     paiMingHidden: true, 
 		wxlogin: true,
 		loadingMoreHidden: false,
@@ -110,13 +110,13 @@ Page({
 			swiperCurrent: e.detail.current
 		});
 	},
-
 	tapBanner: function(e) {
-		// if (e.currentTarget.dataset.id != 0) {
-		// 	wx.navigateTo({
-		// 		url: "/pages/goods-detail/goods-detail?id=" + e.currentTarget.dataset.id
-		// 	})
-		// }
+    console.log('点击轮播图ID-->' + e.currentTarget.dataset.id );
+		if (e.currentTarget.dataset.id != 0) {
+      wx.navigateTo({
+        url: "/pages/imgad/imgad?id=" + e.currentTarget.dataset.id
+      })
+		}
 	},
 	tapSales: function (e) {
     var that = this;

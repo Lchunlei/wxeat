@@ -10,6 +10,7 @@
     "pages/allbill/allbill",
     "pages/getqr/getqr",
     "pages/vip/vip",
+    "pages/imgad/imgad",
     "pages/cart/cart",
     "pages/sincome/sincome",
     "pages/shopfoodadd/shopfoodadd",
@@ -24,7 +25,6 @@
     "pages/address-add/address-add",
     "pages/order-list/order-list",
     "pages/cate-list/cate-list",
-    "pages/order-detail/order-detail",
     "pages/notice/notice",
     "pages/cate/cate",
     "pages/sqrbind/sqrbind",
@@ -46,14 +46,14 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "iconPath": "images/nav/home-off.png",
-        "selectedIconPath": "images/nav/home-on.png",
-        "text": "首页"
-      },{
-        "pagePath": "pages/my/my",
         "iconPath": "images/nav/my-off.png",
         "selectedIconPath": "images/nav/my-on.png",
-        "text": "旺铺"
+        "text": "顾客主页"
+      },{
+        "pagePath": "pages/my/my",
+        "iconPath": "images/nav/home-off.png",
+        "selectedIconPath": "images/nav/home-on.png",
+        "text": "旺铺主页"
       }
     ]
   },

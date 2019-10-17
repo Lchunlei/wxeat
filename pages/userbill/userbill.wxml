@@ -80,7 +80,7 @@
                         <view class="dish-item">
                             <view class="dish-item-wrp">
                                 <view class="dish-item-pic">
-                                    <image class="image" src="https://yuxian.oss-cn-qingdao.aliyuncs.com/moren.jpg" />
+                                    <image class="image" src="{{dish.picUrl? dish.picUrl:'https://yuxian.oss-cn-qingdao.aliyuncs.com/moren.jpg'}}" />
                                 </view>
                                 <view class="dish-item-info" style="">
                                     <view>

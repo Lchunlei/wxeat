@@ -1,0 +1,9 @@
+<navigation id='Navigation' show-icon="{{true}}" title="图文详情" show-title="{{true}}" class=""></navigation>
+<view class="container">
+  <view class="imgcenter" >
+    <image class="imgcenter" src="{{imgUrl}}" mode='widthFix'></image>
+  </view>
+  <view class="title">
+        --结束--
+  </view>
+</view>

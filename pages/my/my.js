@@ -2,7 +2,7 @@ const app = getApp()
 Page({
 	data: {
     companyInfo:'北京智合联动科技有限公司',
-    versionInfo: 'V-1.0.7',
+    versionInfo: 'V-1.0.9',
     loginName:"点击头像登录"
   },
   onGotUserInfo: function (e) {

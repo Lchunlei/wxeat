@@ -92,3 +92,6 @@ picker {
 .hui {
   color: #777;
 }
+.imgcenter {
+  text-align: center;
+}
