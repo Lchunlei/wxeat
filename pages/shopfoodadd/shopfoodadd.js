@@ -1,38 +1,27 @@
-var commonCityData = require('../../utils/city.js')
 //获取应用实例
 var app = getApp()
 Page({
   data: {
-    // foodId: '',
-    // foodName: '',
-    items: [
-      { name: 1, value: '招牌' },
-      { name: 2, value: '热销' },
-      { name: 3, value: '主食' },
-      { name: 4, value: '酒水' },
-      { name: 5, value: '其他' }
-    ],
+    items:[],
     cateId:1,
-    foodPrice: 0,
-    // paixu: ''
+    foodPrice: 0
   },
   checkboxChange: function (e) {
+    console.log('checkbox发生change事件，携带value值为：', e.detail.value);
     var that = this;
-    if (e.detail.value.length > 1) {
-      e.detail.value.splice(0, e.detail.value.length - 1);
-      for (var i = 0; i <that.data.items.length;i++){
-        if (that.data.items[i].name == e.detail.value){
-          that.data.items[i].checked = true;
-        }else{
-          that.data.items[i].checked = false;
-        }
+    let items = that.data.items;
+    let eIndex = e.detail.value.length-1;
+    for (var i = 0; i < items.length; i++) {
+      if (items[i].cateId == e.detail.value[eIndex]) {
+        items[i].checked = true;
+      } else {
+        items[i].checked = false;
       }
-      that.setData({
-        items: that.data.items,
-        cateId: e.detail.value
-      });
     }
-    // console.log('checkbox发生change事件，携带value值为：', e.detail.value)
+    that.setData({
+      items: items,
+      cateId: e.detail.value[eIndex]
+    });
   },
   bindCancel: function () {
     wx.navigateBack({})
@@ -51,6 +40,15 @@ Page({
       });
       return
     }
+    if (that.data.cateId == null || that.data.cateId<29) {
+      wx.showToast({
+        title: '请勾选菜品类别',
+        icon: 'none',
+        duration: 2000
+      });
+      return
+    }
+
     if (foodPrice == "") {
       wx.showToast({
         title: '请填写售价',
@@ -83,9 +81,8 @@ Page({
     } else {
       foodId = 0;
     }
-    console.log("单个菜品-->" + apiAddoRuPDATE);
     wx.request({
-      url: app.globalData.urls + '/food/addOne',
+      url: app.globalData.urls + '/food/addorup',
       method: 'POST',
       data: {
         eToken: app.globalData.token,
@@ -113,35 +110,70 @@ Page({
   onLoad: function (e) {
     var that = this;
     if (app.globalData.iphone == true) { that.setData({ iphone: 'iphone' }) }
-    var foodId = e.foodId;
-    if (foodId) {
-      // 初始化原数据
-      wx.showLoading();
-      wx.request({
-        url: app.globalData.urls + '/food/info',
-        data: {
-          foodId: foodId
-        },
-        success: function (res) {
-          wx.hideLoading();
-          if (res.data.respCode == "R000") {
-            that.setData({
-              foodId: foodId,
-              foodName: res.data.respData.foodName,
-              foodPrice: res.data.respData.foodPrice,
-              paixu: res.data.respData.paixu,
-              sellStatus: res.data.respData.sellStatus,
-            });
-          } else {
-            wx.showModal({
-              title: '提示',
-              content: res.data.respMsg,
-              showCancel: false
+    //加载本店分类
+    wx.request({
+      url: app.globalData.urls + '/cate/mine',
+      data: {
+        eToken: app.globalData.token
+      },
+      success: function (resp) {
+        if (resp.data.respCode == "R000") {
+          let items = resp.data.respData;
+          that.setData({
+            items: resp.data.respData
+          });
+          var foodId = e.foodId;
+          if (foodId) {
+            // 初始化原数据
+            wx.showLoading();
+            wx.request({
+              url: app.globalData.urls + '/food/info',
+              data: {
+                foodId: foodId
+              },
+              success: function (res) {
+                wx.hideLoading();
+                if (res.data.respCode == "R000") {
+                  that.setData({
+                    foodId: foodId,
+                    foodName: res.data.respData.foodName,
+                    cateId: res.data.respData.cateId,
+                    foodPrice: res.data.respData.foodPrice,
+                    paixu: res.data.respData.paixu,
+                    sellStatus: res.data.respData.sellStatus,
+                  });
+                  for (var i = 0; i < items.length; i++) {
+                    if (items[i].cateId == res.data.respData.cateId) {
+                      console.log(items[i]);
+                      items[i].checked = true;
+                    } else {
+                      items[i].checked = false;
+                    }
+                  }
+                  that.setData({
+                    items: items,
+                    cateId: res.data.respData.cateId
+                  });
+                } else {
+                  wx.showModal({
+                    title: '提示',
+                    content: res.data.respMsg,
+                    showCancel: false
+                  })
+                }
+              }
             })
           }
+        } else {
+          wx.showModal({
+            title: '提示',
+            content: resp.data.respMsg,
+            showCancel: false
+          });
+          return;
         }
-      })
-    }
+      }
+    });
   },
   deleteShopFood: function (e) {
     var that = this;

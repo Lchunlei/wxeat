@@ -10,19 +10,23 @@
         </view>
       </view>
 
-      <view class="row-wrap" style="height:170rpx;">
-        <view class="label">类别</view>
-        <checkbox-group bindchange="checkboxChange">
-          <label class="checkbox" wx:for="{{items}}"wx:key="id">
-            <checkbox value="{{item.name}}" checked="{{item.checked}}"/>{{item.value}}
-          </label>
-        </checkbox-group>
+      <view class="row-cate">
+        <view class="label" style="white-space:nowrap;">类别</view>
+        <view class="label-right">
+
+          <checkbox-group class="checkbox" bindchange="checkboxChange">
+            <label style="display:inline-block;margin-left: 50rpx;" wx:for="{{items}}"wx:key="cateId">
+              <checkbox value="{{item.cateId}}" checked="{{item.checked}}"/>{{item.cateName}}
+            </label>
+          </checkbox-group>
+   
+        </view>
       </view>
 
       <view class="row-wrap">
         <view class="label">售价</view>
         <view class="label-right">
-          <input name="foodPrice" class="input" type="number" placeholder="单位元（例：12.5）" value="{{foodPrice/100}}" />
+          <input name="foodPrice" class="input" type="digit" placeholder="单位元（例：12.5）" value="{{foodPrice/100}}" />
         </view>
       </view>
      

@@ -69,7 +69,7 @@ Component({
         delta: 1,
         fail(e) {
           wx.switchTab({
-            url: '/pages/grouponList/main'
+            url: '/pages/index/index'
           })
         }
       })

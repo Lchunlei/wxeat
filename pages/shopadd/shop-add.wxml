@@ -1,6 +1,6 @@
 <navigation id='Navigation' show-icon="{{true}}" title="店铺信息" show-title="{{true}}" class=""></navigation>
 <view class="container">
-  <form bindsubmit="bindSave">
+  <form bindsubmit="bindSave" report-submit="true">
     <view class="form-box">
 
       <view class="row-wrap">
@@ -73,7 +73,7 @@
       </view>
 
     </view>
-    <button type="warn" class="save-btn" formType="submit">保存</button>
+    <button type="warn" class="save-btn" formType="submit" id="saveShop">保存</button>
     <button type="default" class="cancel-btn" bindtap="bindCancel">取消</button>
   </form>
 </view>

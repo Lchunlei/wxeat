@@ -7,7 +7,7 @@ Page({
     myfoodList: [],
 		indicatorDots: true,
 		autoplay: true,
-		interval: 6000,
+		interval: 2000,
 		duration: 800,
 		swiperCurrent: 0,
 		iphone:false,
@@ -118,8 +118,29 @@ Page({
       })
 		}
 	},
+  goShopfood:function(e){
+    var that = this;
+    var batId = e.currentTarget.dataset.id;
+    //登录失败重新登录
+    if (!app.globalData.uid) {
+      app.login();
+    }
+    console.log('跳转时的桌码ID-->' + app.globalData.eatQrId);
+    if (app.globalData.eatQrId != null && app.globalData.eatQrId != 0) {
+      wx.navigateTo({
+        url: '/pages/userbill/userbill?eatQrId=' + app.globalData.eatQrId
+      });
+    } else {
+      wx.showToast({
+        title: '先进店扫码占座哦',
+        icon: 'none',
+        duration: 2000
+      });
+    }
+  },
 	tapSales: function (e) {
     var that = this;
+    //授权消息
     var batId = e.currentTarget.dataset.id;
     if (batId == 1) {
       if (!app.globalData.uid) {
@@ -132,7 +153,7 @@ Page({
         });
       }else{
         wx.showToast({
-          title: '请先扫码占座哦',
+          title: '先进店扫码占座哦',
           icon: 'none',
           duration: 2000
         });
@@ -227,13 +248,13 @@ Page({
 				frontColor: '#000000',
 				backgroundColor: '#ffffff'
 			})
-			app.fadeInOut(this,'fadeAni',1)
+			// app.fadeInOut(this,'fadeAni',1)
 		}else{
 			wx.setNavigationBarColor({
 				frontColor: '#ffffff',
 				backgroundColor: '#ffffff'
 			})
-			app.fadeInOut(this,'fadeAni',0)
+			// app.fadeInOut(this,'fadeAni',0)
 		}
 	}
 })

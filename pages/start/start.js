@@ -22,8 +22,8 @@ function countdown(that) {
 Page({
   data: {
     homeTitle:'旺铺掌柜',
-    homeRemark:'北京智合联动科技有限公司',
-    second: 3,
+    homeRemark:'雷燕出品-力成精品',
+    second: 6,
     home: 0
   },
 

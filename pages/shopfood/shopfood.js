@@ -22,7 +22,7 @@ Page({
   //   })
   // },
 
-  addAddess : function () {
+  addFood : function () {
     wx.navigateTo({
       url:"/pages/shopfoodadd/shopfoodadd"
     })

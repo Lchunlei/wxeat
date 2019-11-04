@@ -158,31 +158,23 @@ Page({
   onLoad: function (options) {
     wx.showLoading();
     var that = this;
-    //加载分类
-    var categories = [{ categoryId: 1, cateName: "招牌" }, { categoryId: 2, cateName: "热销" }, { categoryId: 3, cateName: "主食" }, { categoryId: 4, cateName: "酒水" }, { categoryId: 5, cateName: "其他" }];
     //更新桌码缓存
     let scene = decodeURIComponent(options.scene);
     if (options.scene){
       console.log('扫码进入-->' + scene);
       that.setData({
-        categories: categories,
-        eatQrId: scene,
-        activeCategoryId: 1
+        eatQrId: scene
       });
     }else{
       if (options.eatQrId){
         console.log('用户扫码后首页跳转进入-->' + options.eatQrId);
         that.setData({
-          categories: categories,
-          eatQrId: options.eatQrId,
-          activeCategoryId: 1
+          eatQrId: options.eatQrId
         });
       }else{
         console.log('--代客点餐跳转进入--');
         that.setData({
-          categories: categories,
-          eatQrId: 0,
-          activeCategoryId: 1
+          eatQrId: 0
         });
       }
     }
@@ -289,33 +281,38 @@ Page({
   onShow: function () {
     var that = this;
     let nowToken = app.globalData.token;
-    if (app.globalData.sToken){
-      nowToken = app.globalData.sToken
-    }
-    //加载默认菜品
-    wx.request({
-      url: app.globalData.urls + '/food/deskCode',
-      data: {
-        qrId: that.data.eatQrId,
-        eToken: nowToken
-      },
-      success: function (res) {
-        if (res.data.respCode == 'R000') {
-          wx.hideLoading();
-          app.globalData.eatQrId = that.data.eatQrId;
+    if (that.data.eatQrId){
+      //加载默认菜品
+      wx.request({
+        url: app.globalData.urls + '/food/qrCode',
+        data: {
+          qrId: that.data.eatQrId,
+          eToken: nowToken
+        },
+        success: function (res) {
+          if (res.data.respCode == 'R000') {
+            wx.hideLoading();
+            app.globalData.eatQrId = that.data.eatQrId;
+            that.setData({
+              pageTitle: res.data.respMsg,
+              menus: res.data.respData.foods
+            });
+          }
           that.setData({
-            pageTitle: res.data.respMsg,
-            menus: res.data.respData
+            categories: res.data.respData.cates,
+            //默认被选中的ID
+            activeCategoryId: res.data.respData.cates[0].cateId
           });
+          // that.getGoodsList(0);
         }
-        that.setData({
-          categories: that.data.categories,
-          //默认被选中的ID
-          activeCategoryId: 1
-        });
-        // that.getGoodsList(0);
-      }
-    });
+      });
+    }else{
+      wx.showToast({
+        title: '请微信扫码点餐',
+        icon: 'none',
+        duration: 3000
+      });
+    }
   },
 
 });

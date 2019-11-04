@@ -39,10 +39,10 @@
 
 
 		<view class="index-hot flex">
-			<block wx:for="{{hot}}" wx:key="hot">
-				<navigator hover-class="none" class="hot-item" url="/pages/userbill/userbill">
+			<block wx:for="{{hot}}" wx:key="id">
+				<view hover-class="none" class="hot-item" bindtap="goShopfood"  data-id="{{index}}">
 					<image src="{{item.picUrl}}"></image>
-				</navigator>
+				</view>
 			</block>
 		</view>
 

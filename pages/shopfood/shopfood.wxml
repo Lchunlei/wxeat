@@ -19,7 +19,7 @@
     <image src="/images/address_empty.png" class="no-order-img"></image>
     <view class="text">还没有添加菜单呢</view>
   </view>
-  <view class="bottom-box" bindtap="addAddess">
+  <view class="bottom-box" bindtap="addFood">
     <image src="../../images/address_add.png"></image>
     新增菜单
   </view>

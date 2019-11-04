@@ -7,22 +7,22 @@
   <view class="tixian-bg">
     <image class="tixian-img" src="https://yuxian.oss-cn-qingdao.aliyuncs.com/withdraw.png"></image>
     <view class="tixian-name">
-      公测版大优惠
-      <text class="money">1、30天VIP服务（10元）；</text>
-      <text class="money">2、90天VIP服务（28元）；</text>
-      <text class="money">3、180天VIP服务（55元）；</text>
-      <text class="money">4、360天VIP服务（100元）；</text>
-      <text class="tips">*打款审核通过后将为您升级为VIP商家</text>
+      2019版特色VIP功能
+      <text class="money">1、30天VIP服务（打赏10元以上）；</text>
+      <text class="money">2、90天VIP服务（打赏28元以上）；</text>
+      <text class="money">3、180天VIP服务（打赏55元以上）；</text>
+      <text class="money">4、360天VIP服务（打赏100元以上）；</text>
+      <text class="tips">*打赏审核通过后将为您升级为VIP商家</text>
     </view>
   </view>
   <form bindsubmit="bindSave">
     <view class="form-box">
       <view class="row-wrap">
-        <view class="label">打款单号</view>
+        <view class="label">打赏单号</view>
         <view class="label-right">
           <input name="payNum" class="input" type="text" placeholder="请输入（微信转账单号）或（支付宝订单号）"/>
         </view>
-        <view class="lable-text">*打款审核时间约30分钟</view>
+        <view class="lable-text">*打赏审核时间约30分钟</view>
       </view>
     </view>
     <button class="save-btn" formType="submit">提交申请</button>

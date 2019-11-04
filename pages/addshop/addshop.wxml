@@ -17,7 +17,7 @@
         --成功入驻旺铺掌柜仅需三步--
   </view>
   <view class="testdesc">
-        >1.点击下方注册店铺基本信息
+        >1.点击下方'立即入驻'录入店铺基本信息
   </view>
   <view class="testdesc">
         >2.申领店铺专属桌码
@@ -36,6 +36,12 @@
       <view class="share-title">申领桌码</view>
       <view class="share-text">精美桌码，您值得拥有</view>
       <view class="share-btn" bindtap="getScan">去申领</view>
+    </view>
+    <view class="share-list">
+      <image class="share-img" src="https://yuxian.oss-cn-qingdao.aliyuncs.com/foodcate.png"></image>
+      <view class="share-title">美食分类</view>
+      <view class="share-text">分类美食，顾客点餐更方便</view>
+      <view class="share-btn" bindtap="setCate">去设置</view>
     </view>
     <view class="share-list">
       <image class="share-img" src="https://yuxian.oss-cn-qingdao.aliyuncs.com/qrscan.png"></image>

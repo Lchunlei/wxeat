@@ -1,0 +1,22 @@
+<navigation id='Navigation' show-icon="{{true}}" title="美食分类" show-title="{{true}}" class=""></navigation>
+<view class="container">
+  <view class="address-list">
+    <view class="a-address" wx:for-items="{{cateList}}" wx:key="{{index}}">
+      <view class="left-text active" data-id="{{item.cateId}}">
+        <view class="name-tel">
+          {{item.cateName}}
+        </view>
+      </view>
+      <view class="right-edit" bindtap="updateCate" data-id="{{item.cateId}}" data-cateName="{{item.cateName}}"></view>
+    </view>
+  </view>
+  <view hidden="{{loadingMoreHidden ? true : false}}" class="no-more-goods">
+    <image src="/images/address_empty.png" class="no-order-img"></image>
+    <view class="text">还没有添加分类呢</view>
+  </view>
+  <view class="bottom-box" bindtap="addCate">
+    <image src="../../images/address_add.png"></image>
+    新增分类
+  </view>
+
+</view>

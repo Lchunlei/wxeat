@@ -15,21 +15,9 @@ page {
   border-bottom: 1rpx solid #eee;
   display: flex;
   font-size: 28rpx;
+  /*justify-content: space-between;*/
 }
 
-.row-cate {
-  height: 100%;
-  line-height: 88rpx;
-  margin-left: 30rpx;
-  border-bottom: 1rpx solid #eee;
-  display: flex;
-  font-size: 28rpx;
-}
-
-.checkbox {
-  margin-left: 50rpx;
-  display:inline-block;
-}
 .row-wrap .label {
   width: 160rpx;
   color: #000;

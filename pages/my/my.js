@@ -1,8 +1,9 @@
 const app = getApp()
 Page({
 	data: {
-    companyInfo:'北京智合联动科技有限公司',
-    versionInfo: 'V-1.0.9',
+    companyInfo:'雷燕出品-力成精品',
+    versionInfo: 'V-1.0.16',
+    comHidden:true,
     loginName:"点击头像登录"
   },
   onGotUserInfo: function (e) {
@@ -10,10 +11,9 @@ Page({
     if (!app.globalData.token){
       app.login();
     }
-    console.log("--->" + app.globalData.userInfo);
-    if (app.globalData.userInfo != null) {
+    if ('点击头像登录' != that.data.loginName && that.data.userRole && that.data.sToken) {
       console.log("登录者--->" + app.globalData.userInfo.nickName);
-        return;
+      return;
     }
     wx.request({
       url: app.globalData.urls + '/shop/userLogin',
@@ -23,31 +23,67 @@ Page({
         nickName: e.detail.userInfo.nickName,
         headUrl: e.detail.userInfo.avatarUrl
       },
+      fail:function(){
+        wx.showModal({
+          title: '提示',
+          content:'系统繁忙，请联系客服',
+          showCancel: false
+        });
+      },
       success: function (res) {
         if (res.data.respCode == 'R000') {
-          console.log("登录成功！");
+          console.log("登录成功！"+e.detail.userInfo.nickName);
           app.globalData.token = res.data.respMsg;
           if (res.data.respData.userRole!=1){
             app.globalData.sToken = res.data.respData.wxOpenId;
           }
-          app.globalData.userInfo = {
-            eToken: res.data.respMsg,
-            userRole: res.data.respData.userRole,
-            nickName: e.detail.userInfo.nickName,
-            headUrl: e.detail.userInfo.avatarUrl
-          };
-          that.setData({
-            loginName: e.detail.userInfo.nickName,
-            userRole: res.data.respData.userRole,
-            sToken: res.data.respMsg
-          });
+          if (e.detail.userInfo && e.detail.userInfo.nickName){
+            console.log("1");
+            app.globalData.userInfo = {
+              eToken: res.data.respMsg,
+              userRole: res.data.respData.userRole,
+              nickName: e.detail.userInfo.nickName,
+              headUrl: e.detail.userInfo.avatarUrl
+            };
+            that.setData({
+              loginName: e.detail.userInfo.nickName,
+              userRole: res.data.respData.userRole,
+              sToken: res.data.respMsg
+            });
+          }else{
+            console.log("2");
+            app.globalData.userInfo = {
+              eToken: res.data.respMsg,
+              userRole: res.data.respData.userRole
+            };
+            that.setData({
+              loginName: '尊贵商家',
+              userRole: res.data.respData.userRole,
+              sToken: res.data.respMsg
+            });
+          }
           that.getMyMsg();
+        }else{
+          wx.showModal({
+            title: '提示',
+            content: res.data.respMsg,
+            showCancel: false
+          });
         }
       }
     });
   },
-  onTabItemTap:function(){
-
+  getComInfo:function(){
+    var that = this;
+    that.setData({
+      comHidden:false
+    });
+  },
+  closeComInfo: function () {
+    var that = this;
+    that.setData({
+      comHidden: true
+    });
   },
   onLoad: function () {
     var that = this;
@@ -75,19 +111,6 @@ Page({
   onShow() {
     var that = this;
     //加载有无邀请信息未处理
-    wx.request({
-      url: app.globalData.urls + '/notice/show',
-      data: {
-        eToken: app.globalData.token
-      },
-      success: function (res) {
-        if (res.data.respCode == 'R000') {
-          that.setData({
-            noticeList: res.data.respData
-          });
-        }
-      }
-    });
     that.getMyMsg();
   },	
   addShopInfo: function () {
@@ -190,12 +213,26 @@ Page({
   },
   gkdd: function () {
     var that = this;
+    // try {
+    //   wx.requestSubscribeMessage({
+    //     tmplIds: ['7a8V3A6vTlst2FAzogfu7m4UxP2n12navvJu27LjQdU'],
+    //     success(res) {
+    //       console.log('统一发送信息成功');
+    //     },
+    //     fail(res) {
+    //       console.log('失败', res);
+    //     }
+    //   });
+    // } catch (err) {
+
+    // }
     if (app.globalData.userInfo == null) {
       wx.showToast({
         title: '请点击头像登录！',
         icon: 'none',
         duration: 2000
       });
+
     } else {
       wx.navigateTo({
         url: "/pages/order-list/order-list?currentType=0"
@@ -218,17 +255,11 @@ Page({
   },
   dkxd: function () {
     var that = this;
-    if (app.globalData.userInfo == null) {
-      wx.showToast({
-        title: '请点击头像登录！',
-        icon: 'none',
-        duration: 2000
-      });
-    } else {
-      wx.navigateTo({
-        url: "/pages/userbill/userbill"
-      });
-    }
+    wx.showToast({
+      title: '请先扫码下单！',
+      icon: 'none',
+      duration: 2000
+    });
   },
   qbdd: function () {
     var that = this;
@@ -272,13 +303,27 @@ getMyMsg: function () {
           that.setData({
             myMsg: res.data.respData
           });
-        }else{
+        } else if (res.data.respCode == 'R502'){
+          //登录信息过期
+          app.globalData.userInfo == null;
+          that.setData({
+            loginName: "点击头像登录",
+            myMsg: null
+          });
+        } else{
           that.setData({
             myMsg: null
           });
         }
       }
     })
+    }else{
+      app.globalData.userInfo == null;
+      that.setData({
+        loginName: "点击头像登录",
+        userRole:null,
+        myMsg: null
+      });
     }
   }
 })

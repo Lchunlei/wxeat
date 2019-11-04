@@ -34,7 +34,7 @@ page{
   width:100%;
   top:210rpx;
   color:#fff;
-  font-size:30rpx;
+  font-size:40rpx;
 }
 .tixian-name .money{
   display:block;
@@ -169,12 +169,12 @@ picker {
   padding-right:15px;
 }
 .share-title{
-  color:#e1b68c;
-  font-size:28rpx;
+  color:#e67a0f;
+  font-size:35rpx;
   margin-top:5px;
 }
 .share-text{
-  color:#e1b68c;
+  color:#e67a0f;
   font-size:24rpx;
   margin-top:5px;
 }

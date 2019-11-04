@@ -5,7 +5,6 @@ page {
 
 .address-list {
   width: 100%;
-  margin-bottom: 120rpx;
 }
 
 .address-list .a-address {
@@ -13,7 +12,7 @@ page {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 25rpx 30rpx;
+  padding: 2rpx 30rpx;
   border-bottom: 1rpx solid #f5f5f5;
   background-color: #fff;
 }
@@ -25,12 +24,7 @@ page {
 }
 
 .a-address .left-text.active {
-  background: url(https://yuxian.oss-cn-qingdao.aliyuncs.com/addr-active.png) no-repeat left center;
-  background-size: 28rpx auto;
-}
-
-.a-address .left-text.xiajia {
-  background: url(https://yuxian.oss-cn-qingdao.aliyuncs.com/xiajia.jpg) no-repeat left center;
+  background: url(https://cdn.it120.cc/apifactory/2018/03/07/d14e39b0a699114fe29c1a8614f6dbec.png) no-repeat left center;
   background-size: 28rpx auto;
 }
 
@@ -51,8 +45,8 @@ page {
   height: 100%;
   padding: 50rpx 0 50rpx 58rpx;
   box-sizing: border-box;
-  background: url(https://cdn.it120.cc/images/weappshop/addr-edit.png) no-repeat 43rpx center;
-  background-size: 35rpx auto;
+  background: url(https://yuxian.oss-cn-qingdao.aliyuncs.com/zgedit.png) no-repeat 43rpx center;
+  background-size: 45rpx auto;
 }
 
 .bottom-box {

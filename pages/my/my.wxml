@@ -16,7 +16,7 @@
   <!--公告模块-->
   <view class="userinfo-notice" wx:if="{{noticeList}}">
     <image src="../../images/gonggao.png" />
-    <swiper wx:if="{{noticeList}}" class="notice_swiper" vertical="true" autoplay="true" circular="true" interval="6000">
+    <swiper wx:if="{{noticeList}}" class="notice_swiper" vertical="true" autoplay="true" circular="true" interval="1500">
       <navigator wx:for-items="{{noticeList}}" wx:key="id" url="/pages/notice/notice?id={{item.nteId}}" hover-class="none" open-type="navigate">
         <swiper-item >
           <view class="notice_itemr">{{item.nteTitle}}</view>
@@ -96,10 +96,30 @@
     </view>
 
   </view>
-    <view class="userinfo-info">
+  <view class="userinfo-info"  bindtap="getComInfo">
     {{companyInfo}}
   </view>
   <view class="userinfo-info">
     {{versionInfo}}
   </view>
+
+  <view class="show-container" hidden="{{comHidden}}">
+    <view class="show-box">
+      <view class="show-logo-box">
+        <view class="show-mall-name">旺铺掌柜</view>
+      </view>
+      <view class="show-text-box">
+        <view class="show-text-name">产品经理：赵强</view>
+        <view class="show-text-name">技术总监：刘春雷</view>
+        <view class="show-text-name">UI设计师：任叶蕊、田月月</view>
+        <view class="show-text-name">开发工程师：</view>
+        <view class="show-text-info">刘春雷、王立春、赵新宇</view>
+        <view class="show-text-info">荆斌鹏、罗志</view>
+        <view class="show-logo-box">
+          <view class="show-mall-name"><button bindtap="closeComInfo">关闭</button></view>
+        </view>
+      </view>
+    </view>
+  </view>
+
 </view>

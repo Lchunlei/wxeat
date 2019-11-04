@@ -18,6 +18,7 @@ Page({
   },
   bindSave: function (e) {
     var that = this;
+    console.log(e.detail);
     var bossName = e.detail.value.bossName;
     var shopName = e.detail.value.shopName;
     var address = e.detail.value.address;

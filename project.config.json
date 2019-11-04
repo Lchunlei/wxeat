@@ -13,7 +13,7 @@
 		"checkInvalidKey": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.5.0",
+	"libVersion": "2.9.0",
 	"appid": "wx4d9d0dd11e726af3",
 	"projectname": "wxeat",
 	"debugOptions": {

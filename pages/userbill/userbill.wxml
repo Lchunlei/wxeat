@@ -17,8 +17,8 @@
   <view class="type-container-boxx">
   <!--类目s-->
     <view class="type-container">
-      <view wx:for-items="{{categories}}" wx:key="categoryId" class="type-box" bindtap="tabClick" id="{{item.categoryId}}">
-        <view class="type-navbar-item {{activeCategoryId == item.categoryId ? 'type-item-on' : ''}}">
+      <view wx:for-items="{{categories}}" wx:key="cateId" class="type-box" bindtap="tabClick" id="{{item.cateId}}">
+        <view class="type-navbar-item {{activeCategoryId == item.cateId ? 'type-item-on' : ''}}">
           {{item.cateName}}
         </view>
       </view>

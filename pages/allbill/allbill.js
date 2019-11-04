@@ -22,6 +22,7 @@ Page({
   getPage: function (pageNum){
     wx.showLoading();
     var that = this;
+    console.log('----'+that.data.currentType);
     let token = app.globalData.token;
     if (app.globalData.sToken) {
       token = app.globalData.sToken;

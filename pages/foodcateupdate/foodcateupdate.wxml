@@ -1,0 +1,16 @@
+<navigation id='Navigation' show-icon="{{true}}" title="{{pagetitle}}" show-title="{{true}}" class=""></navigation>
+<view class="container">
+  <form bindsubmit="bindSave">
+    <view class="form-box">
+      <view class="row-wrap">
+        <view class="label">分类名称</view>
+        <view class="label-right">
+          <input name="cateName" class="input" type="text" placeholder="请输入2~5个字" value="{{cateName}}"/>
+        </view>
+      </view>
+    </view>
+    <button type="primary" class="save-btn" formType="submit">确认提交</button>
+    <button type="warn" class="save-btn" bindtap="deleteBind" hidden="{{pagetitle=='新增分类'?true:false}}">删除</button>
+    <button type="default" class="cancel-btn" bindtap="bindCancel">取消</button>
+  </form>
+</view>

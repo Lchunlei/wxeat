@@ -266,7 +266,7 @@ Page({
           }
         }
       })
-    } else if (viewId == 1 || viewId == 2){
+    } else if (viewId == 1){
       wx.request({
         url: app.globalData.urls + '/bill/list',
         data: {
@@ -275,7 +275,6 @@ Page({
           tabNum: that.data.currentType
         },
         success: (res) => {
-          console.log(res)
           wx.hideLoading();
           if (res.data.respCode == 'R000') {
             that.setData({
