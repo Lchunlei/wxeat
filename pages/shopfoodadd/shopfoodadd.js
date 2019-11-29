@@ -85,7 +85,7 @@ Page({
       url: app.globalData.urls + '/food/addorup',
       method: 'POST',
       data: {
-        eToken: app.globalData.token,
+        eToken: app.globalData.sToken,
         foodId: foodId,
         foodName: foodName,
         cateId: that.data.cateId,
@@ -114,7 +114,7 @@ Page({
     wx.request({
       url: app.globalData.urls + '/cate/mine',
       data: {
-        eToken: app.globalData.token
+        eToken: app.globalData.sToken
       },
       success: function (resp) {
         if (resp.data.respCode == "R000") {
@@ -191,7 +191,7 @@ Page({
           wx.request({
             url: app.globalData.urls + '/food/sell',
             data: {
-              eToken: app.globalData.token,
+              eToken: app.globalData.sToken,
               foodId: foodId
             },
             success: (res) => {

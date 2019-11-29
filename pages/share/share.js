@@ -12,7 +12,7 @@ Page({
     wx.request({
       url: app.globalData.urls + '/staff/lookup',
       data: {
-        eToken: app.globalData.token
+        eToken: app.globalData.sToken
       },
       success: function (res) {
         if (res.data.respCode == 'R000') {
@@ -36,7 +36,7 @@ Page({
     wx.request({
       url: app.globalData.urls + '/staff/cofInvite',
       data: {
-        eToken: app.globalData.token,
+        eToken: app.globalData.sToken,
         cof: confStatus
       },
       success: function (res) {
@@ -45,7 +45,7 @@ Page({
             inviShopName: null
           });
           if (confStatus==1){
-            app.globalData.sToken = res.data.respData;
+            app.globalData.userRole = 2;
           }
         }
         wx.showToast({

@@ -43,10 +43,10 @@
       出餐列表
     </view>
 
-    <view hover-class="none" class="cart-list" bindtap="dkxd">
+    <view hover-class="none" class="cart-list" bindtap="hmd">
       <view wx:if="{{noconfirm}}" class="red-dot">{{noconfirm}}</view>
       <image src="../../images/order-details/delivering.png"></image>
-      代客下单
+      黑名单
     </view>
 
     <view hover-class="none" class="cart-list" bindtap="qbdd">

@@ -19,7 +19,7 @@ Page({
     wx.request({
       url: app.globalData.urls + '/shop/info',
       data: {
-        eToken: app.globalData.token
+        eToken: app.globalData.sToken
       },
       success: function (res) {
         if (res.data.respCode == 'R000') {

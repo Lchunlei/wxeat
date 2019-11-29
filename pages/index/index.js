@@ -125,17 +125,30 @@ Page({
     if (!app.globalData.uid) {
       app.login();
     }
-    console.log('跳转时的桌码ID-->' + app.globalData.eatQrId);
-    if (app.globalData.eatQrId != null && app.globalData.eatQrId != 0) {
+    console.log(batId);
+    if (batId==3){
+      //进代客下单页面
       wx.navigateTo({
-        url: '/pages/userbill/userbill?eatQrId=' + app.globalData.eatQrId
+        url: '/pages/userbill/userbill?eatQrId=0'
       });
-    } else {
-      wx.showToast({
-        title: '先进店扫码占座哦',
-        icon: 'none',
-        duration: 2000
+    } else if (batId == 2){
+      //进入新手教程
+      wx.navigateTo({
+        url: '/pages/xsjc/xsjc'
       });
+    }else{
+      console.log('跳转时的桌码ID-->' + app.globalData.eatQrId);
+      if (app.globalData.eatQrId != null && app.globalData.eatQrId != 0) {
+        wx.navigateTo({
+          url: '/pages/userbill/userbill?eatQrId=' + app.globalData.eatQrId
+        });
+      } else {
+        wx.showToast({
+          title: '先进店扫码占座哦',
+          icon: 'none',
+          duration: 2000
+        });
+      }
     }
   },
 	tapSales: function (e) {

@@ -3,7 +3,8 @@ var app = getApp()
 Page({
   data: {
     pageTitle:"店铺菜单",
-    text: "Page main",
+    remarkHidden:true,
+    foodRemark:'',
     background: [
       {
         color: 'green',
@@ -205,7 +206,19 @@ Page({
     });
     wx.hideLoading();
   },
+  preMakeBill:function(){
+    var that = this;
+    that.setData({
+      remarkHidden:false
+    });
+  },
   makeBill: function (e){
+    let thisRemake = '';
+    if (e.detail.value.foodRemark){
+      thisRemake = e.detail.value.foodRemark;
+    }
+    console.log(e);
+    console.log(e.detail.value.foodRemark);
     if (!app.globalData.token){
       console.log('用户还未登录');
       //用户无感快捷登录
@@ -239,6 +252,7 @@ Page({
         data: {
           shopId: that.data.eatQrId,
           eToken: app.globalData.token,
+          foodRemark: thisRemake,
           billInfos:that.data.myMenus
         },
         success: function (res) {
@@ -261,10 +275,13 @@ Page({
             });
           
           } else {
+            that.setData({
+              remarkHidden: true
+            });
             wx.showToast({
               title: res.data.respMsg,
               icon: 'none',
-              duration: 1000
+              duration: 5000
             });
           }
         }

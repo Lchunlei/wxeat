@@ -22,7 +22,7 @@ Page({
           wx.request({
             url: app.globalData.urls + '/staff/del',
             data: {
-              eToken: app.globalData.token,
+              eToken: app.globalData.sToken,
               shopId: e.currentTarget.dataset.id
             },
             success: (res) => {
@@ -52,7 +52,7 @@ Page({
     wx.request({
       url: app.globalData.urls + '/staff/all',
       data: {
-        eToken: app.globalData.token
+        eToken: app.globalData.sToken
       },
       success: (res) => {
         if (res.data.respCode == 'R000') {

@@ -13,7 +13,7 @@ Page({
     wx.request({
       url: app.globalData.urls + '/cate/del',
       data: {
-        eToken: app.globalData.token,
+        eToken: app.globalData.sToken,
         cateId: that.data.cateId
       },
       success: function (res) {
@@ -54,7 +54,7 @@ Page({
         url: app.globalData.urls + '/cate/update',
         method:'POST',
         data: {
-          eToken: app.globalData.token,
+          eToken: app.globalData.sToken,
           cateName: cateName,
           cateId: that.data.cateId
         },
@@ -85,7 +85,7 @@ Page({
         url: app.globalData.urls + '/cate/add',
         method: 'POST',
         data: {
-          eToken: app.globalData.token,
+          eToken: app.globalData.sToken,
           cateName: cateName,
           cateId: that.data.cateId
         },

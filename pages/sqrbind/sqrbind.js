@@ -12,7 +12,7 @@ Page({
     wx.request({
       url: app.globalData.urls + '/qr/delbind',
       data: {
-        eToken: app.globalData.token,
+        eToken: app.globalData.sToken,
         qrId: that.data.sceneId
       },
       success: function (res) {
@@ -60,7 +60,7 @@ Page({
     wx.request({
       url: app.globalData.urls + '/qr/binding',
       data: {
-        eToken: app.globalData.token,
+        eToken: app.globalData.sToken,
         qrId: that.data.sceneId,
         deskCode: deskCode
       },

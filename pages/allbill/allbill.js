@@ -23,10 +23,7 @@ Page({
     wx.showLoading();
     var that = this;
     console.log('----'+that.data.currentType);
-    let token = app.globalData.token;
-    if (app.globalData.sToken) {
-      token = app.globalData.sToken;
-    }
+    let token = app.globalData.sToken;
     wx.request({
       url: app.globalData.urls + '/bill/list',
       data: {

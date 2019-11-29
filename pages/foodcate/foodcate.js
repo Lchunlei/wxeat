@@ -27,7 +27,7 @@ Page({
     wx.request({
       url: app.globalData.urls + '/cate/mine',
       data: {
-        eToken: app.globalData.token
+        eToken: app.globalData.sToken
       },
       success: (res) => {
         if (res.data.respCode == 'R000') {

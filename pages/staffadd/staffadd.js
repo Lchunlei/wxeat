@@ -22,7 +22,7 @@ Page({
     wx.request({
       url: app.globalData.urls + '/staff/preAdd',
       data: {
-        eToken: app.globalData.token,
+        eToken: app.globalData.sToken,
         uId: inviteId,
         userRole: 2
       },
@@ -40,37 +40,37 @@ Page({
       }
     })
   },
-  onLoad: function (e) {
+  onLoad: function () {
     var that = this;
     if (app.globalData.iphone == true) { that.setData({ iphone: 'iphone' }) }
-    var foodId = e.foodId;
-    if (foodId) {
-      // 初始化原数据
-      wx.showLoading();
-      wx.request({
-        url: app.globalData.urls + '/food/info',
-        data: {
-          foodId: foodId
-        },
-        success: function (res) {
-          wx.hideLoading();
-          if (res.data.respCode == "R000") {
-            that.setData({
-              foodId: foodId,
-              foodName: res.data.respData.foodName,
-              foodPrice: res.data.respData.foodPrice,
-              paixu: res.data.respData.paixu,
-              sellStatus: res.data.respData.sellStatus,
-            });
-          } else {
-            wx.showModal({
-              title: '提示',
-              content: res.data.respMsg,
-              showCancel: false
-            })
-          }
-        }
-      })
-    }
+    // var foodId = e.foodId;
+    // if (foodId) {
+    //   // 初始化原数据
+    //   wx.showLoading();
+    //   wx.request({
+    //     url: app.globalData.urls + '/food/info',
+    //     data: {
+    //       foodId: foodId
+    //     },
+    //     success: function (res) {
+    //       wx.hideLoading();
+    //       if (res.data.respCode == "R000") {
+    //         that.setData({
+    //           foodId: foodId,
+    //           foodName: res.data.respData.foodName,
+    //           foodPrice: res.data.respData.foodPrice,
+    //           paixu: res.data.respData.paixu,
+    //           sellStatus: res.data.respData.sellStatus,
+    //         });
+    //       } else {
+    //         wx.showModal({
+    //           title: '提示',
+    //           content: res.data.respMsg,
+    //           showCancel: false
+    //         })
+    //       }
+    //     }
+    //   })
+    // }
   }
 })

@@ -17,7 +17,7 @@ Page({
     wx.request({
       url: app.globalData.urls + '/sKpi/today',
       data: {
-        eToken: app.globalData.token
+        eToken: app.globalData.sToken
       },
       success: function (res) {
         if (res.data.respCode == 'R000') {

@@ -32,7 +32,7 @@
         --店铺VIP升级介绍--
     </view>
   <view class="section tc" style="text-align:center">
-    <video style="text-align:center" src="https://yuxian.oss-cn-qingdao.aliyuncs.com/jiaocheng.mp4" controls></video>
+    <video style="text-align:center" src="https://yuxian.oss-cn-qingdao.aliyuncs.com/jiaocheng01.mp4" controls></video>
   </view>
 
   <view class="shoukuan">

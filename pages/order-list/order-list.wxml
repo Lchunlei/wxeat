@@ -62,6 +62,7 @@
           <view class="date-box">{{item.foodName}}</view>
           <view class="status">x{{item.eatNum}}</view>
         </view>
+        <view class="foodremark" hidden="{{item.billRemark?false:true}}">备注：{{item.billRemark}}</view>
       <!--
       <view bindtap="orderDetail" data-id="{{item.id}}">
         <scroll-view class="goods-img-container" scroll-x="true">
@@ -71,6 +72,7 @@
         </scroll-view>
       </view>
       -->
+  
       <view class="price-box">
         <view class="total-price">餐桌号：{{item.deskCode}}</view>
 				<view class="btn-box">

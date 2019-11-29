@@ -76,11 +76,10 @@
       </view>
       <view class="show-text-name">预计总消费：{{paiduiInfo.totalMoney/100}}元</view>
 
-    <view class="show-logo-box">
-      <view class="show-mall-name"><button bindtap="closePaiMing">知道了</button></view>
+      <view class="show-logo-box">
+        <view class="show-mall-name"><button bindtap="closePaiMing">知道了</button></view>
+      </view>
     </view>
-    </view>
-    
   </view>
 </view>
 

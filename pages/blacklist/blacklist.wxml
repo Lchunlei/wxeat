@@ -1,0 +1,22 @@
+<navigation id='Navigation' show-icon="{{true}}" title="黑名单" show-title="{{true}}" class=""></navigation>
+<view class="container">
+  <view class="address-list">
+    <view class="a-address" wx:for-items="{{blackList}}" wx:key="{{index}}">
+      <view class="left-text active" data-id="{{item.userId}}">
+        <view class="name-tel">
+          {{item.userId}}
+        </view>
+      </view>
+      <view class="right-edit" bindtap="delBlack" data-id="{{item.userId}}"></view>
+    </view>
+  </view>
+  <view hidden="{{loadingMoreHidden ? true : false}}" class="no-more-goods">
+    <image src="/images/address_empty.png" class="no-order-img"></image>
+    <view class="text">还没有拉黑任何顾客呢</view>
+  </view>
+  <view class="bottom-box" bindtap="addBlack">
+    <image src="../../images/address_add.png"></image>
+    添加黑名单
+  </view>
+
+</view>

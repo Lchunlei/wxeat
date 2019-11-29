@@ -1,0 +1,18 @@
+<navigation id='Navigation' show-icon="{{true}}" title="新手教程" show-title="{{true}}" class=""></navigation>
+<view class="container">
+  <view class="tixian-bg">
+    <image class="tixian-img" src="https://yuxian.oss-cn-qingdao.aliyuncs.com/withdraw.png"></image>
+    <view class="tixian-name">
+      <text class="tixian-title">2019版旺铺掌柜</text>
+      <text class="money">1、操作流程指引；</text>
+      <text class="money">2、基础功能介绍；</text>
+      <text class="money">3、常见问题解决办法；</text>
+      <text class="money">4、新功能预览；</text>
+      <text class="tips">*（建议全屏观看更清晰哦）</text>
+    </view>
+  </view>
+  <view style="text-align:center">
+    <video style="text-align:center" src="{{xsjcUrl}}" controls danmu-list="{{danmuList}}" enable-danmu danmu-btn></video>
+  </view>
+
+</view>

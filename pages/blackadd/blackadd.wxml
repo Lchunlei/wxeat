@@ -1,0 +1,35 @@
+<navigation id='Navigation' show-icon="{{true}}" title="拉黑顾客" show-title="{{true}}" class=""></navigation>
+<view class="container">
+  <form bindsubmit="bindSave">
+    <view class="form-box">
+      <view class="row-wrap">
+        <view class="label">顾客号</view>
+        <view class="label-right">
+          <input name="addBlackId" class="input" type="number" placeholder="输入要拉黑顾客号" value="{{addBlackId}}" />
+        </view>
+      </view>
+    </view>
+    <button type="primary" class="save-btn" formType="submit">立即拉黑</button>
+    <button type="default" class="cancel-btn" bindtap="bindCancel">取消</button>
+  </form>
+  <view class="title">
+        --拉黑顾客介绍--
+  </view>
+  <view class="testdesc">
+        >1.如发现顾客恶意刷单可直接拉黑;
+  </view>
+  <view class="testdesc">
+        >2.查看拉黑顾客号（如下图）;
+  </view>
+  <view class="testdesc">
+        >3.点击‘立即拉黑’即可;
+  </view>
+
+  <view class="imgcenter" >
+    <image class="imgcenter" src="https://yuxian.oss-cn-qingdao.aliyuncs.com/laheiguke.jpg" mode='widthFix'></image>
+  </view>
+
+  <view class="title">
+        --结束--
+  </view>
+</view>

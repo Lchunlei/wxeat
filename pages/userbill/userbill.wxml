@@ -10,7 +10,7 @@
           <text class="cart-item-total-price">￥{{total.money/100}}</text>
         </view>
         <view class="cart-tab-item">
-          <view class="cart-tab-item-btn" hover-class="navigator-hover" bindtap="makeBill">预约餐位</view>
+          <view class="cart-tab-item-btn" hover-class="navigator-hover" bindtap="preMakeBill">选好了</view>
         </view>
     </view>
   <!--购物车e-->
@@ -148,3 +148,26 @@
 </view>
 <view class="top-line"></view>
 <view class="bottom-lin"></view>
+<!--汇总备注弹出层-->
+<view class="show-container" hidden="{{remarkHidden}}">
+  <view class="show-box">
+    <view class="show-logo-box">
+      <!--
+      <image src="{{toplogo}}" />
+      -->
+      <view class="show-mall-name">{{pageTitle}}</view>
+    </view>
+    <form bindsubmit="makeBill">
+      <view class="show-text-box">
+        <view class="show-text-name">预计总消费：{{total.money/100}}元</view>
+        <view class="show-text-info">点餐总数：{{total.count}}份</view>
+        <view class="show-text-name" style="border: 1px solid lightgray;height: 80rpx;margin-top: 15rpx;">
+          <textarea name="foodRemark" value="{{foodRemark}}" auto-height placeholder="口味、忌口等备注" maxlength='32'/>
+        </view>
+        <view class="show-logo-box">
+          <view class="show-mall-name"><button formType="submit">提交预定</button></view>
+        </view>
+      </view>
+    </form>
+  </view>
+</view>

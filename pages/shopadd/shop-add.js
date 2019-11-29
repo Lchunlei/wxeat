@@ -89,7 +89,7 @@ Page({
       url: app.globalData.urls + '/shop/join',
       method: 'POST',
       data: {
-        wxOpenId: app.globalData.token,
+        wxOpenId: app.globalData.sToken,
         // province: commonCityData.cityData[this.data.selProvinceIndex].provinceName,
         province: this.data.selProvince,
         city: this.data.selCity,
@@ -202,7 +202,7 @@ Page({
         url: app.globalData.urls + '/shop/info',
         // method: "POST",
         data: {
-          eToken: app.globalData.token
+          eToken: app.globalData.sToken
         },
         success: function (res) {
           wx.hideLoading();

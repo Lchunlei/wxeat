@@ -2,7 +2,7 @@ const app = getApp()
 Page({
 	data: {
     companyInfo:'雷燕出品-力成精品',
-    versionInfo: 'V-1.0.16',
+    versionInfo: 'V-1.0.19',
     comHidden:true,
     loginName:"点击头像登录"
   },
@@ -33,35 +33,19 @@ Page({
       success: function (res) {
         if (res.data.respCode == 'R000') {
           console.log("登录成功！"+e.detail.userInfo.nickName);
-          app.globalData.token = res.data.respMsg;
-          if (res.data.respData.userRole!=1){
-            app.globalData.sToken = res.data.respData.wxOpenId;
-          }
-          if (e.detail.userInfo && e.detail.userInfo.nickName){
-            console.log("1");
-            app.globalData.userInfo = {
-              eToken: res.data.respMsg,
-              userRole: res.data.respData.userRole,
-              nickName: e.detail.userInfo.nickName,
-              headUrl: e.detail.userInfo.avatarUrl
-            };
-            that.setData({
-              loginName: e.detail.userInfo.nickName,
-              userRole: res.data.respData.userRole,
-              sToken: res.data.respMsg
-            });
-          }else{
-            console.log("2");
-            app.globalData.userInfo = {
-              eToken: res.data.respMsg,
-              userRole: res.data.respData.userRole
-            };
-            that.setData({
-              loginName: '尊贵商家',
-              userRole: res.data.respData.userRole,
-              sToken: res.data.respMsg
-            });
-          }
+          app.globalData.sToken = res.data.respMsg;
+          app.globalData.userRole = res.data.respData.userRole;
+          app.globalData.userInfo = {
+            eToken: res.data.respMsg,
+            userRole: res.data.respData.userRole,
+            nickName: e.detail.userInfo.nickName,
+            headUrl: e.detail.userInfo.avatarUrl
+          };
+          that.setData({
+            loginName: e.detail.userInfo.nickName,
+            userRole: res.data.respData.userRole,
+            sToken: res.data.respMsg
+          });
           that.getMyMsg();
         }else{
           wx.showModal({
@@ -116,14 +100,14 @@ Page({
   addShopInfo: function () {
     // 更新用户信息
     var that = this;
-    if (app.globalData.userInfo == null){
+    if (app.globalData.sToken == null){
       wx.showToast({
         title: '请点击头像登录！',
         icon: 'none',
         duration: 2000
       });
     }else{
-      if (that.data.userRole==1){
+      if (app.globalData.userRole==1){
         wx.navigateTo({
           url: "/pages/addshop/addshop"
         });
@@ -139,28 +123,36 @@ Page({
   shopFood: function () {
     // 更新店铺菜单
     var that = this;
-    if (app.globalData.userInfo == null) {
+    if (app.globalData.sToken == null) {
       wx.showToast({
         title: '请点击头像登录！',
         icon: 'none',
         duration: 2000
       });
     } else {
-      wx.navigateTo({
-        url: "/pages/shopfood/shopfood"
-      });
+      if (app.globalData.userRole == 1) {
+        wx.navigateTo({
+          url: "/pages/shopfood/shopfood"
+        });
+      } else {
+        wx.showToast({
+          title: '仅店长有权访问',
+          icon: 'none',
+          duration: 2000
+        });
+      }
     }
   },
   sincome: function () {
     var that = this;
-    if (app.globalData.userInfo == null) {
+    if (app.globalData.sToken == null) {
       wx.showToast({
         title: '请点击头像登录！',
         icon: 'none',
         duration: 2000
       });
     } else {
-      if (that.data.userRole == 1) {
+      if (app.globalData.userRole == 1) {
         wx.navigateTo({
           url: "/pages/sincome/sincome"
         });
@@ -176,14 +168,14 @@ Page({
   vip: function () {
     // 更新店铺菜单
     var that = this;
-    if (app.globalData.userInfo == null) {
+    if (app.globalData.sToken == null) {
       wx.showToast({
         title: '请点击头像登录！',
         icon: 'none',
         duration: 2000
       });
     } else {
-      if (that.data.userRole == 1) {
+      if (app.globalData.userRole == 1) {
         wx.navigateTo({
           url: "/pages/vip/vip"
         });
@@ -199,7 +191,7 @@ Page({
   billsCore: function () {
     //订单中心跳转
     var that = this;
-    if (app.globalData.userInfo==null) {
+    if (app.globalData.sToken ==null) {
       wx.showToast({
         title: '请点击头像登录！',
         icon: 'none',
@@ -226,7 +218,7 @@ Page({
     // } catch (err) {
 
     // }
-    if (app.globalData.userInfo == null) {
+    if (app.globalData.sToken == null) {
       wx.showToast({
         title: '请点击头像登录！',
         icon: 'none',
@@ -241,7 +233,7 @@ Page({
   },
   cclb: function () {
     var that = this;
-    if (app.globalData.userInfo == null) {
+    if (app.globalData.sToken == null) {
       wx.showToast({
         title: '请点击头像登录！',
         icon: 'none',
@@ -253,17 +245,31 @@ Page({
       });
     }
   },
-  dkxd: function () {
+  hmd: function () {
     var that = this;
-    wx.showToast({
-      title: '请先扫码下单！',
-      icon: 'none',
-      duration: 2000
-    });
+    if (app.globalData.sToken == null) {
+      wx.showToast({
+        title: '请点击头像登录！',
+        icon: 'none',
+        duration: 2000
+      });
+    } else {
+      if (app.globalData.userRole == 1) {
+        wx.navigateTo({
+          url: "/pages/blacklist/blacklist"
+        });
+      } else {
+        wx.showToast({
+          title: '仅店长有权访问',
+          icon: 'none',
+          duration: 2000
+        });
+      }
+    }
   },
   qbdd: function () {
     var that = this;
-    if (app.globalData.userInfo == null) {
+    if (app.globalData.sToken == null) {
       wx.showToast({
         title: '请点击头像登录！',
         icon: 'none',
@@ -292,11 +298,11 @@ Page({
 },
 getMyMsg: function () {
   var that = this;
-  if (that.data.sToken){
+  if (that.data.sToken && app.globalData.sToken){
     wx.request({
       url: app.globalData.urls + '/staff/lookup',
       data: {
-        eToken: that.data.sToken
+        eToken: app.globalData.sToken
       },
       success: function (res) {
         if (res.data.respCode == 'R000') {
@@ -306,6 +312,8 @@ getMyMsg: function () {
         } else if (res.data.respCode == 'R502'){
           //登录信息过期
           app.globalData.userInfo == null;
+          app.globalData.sToken == null;
+          app.globalData.userRole == null;
           that.setData({
             loginName: "点击头像登录",
             myMsg: null
@@ -319,6 +327,8 @@ getMyMsg: function () {
     })
     }else{
       app.globalData.userInfo == null;
+      app.globalData.sToken==null;
+      app.globalData.userRole == null;
       that.setData({
         loginName: "点击头像登录",
         userRole:null,

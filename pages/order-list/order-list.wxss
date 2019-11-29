@@ -137,7 +137,11 @@
   background-color: #f7f7f7;
   display: inline-block;
 }
-
+.foodremark {
+  font-size: 30rpx;
+  margin-left: 30rpx;
+  color: #b5272d;
+}
 .order-list .a-order .price-box {
   position: relative;
   width: 720rpx;
