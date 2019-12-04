@@ -12,7 +12,13 @@
     </view>
   </view>
   <view style="text-align:center">
-    <video style="text-align:center" src="{{xsjcUrl}}" controls danmu-list="{{danmuList}}" enable-danmu danmu-btn></video>
+    <video style="text-align:center" id="myVideo" src="{{xsjcUrl}}" controls danmu-list="{{danmuList}}" enable-danmu danmu-btn></video>
   </view>
-
+    <view class="row-wrap">
+        <view class="label-right">
+           <input id="danmuStr" bindblur="bindInputBlur"  class="input"  type="text" placeholder="最多输入30个字"/>
+        </view>
+    </view>
+   
+    <button bindtap="bindSendDanmu">发送弹幕</button>
 </view>

@@ -2,7 +2,7 @@ const app = getApp()
 Page({
 	data: {
     companyInfo:'雷燕出品-力成精品',
-    versionInfo: 'V-1.0.19',
+    versionInfo: 'V-1.0.20',
     comHidden:true,
     loginName:"点击头像登录"
   },
